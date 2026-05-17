@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Programs | Karecation</title>
+  <meta name="description" content="Explore Karecation concierge packages and individual coordination paths for Korea beauty, wellness, and clinic visits.">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body data-page="programs">
+  <header class="site-header">
+    <div class="container nav-row">
+      <a class="brand" href="index.html">Karecation<small>Premium K-Beauty Concierge</small></a>
+      <nav class="main-nav" aria-label="Main">
+        <a data-page="home" href="index.html">Home</a>
+        <a data-page="programs" href="programs.html">Programs</a>
+        <a data-page="booking" href="booking.html">Consultation</a>
+        <a data-page="about" href="about.html">About</a>
+        <a data-page="faq" href="faq.html">FAQ</a>
+        <a data-page="contact" href="contact.html">Contact</a>
+      </nav>
+      <a class="cart-entry" href="cart.html">Cart <span class="cart-count" data-cart-count>0</span></a>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <p class="eyebrow">Concierge Paths</p>
+        <h1>Choose the right level of support for your Korea visit.</h1>
+        <p class="lead">Compare all-in-one packages, individual coordination, wellness planning, beauty support, and custom itineraries.</p>
+      </div>
+    </section>
+
+    <section class="section-sm">
+      <div class="container">
+        <div class="filter-toolbar card card-inner">
+          <div class="chip-group" id="categoryFilters"></div>
+          <div class="toolbar-row">
+            <input class="search" id="programSearch" type="text" placeholder="Search concierge path">
+            <select id="programSort" style="max-width:220px;">
+              <option value="recommended">Sort: Recommended</option>
+              <option value="price-asc">Price: Low to High</option>
+              <option value="price-desc">Price: High to Low</option>
+            </select>
+            <input type="hidden" id="activeCategory" value="All">
+          </div>
+        </div>
+
+        <div class="grid-programs" id="programGrid" style="margin-top:14px;"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">Need a recommendation? Start with a <strong>Private Consultation</strong>.</div>
+  </footer>
+
+  <a class="floating-cart" href="cart.html">Cart <strong data-cart-count>0</strong></a>
+  <div class="container"><p id="globalFlash" class="status-message"></p></div>
+</body>
+</html>
+

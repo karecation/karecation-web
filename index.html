@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Karecation | Premium K-Beauty Concierge</title>
+  <meta name="description" content="Premium K-beauty concierge support for foreign clients visiting Korea.">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body data-page="home">
+  <header class="site-header">
+    <div class="container nav-row">
+      <a class="brand" href="index.html">Karecation<small>Premium K-Beauty Concierge</small></a>
+      <nav class="main-nav" aria-label="Main">
+        <a data-page="home" href="index.html">Home</a>
+        <a data-page="programs" href="programs.html">Programs</a>
+        <a data-page="booking" href="booking.html">Consultation</a>
+        <a data-page="about" href="about.html">About</a>
+        <a data-page="faq" href="faq.html">FAQ</a>
+        <a data-page="contact" href="contact.html">Contact</a>
+      </nav>
+      <a class="cart-entry" href="cart.html">Cart <span class="cart-count" data-cart-count>0</span></a>
+    </div>
+  </header>
+
+  <main>
+    <section class="section-sm">
+      <div class="container hero">
+        <div class="card hero-copy">
+          <p class="eyebrow" id="homeHeroEyebrow">Premium K-Beauty Concierge</p>
+          <h1 id="homeHeroTitle">Beauty in Korea,<br>made simple.</h1>
+          <p class="lead" id="homeHeroLead">Choose a package or let Karecation plan it.</p>
+          <div style="display:flex; gap:8px; flex-wrap:wrap;">
+            <a class="btn btn-primary" id="homeHeroPrimary" href="programs.html">View Programs</a>
+            <a class="btn btn-secondary" id="homeHeroSecondary" href="booking.html">Request Private Consultation</a>
+          </div>
+        </div>
+        <figure class="hero-media">
+          <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1200&q=80" alt="Private healthcare consultation">
+        </figure>
+      </div>
+    </section>
+
+    <section class="section product-section">
+      <div class="container section-head">
+        <div>
+          <p class="eyebrow" id="homeProgramsEyebrow">Featured Programs</p>
+          <h2 id="homeProgramsTitle">Start with a concierge path.</h2>
+        </div>
+        <a class="btn btn-secondary" id="homeProgramsCta" href="programs.html">View All Programs</a>
+      </div>
+      <div class="container">
+        <div class="grid-programs program-grid-featured" id="homeFeaturedPrograms"></div>
+      </div>
+    </section>
+
+    <section class="section-sm">
+      <div class="container">
+        <p class="eyebrow" id="homeHowEyebrow">How It Works</p>
+        <h2 class="section-title" id="homeHowTitle">Select. Request. Arrive prepared.</h2>
+        <div class="step-grid step-grid-4">
+          <article class="step"><span class="step-index">01</span><h3 id="homeStep1Title">Choose a program</h3><p class="muted" id="homeStep1Text">Compare packages and individual services.</p></article>
+          <article class="step"><span class="step-index">02</span><h3 id="homeStep2Title">Add to cart</h3><p class="muted" id="homeStep2Text">Save the path you want to discuss.</p></article>
+          <article class="step"><span class="step-index">03</span><h3 id="homeStep3Title">Request planning</h3><p class="muted" id="homeStep3Text">Share dates, goals, and language needs.</p></article>
+          <article class="step"><span class="step-index">04</span><h3 id="homeStep4Title">Get coordinated</h3><p class="muted" id="homeStep4Text">Karecation supports booking and itinerary flow.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-sm">
+      <div class="container">
+        <p class="eyebrow" id="homeTrustEyebrow">Trust</p>
+        <h2 class="section-title" id="homeTrustTitle">Premium support, clear boundaries.</h2>
+        <div class="info-grid">
+          <article class="info-card"><h3 id="homeTrust1Title">Private planning</h3><p class="muted" id="homeTrust1Text" style="margin-top:6px;">Built around your goals and schedule.</p></article>
+          <article class="info-card"><h3 id="homeTrust2Title">Clinic discovery</h3><p class="muted" id="homeTrust2Text" style="margin-top:6px;">Compare options clearly.</p></article>
+          <article class="info-card"><h3 id="homeTrust3Title">Multilingual support</h3><p class="muted" id="homeTrust3Text" style="margin-top:6px;">Communication help for foreign visitors.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-sm">
+      <div class="container compact-faq">
+        <p class="eyebrow" id="homeFaqEyebrow">FAQ</p>
+        <h2 class="section-title" id="homeFaqTitle">Before you start.</h2>
+        <div class="faq-list" id="homeFaqList"></div>
+      </div>
+    </section>
+
+    <section class="section-sm final-cta">
+      <div class="container final-cta-inner">
+        <div>
+          <p class="eyebrow" id="homeFinalEyebrow">Start Planning</p>
+          <h2 id="homeFinalTitle">Ready to choose your Korea concierge path?</h2>
+        </div>
+        <a class="btn btn-primary" id="homeFinalCta" href="booking.html">Request Private Consultation</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div><h4>Karecation</h4><p>Premium K-beauty concierge support for foreign clients visiting Korea.</p></div>
+      <div><h4>Browse</h4><div class="footer-links"><a href="programs.html">Programs</a><a href="booking.html">Consultation</a></div></div>
+      <div><h4>Support</h4><div class="footer-links"><a href="faq.html">FAQ</a><a href="contact.html">Contact</a></div></div>
+    </div>
+  </footer>
+
+  <a class="floating-cart" href="cart.html">Cart <strong data-cart-count>0</strong></a>
+  <div class="container"><p id="globalFlash" class="status-message"></p></div>
+</body>
+</html>
+

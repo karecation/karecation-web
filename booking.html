@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Private Consultation | Karecation</title>
+  <meta name="description" content="Request a private Karecation consultation for Korea beauty, wellness, or clinic coordination.">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body data-page="booking">
+  <header class="site-header">
+    <div class="container nav-row">
+      <a class="brand" href="index.html">Karecation<small>Premium K-Beauty Concierge</small></a>
+      <nav class="main-nav" aria-label="Main">
+        <a data-page="home" href="index.html">Home</a>
+        <a data-page="programs" href="programs.html">Programs</a>
+        <a data-page="booking" href="booking.html">Consultation</a>
+        <a data-page="about" href="about.html">About</a>
+        <a data-page="faq" href="faq.html">FAQ</a>
+        <a data-page="contact" href="contact.html">Contact</a>
+      </nav>
+      <a class="cart-entry" href="cart.html">Cart <span class="cart-count" data-cart-count>0</span></a>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <p class="eyebrow">Private Consultation</p>
+        <h1>Tell us what you want to arrange in Korea.</h1>
+        <p class="lead">Share your goals, dates, nationality, and support needs. Karecation will review the request and guide the next step.</p>
+      </div>
+    </section>
+
+    <section class="section-sm">
+      <div class="container booking-grid">
+        <article class="form-card">
+          <h3 class="display" style="margin-bottom:10px;">Your Details</h3>
+          <form id="bookingForm" style="display:grid; gap:8px;">
+            <div class="field-grid">
+              <label>
+                Full Name
+                <input id="fullName" name="name" type="text" required>
+              </label>
+              <label>
+                Email
+                <input id="email" name="email" type="email" required>
+              </label>
+            </div>
+
+            <label>
+              Nationality
+              <input id="nationality" name="nationality" type="text" placeholder="e.g. USA / Japan / China" required>
+            </label>
+
+            <label>
+              Additional Request
+              <textarea id="requestNote" name="message" placeholder="Tell us desired services, visit dates, language needs, budget range, and any travel constraints."></textarea>
+            </label>
+
+            <button class="btn btn-primary" type="submit">Request a Private Consultation</button>
+            <p id="bookingStatus" class="status-message"></p>
+          </form>
+        </article>
+
+        <aside class="summary-card">
+          <h3 class="display" style="margin-bottom:8px;">Selected Path</h3>
+          <div id="bookingSummary" class="list-stack"></div>
+          <hr style="border:none; border-top:1px solid var(--line); margin:8px 0;">
+          <div class="total-row"><span>Subtotal</span><span id="bookingSubtotal">$0</span></div>
+          <div class="total-row"><span>Service (5%)</span><span id="bookingService">$0</span></div>
+          <div class="total-row"><strong>Total</strong><strong id="bookingTotal">$0</strong></div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">Consultation is request-first. Availability, scope, and final payment guidance are confirmed before any visit is finalized.</div>
+  </footer>
+
+  <a class="floating-cart" href="cart.html">Cart <strong data-cart-count>0</strong></a>
+  <div class="container"><p id="globalFlash" class="status-message"></p></div>
+</body>
+</html>
+
