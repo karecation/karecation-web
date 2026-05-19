@@ -134,24 +134,27 @@ const CONTACT_CHANNELS = [
     name: "Instagram",
     address: "@karecation.official",
     href: "https://www.instagram.com/karecation.official/",
-    qrSrc: "assets/qr/instagram-qr.png",
-    qrAlt: "Instagram QR code"
+    ctaLabel: "Open Instagram",
+    qrSrc: "instagram-qr.png",
+    qrAlt: "Instagram QR code for Karecation"
   },
   {
     id: "wechat",
     name: "WeChat",
     address: "ID: karecation_official",
-    href: "https://weixin.qq.com/",
-    qrSrc: "assets/qr/wechat-qr.png",
-    qrAlt: "WeChat QR code"
+    href: "wechat-qr.jpg",
+    ctaLabel: "View WeChat QR",
+    qrSrc: "wechat-qr.jpg",
+    qrAlt: "WeChat QR code for Karecation"
   },
   {
     id: "line",
     name: "LINE",
     address: "@karecation",
-    href: "https://line.me/ti/p/@karecation",
-    qrSrc: "assets/qr/line-qr.png",
-    qrAlt: "LINE QR code"
+    href: "https://line.me/ti/p/JxeUhsh3B8",
+    ctaLabel: "Open LINE",
+    qrSrc: "line-qr.jpg",
+    qrAlt: "LINE QR code for Karecation"
   }
 ];
 
@@ -1985,35 +1988,35 @@ const PROGRAMS_PAGE_DURATION_MAP = {
 // Programs page uses local placeholders so visual assets can be swapped with licensed brand-safe files.
 const PROGRAMS_PAGE_MEDIA = {
   "quick-concierge-consultation": {
-    image: "images/programs/private-consultation.jpg",
+    image: "private-consultation.jpg",
     imageAlt: "Private K-beauty consultation planning"
   },
   "skin-clinic-care-1": {
-    image: "images/programs/skin-clinic-care-1.jpg",
+    image: "skin-clinic-care-1.jpg",
     imageAlt: "Premium skin refresh treatment"
   },
   "skin-clinic-care-2": {
-    image: "images/programs/skin-clinic-care-2.jpg",
+    image: "skin-clinic-care-2.jpg",
     imageAlt: "Advanced skin clinic care"
   },
   "scalp-diagnosis-spa": {
-    image: "images/programs/scalp-care.jpg",
+    image: "scalp-care.jpg",
     imageAlt: "Relaxing scalp care treatment"
   },
   "hair-salon": {
-    image: "images/programs/hair-salon.jpg",
+    image: "hair-salon.jpg",
     imageAlt: "Refined Seoul hair salon care"
   },
   "celebrity-hair-makeup": {
-    image: "images/programs/hair-makeup.jpg",
+    image: "hair-makeup.jpg",
     imageAlt: "Luxury hair and makeup styling"
   },
   "nail-care": {
-    image: "images/programs/nail-pedi-care.jpg",
+    image: "nail-pedi-care.jpg",
     imageAlt: "Minimal nail and pedi care"
   },
   "body-massage": {
-    image: "images/programs/body-massage.jpg",
+    image: "body-massage.jpg",
     imageAlt: "Premium body massage and recovery"
   }
 };
@@ -2419,7 +2422,7 @@ function renderContactChannels() {
           <img data-channel-qr src="${channel.qrSrc}" alt="${channel.qrAlt}" loading="lazy" decoding="async">
           <figcaption class="channel-qr-missing">${labels.qrMissing}</figcaption>
         </figure>
-        <a class="contact-channel-link" href="${channel.href}" target="_blank" rel="noopener noreferrer">${labels.openLink}</a>
+        <a class="contact-channel-link" href="${channel.href}" target="_blank" rel="noopener noreferrer">${channel.ctaLabel || labels.openLink}</a>
       </article>
     `;
   }).join("");

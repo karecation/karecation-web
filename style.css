@@ -998,9 +998,12 @@ label {
 }
 
 .channel-qr-shell img {
-  width: min(170px, 100%);
-  aspect-ratio: 1 / 1;
+  width: 100%;
+  max-width: 220px;
+  height: auto;
   object-fit: contain;
+  display: block;
+  margin: 0 auto;
   image-rendering: -webkit-optimize-contrast;
   image-rendering: crisp-edges;
 }
