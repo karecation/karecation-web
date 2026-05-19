@@ -1,17 +1,17 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Karecation | Premium K-Beauty Concierge</title>
-  <meta name="description" content="Premium K-beauty concierge support for foreign clients visiting Korea.">
+  <title>Karecation | Private K-beauty concierge</title>
+  <meta name="description" content="Private K-beauty concierge for international guests visiting Seoul.">
   <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
 </head>
 <body data-page="home">
   <header class="site-header">
     <div class="container nav-row">
-      <a class="brand" href="index.html">Karecation<small>Premium K-Beauty Concierge</small></a>
+      <a class="brand" href="index.html">Karecation<small>Private K-beauty concierge</small></a>
       <nav class="main-nav" aria-label="Main">
         <a data-page="home" href="index.html">Home</a>
         <a data-page="programs" href="programs.html">Programs</a>
@@ -28,54 +28,107 @@
     <section class="section-sm">
       <div class="container hero">
         <div class="card hero-copy">
-          <p class="eyebrow" id="homeHeroEyebrow">Premium K-Beauty Concierge</p>
-          <h1 id="homeHeroTitle">Beauty in Korea,<br>made simple.</h1>
-          <p class="lead" id="homeHeroLead">Choose a package or let Karecation plan it.</p>
+          <p class="eyebrow" id="homeHeroEyebrow">PREMIUM K-BEAUTY, SIMPLIFIED</p>
+          <h1 id="homeHeroTitle">Beauty,<br>privately arranged.</h1>
+          <p class="lead" id="homeHeroLead">Private K-beauty concierge for international guests visiting Seoul. Explore curated programs or request a private consultation.</p>
           <div style="display:flex; gap:8px; flex-wrap:wrap;">
-            <a class="btn btn-primary" id="homeHeroPrimary" href="programs.html">View Programs</a>
-            <a class="btn btn-secondary" id="homeHeroSecondary" href="booking.html">Request Private Consultation</a>
+            <a class="btn btn-primary" id="homeHeroPrimary" href="programs.html">Explore Programs</a>
+            <a class="btn btn-secondary" id="homeHeroSecondary" href="booking.html">Request Consultation</a>
           </div>
         </div>
-        <figure class="hero-media">
-          <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1200&q=80" alt="Private healthcare consultation">
-        </figure>
-      </div>
-    </section>
+        <aside class="hero-media hero-package card" aria-labelledby="allInOnePackageTitle">
+          <div class="hero-package-inner">
+            <p class="eyebrow">Signature itinerary</p>
+            <h3 id="allInOnePackageTitle" class="hero-package-title">All-in-One Package</h3>
+            <p class="hero-package-price">Starting from $1,499</p>
+            <p class="muted">A private all-in-one Seoul beauty day built around clinic care, salon care, recovery, and optional refinements.</p>
+            <p class="hero-package-note">Includes 1 skin clinic care option + 3 optional programs.</p>
+            <button class="btn btn-primary" type="button" data-builder-toggle>Build Your Journey</button>
+          </div>
+          <section class="allinone-builder" id="allInOneBuilder" hidden aria-live="polite">
+            <header class="allinone-builder-head">
+              <h4>Build your beauty journey.</h4>
+              <p class="muted">Choose 1 skin clinic care option and 3 optional programs to complete your All-in-One Package.</p>
+              <div class="allinone-pricing" aria-label="All-in-One package pricing">
+                <p><span>Base package:</span><strong id="allInOneBasePrice">$1,499</strong></p>
+                <p><span>Add-ons:</span><strong id="allInOneAddonPrice">$0</strong></p>
+                <p><span>Total:</span><strong id="allInOneTotalPrice">$1,499</strong></p>
+              </div>
+              <p class="allinone-counter" id="allInOneCounter">0 / 4 selected</p>
+              <p class="allinone-ready" id="allInOneReady" hidden>Your journey is ready.</p>
+            </header>
 
-    <section class="section product-section">
-      <div class="container section-head">
-        <div>
-          <p class="eyebrow" id="homeProgramsEyebrow">Featured Programs</p>
-          <h2 id="homeProgramsTitle">Start with a concierge path.</h2>
-        </div>
-        <a class="btn btn-secondary" id="homeProgramsCta" href="programs.html">View All Programs</a>
-      </div>
-      <div class="container">
-        <div class="grid-programs program-grid-featured" id="homeFeaturedPrograms"></div>
+            <div class="allinone-group">
+              <p class="allinone-group-label">Required: Choose 1 Skin Clinic Care</p>
+              <div class="allinone-options">
+                <button class="allinone-option" type="button" data-builder-option data-builder-group="skin" data-program-id="skin-clinic-care-1">
+                  <strong>Skin Clinic Care 1 (+$0)</strong>
+                  <span>Tone, texture, pore care, vitamin tone care, and toning.</span>
+                </button>
+                <button class="allinone-option" type="button" data-builder-option data-builder-group="skin" data-program-id="skin-clinic-care-2">
+                  <strong>Skin Clinic Care 2 (+$150)</strong>
+                  <span>Lifting, pigment laser, and wrinkle botox.</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="allinone-group">
+              <p class="allinone-group-label">Choose 3 Optional Programs</p>
+              <div class="allinone-options">
+                <button class="allinone-option" type="button" data-builder-option data-builder-group="optional" data-program-id="scalp-diagnosis-spa">
+                  <strong>Scalp Care (+$0)</strong>
+                  <span>Scalp diagnosis, scaling, and relaxing treatment support.</span>
+                </button>
+                <button class="allinone-option" type="button" data-builder-option data-builder-group="optional" data-program-id="hair-salon">
+                  <strong>Hair Salon (+$80)</strong>
+                  <span>Haircut or hair clinic treatment with consultation and finishing.</span>
+                </button>
+                <button class="allinone-option" type="button" data-builder-option data-builder-group="optional" data-program-id="celebrity-hair-makeup">
+                  <strong>Hair &amp; Makeup (+$100)</strong>
+                  <span>Professional hair styling and makeup for a polished, camera-ready look.</span>
+                </button>
+                <button class="allinone-option" type="button" data-builder-option data-builder-group="optional" data-program-id="nail-care">
+                  <strong>Nail/Pedi Care (+$0)</strong>
+                  <span>Nail or pedi care with shaping, cuticle care, and finish.</span>
+                </button>
+                <button class="allinone-option" type="button" data-builder-option data-builder-group="optional" data-program-id="body-massage">
+                  <strong>Body Massage (+$20)</strong>
+                  <span>Full-body massage focused on recovery, comfort, and release.</span>
+                </button>
+                <button class="allinone-option" type="button" data-builder-option data-builder-group="optional" data-program-id="beauty-shopping">
+                  <strong>Beauty Shopping (+$0)</strong>
+                  <span>Guided K-beauty shopping support, including destinations such as Olive Young.</span>
+                </button>
+              </div>
+            </div>
+
+            <button class="btn btn-primary" type="button" data-builder-continue>Continue to Consultation</button>
+          </section>
+        </aside>
       </div>
     </section>
 
     <section class="section-sm">
       <div class="container">
         <p class="eyebrow" id="homeHowEyebrow">How It Works</p>
-        <h2 class="section-title" id="homeHowTitle">Select. Request. Arrive prepared.</h2>
+        <h2 class="section-title" id="homeHowTitle">Choose clearly. Plan privately. Arrive prepared.</h2>
         <div class="step-grid step-grid-4">
-          <article class="step"><span class="step-index">01</span><h3 id="homeStep1Title">Choose a program</h3><p class="muted" id="homeStep1Text">Compare packages and individual services.</p></article>
-          <article class="step"><span class="step-index">02</span><h3 id="homeStep2Title">Add to cart</h3><p class="muted" id="homeStep2Text">Save the path you want to discuss.</p></article>
-          <article class="step"><span class="step-index">03</span><h3 id="homeStep3Title">Request planning</h3><p class="muted" id="homeStep3Text">Share dates, goals, and language needs.</p></article>
-          <article class="step"><span class="step-index">04</span><h3 id="homeStep4Title">Get coordinated</h3><p class="muted" id="homeStep4Text">Karecation supports booking and itinerary flow.</p></article>
+          <article class="step"><span class="step-index">01</span><h3 id="homeStep1Title">Choose a program</h3><p class="muted" id="homeStep1Text">Browse curated options based on the kind of beauty experience you want in Seoul.</p></article>
+          <article class="step"><span class="step-index">02</span><h3 id="homeStep2Title">Save your selections</h3><p class="muted" id="homeStep2Text">Add the paths you want to discuss before making a final decision.</p></article>
+          <article class="step"><span class="step-index">03</span><h3 id="homeStep3Title">Request consultation</h3><p class="muted" id="homeStep3Text">Share your dates, goals, language needs, and preferred level of support.</p></article>
+          <article class="step"><span class="step-index">04</span><h3 id="homeStep4Title">Get coordinated</h3><p class="muted" id="homeStep4Text">Karecation helps organize the next step with clarity, privacy, and guidance.</p></article>
         </div>
       </div>
     </section>
 
     <section class="section-sm">
       <div class="container">
-        <p class="eyebrow" id="homeTrustEyebrow">Trust</p>
-        <h2 class="section-title" id="homeTrustTitle">Premium support, clear boundaries.</h2>
+        <p class="eyebrow" id="homeTrustEyebrow">Why Karecation</p>
+        <h2 class="section-title" id="homeTrustTitle">Private support, clearer decisions.</h2>
         <div class="info-grid">
-          <article class="info-card"><h3 id="homeTrust1Title">Private planning</h3><p class="muted" id="homeTrust1Text" style="margin-top:6px;">Built around your goals and schedule.</p></article>
-          <article class="info-card"><h3 id="homeTrust2Title">Clinic discovery</h3><p class="muted" id="homeTrust2Text" style="margin-top:6px;">Compare options clearly.</p></article>
-          <article class="info-card"><h3 id="homeTrust3Title">Multilingual support</h3><p class="muted" id="homeTrust3Text" style="margin-top:6px;">Communication help for foreign visitors.</p></article>
+          <article class="info-card"><h3 id="homeTrust1Title">Tailored planning</h3><p class="muted" id="homeTrust1Text" style="margin-top:6px;">Built around your goals, timing, comfort level, and beauty priorities.</p></article>
+          <article class="info-card"><h3 id="homeTrust2Title">Trusted discovery</h3><p class="muted" id="homeTrust2Text" style="margin-top:6px;">Explore clinic, beauty, and shopping options with more clarity.</p></article>
+          <article class="info-card"><h3 id="homeTrust3Title">Multilingual support</h3><p class="muted" id="homeTrust3Text" style="margin-top:6px;">Designed to help international guests navigate the process with ease.</p></article>
         </div>
       </div>
     </section>
@@ -83,7 +136,7 @@
     <section class="section-sm">
       <div class="container compact-faq">
         <p class="eyebrow" id="homeFaqEyebrow">FAQ</p>
-        <h2 class="section-title" id="homeFaqTitle">Before you start.</h2>
+        <h2 class="section-title" id="homeFaqTitle">Before you begin.</h2>
         <div class="faq-list" id="homeFaqList"></div>
       </div>
     </section>
@@ -92,9 +145,9 @@
       <div class="container final-cta-inner">
         <div>
           <p class="eyebrow" id="homeFinalEyebrow">Start Planning</p>
-          <h2 id="homeFinalTitle">Ready to choose your Korea concierge path?</h2>
+          <h2 id="homeFinalTitle">Ready to plan your Seoul beauty experience?</h2>
         </div>
-        <a class="btn btn-primary" id="homeFinalCta" href="booking.html">Request Private Consultation</a>
+        <a class="btn btn-primary" id="homeFinalCta" href="booking.html">Request Consultation</a>
       </div>
     </section>
 
@@ -102,7 +155,7 @@
 
   <footer class="site-footer">
     <div class="container footer-grid">
-      <div><h4>Karecation</h4><p>Premium K-beauty concierge support for foreign clients visiting Korea.</p></div>
+      <div><h4>Karecation</h4><p>Private K-beauty concierge for international guests visiting Seoul.</p></div>
       <div><h4>Browse</h4><div class="footer-links"><a href="programs.html">Programs</a><a href="booking.html">Consultation</a></div></div>
       <div><h4>Support</h4><div class="footer-links"><a href="faq.html">FAQ</a><a href="contact.html">Contact</a></div></div>
     </div>
