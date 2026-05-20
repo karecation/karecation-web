@@ -132,21 +132,21 @@ const CONTACT_CHANNELS = [
   {
     id: "instagram",
     name: "Instagram",
-    address: "@karecation",
+    address: "ID: @karecation",
     qrSrc: "instagram-qr.png",
     qrAlt: "Instagram QR code for Karecation"
   },
   {
     id: "wechat",
     name: "WeChat",
-    address: "@karecation",
+    address: "ID: @karecation",
     qrSrc: "wechat-qr.png",
     qrAlt: "WeChat QR code for Karecation"
   },
   {
     id: "line",
     name: "LINE",
-    address: "@karecation",
+    address: "ID: @karecation",
     qrSrc: "line-qr.png",
     qrAlt: "LINE QR code for Karecation"
   }
