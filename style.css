@@ -365,6 +365,10 @@ p {
   color: #4e535d;
 }
 
+.hero-package-inner [data-builder-toggle] {
+  margin-top: 24px;
+}
+
 .allinone-builder {
   border-top: 1px solid var(--line);
   padding: 18px 22px 22px;

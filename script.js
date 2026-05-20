@@ -2044,7 +2044,6 @@ function applyLocale() {
   renderCartPage();
   renderBookingSummary();
   renderFaqPage();
-  renderContactChannels();
   updateCartCount();
   syncAllInOneBuilderUI();
 }
@@ -2121,14 +2120,6 @@ function renderStaticPageCopy() {
       setText(`aboutStep${index + 1}Title`, step[0]);
       setText(`aboutStep${index + 1}Text`, step[1]);
     });
-  }
-
-  if (page === "contact") {
-    const channel = contactChannelCopy();
-    setText("contactChannelsEyebrow", channel.eyebrow);
-    setText("contactChannelsTitle", channel.title);
-    setText("contactChannelsLead", channel.lead);
-    setText("contactChannelsHelper", channel.helper);
   }
 
   setPlaceholder("programSearch", copy.page.searchPlaceholder);
