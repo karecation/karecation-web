@@ -132,28 +132,22 @@ const CONTACT_CHANNELS = [
   {
     id: "instagram",
     name: "Instagram",
-    address: "@karecation.official",
-    href: "https://www.instagram.com/karecation.official/",
-    ctaLabel: "Open Instagram",
+    address: "@karecation",
     qrSrc: "instagram-qr.png",
     qrAlt: "Instagram QR code for Karecation"
   },
   {
     id: "wechat",
     name: "WeChat",
-    address: "ID: karecation_official",
-    href: "wechat-qr.jpg",
-    ctaLabel: "View WeChat QR",
-    qrSrc: "wechat-qr.jpg",
+    address: "@karecation",
+    qrSrc: "wechat-qr.png",
     qrAlt: "WeChat QR code for Karecation"
   },
   {
     id: "line",
     name: "LINE",
     address: "@karecation",
-    href: "https://line.me/ti/p/JxeUhsh3B8",
-    ctaLabel: "Open LINE",
-    qrSrc: "line-qr.jpg",
+    qrSrc: "line-qr.png",
     qrAlt: "LINE QR code for Karecation"
   }
 ];
@@ -2422,7 +2416,6 @@ function renderContactChannels() {
           <img data-channel-qr src="${channel.qrSrc}" alt="${channel.qrAlt}" loading="lazy" decoding="async">
           <figcaption class="channel-qr-missing">${labels.qrMissing}</figcaption>
         </figure>
-        <a class="contact-channel-link" href="${channel.href}" target="_blank" rel="noopener noreferrer">${channel.ctaLabel || labels.openLink}</a>
       </article>
     `;
   }).join("");
