@@ -369,6 +369,58 @@ p {
   margin-top: 24px;
 }
 
+/* ─── All-in-One flagship hero ─── */
+.aio-hero {
+  padding: 0;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.aio-hero:has(#allInOneBuilder:not([hidden])) {
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  align-items: start;
+}
+
+.aio-hero-summary {
+  padding: 44px 40px;
+  display: grid;
+  gap: 14px;
+  align-content: start;
+  max-width: 580px;
+}
+
+.aio-hero:has(#allInOneBuilder:not([hidden])) .aio-hero-summary {
+  max-width: none;
+}
+
+.aio-hero-title {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  line-height: 1.16;
+}
+
+.aio-hero-price {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #2b2f36;
+}
+
+.aio-hero-note {
+  font-size: 0.82rem;
+  color: #4e535d;
+}
+
+.aio-hero-summary [data-builder-toggle] {
+  margin-top: 8px;
+  width: fit-content;
+}
+
+.aio-hero .allinone-builder {
+  border-top: none;
+  border-left: 1px solid var(--line);
+}
+
 .allinone-builder {
   border-top: 1px solid var(--line);
   padding: 18px 22px 22px;
@@ -1145,6 +1197,15 @@ label {
     grid-template-columns: 1fr;
   }
 
+  .aio-hero:has(#allInOneBuilder:not([hidden])) {
+    grid-template-columns: 1fr;
+  }
+
+  .aio-hero .allinone-builder {
+    border-left: none;
+    border-top: 1px solid var(--line);
+  }
+
   .final-cta-inner {
     align-items: flex-start;
     flex-direction: column;
@@ -1246,6 +1307,11 @@ label {
   .hero-package-inner,
   .allinone-builder {
     padding: 14px;
+  }
+
+  .aio-hero-summary {
+    padding: 22px 18px;
+    max-width: none;
   }
 
   .hero-copy h1 {
