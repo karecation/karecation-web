@@ -384,6 +384,7 @@ p {
   border: 0;
   background: transparent;
   min-height: 100%;
+  overflow: hidden;
 }
 
 .all-in-one-carousel:focus-visible {
@@ -391,20 +392,69 @@ p {
   outline-offset: 2px;
 }
 
+.all-in-one-carousel-viewport {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.all-in-one-carousel-track {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transform: translateX(0);
+  transition: transform 450ms ease;
+}
+
 .all-in-one-slide {
-  position: absolute;
-  inset: 0;
+  flex: 0 0 100%;
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-  opacity: 0;
-  transition: opacity 450ms ease;
   pointer-events: none;
 }
 
-.all-in-one-slide.is-active {
-  opacity: 1;
+.all-in-one-carousel-controls {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.carousel-control {
+  position: absolute;
+  top: 50%;
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  border-radius: 999px;
+  background: rgba(20, 16, 12, 0.28);
+  color: rgba(255, 255, 255, 0.92);
+  font: inherit;
+  font-size: 1.9rem;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  pointer-events: auto;
+  transform: translateY(-50%);
+  transition: background-color 0.18s ease, border-color 0.18s ease;
+}
+
+.carousel-control:hover,
+.carousel-control:focus-visible {
+  background: rgba(20, 16, 12, 0.42);
+  border-color: rgba(255, 255, 255, 0.72);
+}
+
+.carousel-control-prev {
+  left: 22px;
+}
+
+.carousel-control-next {
+  right: 22px;
 }
 
 .hero-bg-overlay {
@@ -495,6 +545,7 @@ p {
   border-top: 1px solid var(--line);
   padding: 18px 22px 22px;
   background: var(--surface-soft);
+  scroll-margin-top: 96px;
 }
 
 .allinone-builder-card {
@@ -1000,6 +1051,11 @@ textarea {
   font-size: 0.96rem;
 }
 
+.payment-note {
+  font-size: 0.78rem;
+  margin: 8px 0 0;
+}
+
 .booking-grid {
   display: grid;
   grid-template-columns: 1.2fr 1fr;
@@ -1016,6 +1072,26 @@ textarea {
   border-radius: 12px;
   background: #fff;
   padding: 16px;
+}
+
+.payment-cta-wrap {
+  margin-top: 14px;
+}
+
+.payment-cta-card {
+  display: grid;
+  gap: 10px;
+}
+
+.payment-cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.payment-cta-actions .btn {
+  flex: 1 1 260px;
+  min-height: 44px;
 }
 
 .field-grid {

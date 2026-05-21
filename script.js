@@ -3699,7 +3699,13 @@ function initAllInOneHeroCarousel() {
   const carousel = document.querySelector("[data-allinone-carousel]");
   if (!carousel) return;
 
-  let slides = Array.from(carousel.querySelectorAll(".all-in-one-slide"));
+  const heroCard = carousel.closest(".hero-background-card") || carousel;
+  const track = carousel.querySelector("[data-carousel-track]");
+  const prevButton = heroCard.querySelector("[data-carousel-prev]");
+  const nextButton = heroCard.querySelector("[data-carousel-next]");
+  if (!track) return;
+
+  let slides = Array.from(track.querySelectorAll(".all-in-one-slide"));
   if (!slides.length) return;
 
   let timerId = null;
@@ -3710,7 +3716,7 @@ function initAllInOneHeroCarousel() {
     : null;
 
   const refreshSlides = () => {
-    slides = Array.from(carousel.querySelectorAll(".all-in-one-slide"));
+    slides = Array.from(track.querySelectorAll(".all-in-one-slide"));
     if (!slides.length) return false;
     if (activeIndex >= slides.length) activeIndex = 0;
     return true;
@@ -3718,10 +3724,14 @@ function initAllInOneHeroCarousel() {
 
   const setActiveSlide = (nextIndex) => {
     if (!slides.length) return;
+    const normalizedIndex = (nextIndex + slides.length) % slides.length;
     slides.forEach((slide, slideIndex) => {
-      slide.classList.toggle("is-active", slideIndex === nextIndex);
+      const isActive = slideIndex === normalizedIndex;
+      slide.classList.toggle("is-active", isActive);
+      slide.setAttribute("aria-hidden", isActive ? "false" : "true");
     });
-    activeIndex = nextIndex;
+    track.style.transform = `translateX(-${normalizedIndex * 100}%)`;
+    activeIndex = normalizedIndex;
   };
 
   const stopRotation = () => {
@@ -3733,9 +3743,8 @@ function initAllInOneHeroCarousel() {
 
   const canRotate = () => slides.length > 1 && !(motionQuery && motionQuery.matches);
 
-  const stepSlide = () => {
-    const nextIndex = (activeIndex + 1) % slides.length;
-    setActiveSlide(nextIndex);
+  const stepSlide = (direction = 1) => {
+    setActiveSlide(activeIndex + direction);
   };
 
   const startRotation = () => {
@@ -3761,9 +3770,7 @@ function initAllInOneHeroCarousel() {
         stopRotation();
         return;
       }
-      if (wasActive) {
-        setActiveSlide(0);
-      }
+      setActiveSlide(wasActive ? 0 : activeIndex);
       startRotation();
     }, { once: true });
   };
@@ -3780,15 +3787,27 @@ function initAllInOneHeroCarousel() {
 
   activeIndex = slides.findIndex((slide) => slide.classList.contains("is-active"));
   if (activeIndex < 0) activeIndex = 0;
-  setActiveSlide(0);
+  setActiveSlide(activeIndex);
   startRotation();
 
-  carousel.addEventListener("mouseenter", stopRotation);
-  carousel.addEventListener("mouseleave", startRotation);
-  carousel.addEventListener("focusin", stopRotation);
-  carousel.addEventListener("focusout", (event) => {
+  prevButton?.addEventListener("click", () => {
+    stopRotation();
+    stepSlide(-1);
+    startRotation();
+  });
+
+  nextButton?.addEventListener("click", () => {
+    stopRotation();
+    stepSlide(1);
+    startRotation();
+  });
+
+  heroCard.addEventListener("mouseenter", stopRotation);
+  heroCard.addEventListener("mouseleave", startRotation);
+  heroCard.addEventListener("focusin", stopRotation);
+  heroCard.addEventListener("focusout", (event) => {
     const nextTarget = event.relatedTarget;
-    if (!nextTarget || !carousel.contains(nextTarget)) {
+    if (!nextTarget || !heroCard.contains(nextTarget)) {
       startRotation();
     }
   });
