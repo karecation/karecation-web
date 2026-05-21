@@ -55,20 +55,6 @@
             </label>
 
             <label>
-              Preferred Visit Date
-              <input id="preferredVisitDate" name="preferredDate" type="date" required>
-            </label>
-            <p id="preferredVisitDateHelper" class="muted payment-note" style="margin-top:-2px;">Final availability will be confirmed by Karecation after reviewing your request.</p>
-
-            <label>
-              Payment Method
-              <select id="paymentMethod" name="paymentMethod" required>
-                <option value="card" id="paymentMethodCardOption" selected>Card Payment</option>
-                <option value="cash-bank-transfer" id="paymentMethodCashBankOption">Cash / Bank Transfer</option>
-              </select>
-            </label>
-
-            <label>
               Additional Request
               <textarea id="requestNote" name="message" placeholder="Share preferred programs, dates, language needs, and support priorities."></textarea>
             </label>
@@ -81,26 +67,11 @@
         <aside class="summary-card">
           <h3 class="display" style="margin-bottom:8px;">Selected Path</h3>
           <div id="bookingSummary" class="list-stack"></div>
-          <div class="total-row" style="margin-top:4px;"><span id="bookingPreferredDateLabel">Preferred Visit Date</span><span id="bookingPreferredDateValue">-</span></div>
           <hr style="border:none; border-top:1px solid var(--line); margin:8px 0;">
-          <div class="total-row"><span id="bookingSubtotalLabel">Subtotal</span><span id="bookingSubtotal">$0</span></div>
-          <div class="total-row"><span id="bookingServiceLabel">Service fee included for card payment (5%)</span><span id="bookingService">$0</span></div>
-          <div class="total-row"><strong id="bookingCardTotalLabel">Card payment total</strong><strong id="bookingTotal">$0</strong></div>
-          <div class="total-row"><span id="bookingCashTotalLabel">Cash / Bank Transfer Total</span><span id="bookingCashTotal">$0</span></div>
-          <p id="bookingCashDiscountLine" class="muted payment-note">5% service fee discount applied for cash or bank transfer.</p>
-          <p id="bookingPaymentNote" class="muted payment-note">Card payments include the 5% service fee. Cash or bank transfer payments receive a 5% service fee discount after availability and final scope are confirmed.</p>
+          <div class="total-row"><span>Subtotal</span><span id="bookingSubtotal">$0</span></div>
+          <div class="total-row"><span>Service (5%)</span><span id="bookingService">$0</span></div>
+          <div class="total-row"><strong>Total</strong><strong id="bookingTotal">$0</strong></div>
         </aside>
-      </div>
-
-      <div class="container payment-cta-wrap">
-        <article class="form-card payment-cta-card">
-          <h3 class="display" id="bookingPaymentCtaTitle" style="margin-bottom:8px;">Payment after confirmation</h3>
-          <p class="muted" id="bookingPaymentCtaBody">Karecation confirms availability, scope, and timing before collecting payment. After your request is reviewed, we will share a secure payment link or cash / bank transfer instructions.</p>
-          <div class="payment-cta-actions">
-            <a class="btn btn-primary" id="bookingCardPayCta" href="PLACEHOLDER_CARD_PAYMENT_LINK" target="_blank" rel="noopener noreferrer">Pay by Card</a>
-            <a class="btn btn-secondary" id="bookingCashBankCta" href="contact.html">Request Cash / Bank Transfer Instructions</a>
-          </div>
-        </article>
       </div>
     </section>
   </main>
