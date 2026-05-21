@@ -3695,6 +3695,87 @@ function bindGlobalEvents() {
   });
 }
 
+function initAllInOneHeroCarousel() {
+  const carousel = document.querySelector("[data-allinone-carousel]");
+  if (!carousel) return;
+
+  const slides = Array.from(carousel.querySelectorAll(".all-in-one-slide"));
+  if (!slides.length) return;
+
+  let activeIndex = slides.findIndex((slide) => slide.classList.contains("is-active"));
+  if (activeIndex < 0) activeIndex = 0;
+  let timerId = null;
+
+  const motionQuery = typeof window.matchMedia === "function"
+    ? window.matchMedia("(prefers-reduced-motion: reduce)")
+    : null;
+
+  const setActiveSlide = (nextIndex) => {
+    slides.forEach((slide, slideIndex) => {
+      slide.classList.toggle("is-active", slideIndex === nextIndex);
+    });
+    activeIndex = nextIndex;
+  };
+
+  const stopRotation = () => {
+    if (timerId) {
+      window.clearInterval(timerId);
+      timerId = null;
+    }
+  };
+
+  const canRotate = () => slides.length > 1 && !(motionQuery && motionQuery.matches);
+
+  const stepSlide = () => {
+    const nextIndex = (activeIndex + 1) % slides.length;
+    setActiveSlide(nextIndex);
+  };
+
+  const startRotation = () => {
+    stopRotation();
+    if (!canRotate()) return;
+    timerId = window.setInterval(stepSlide, 3000);
+  };
+
+  const handleMotionChange = () => {
+    stopRotation();
+    if (!canRotate()) {
+      setActiveSlide(0);
+      return;
+    }
+    startRotation();
+  };
+
+  setActiveSlide(0);
+  startRotation();
+
+  carousel.addEventListener("mouseenter", stopRotation);
+  carousel.addEventListener("mouseleave", startRotation);
+  carousel.addEventListener("focusin", stopRotation);
+  carousel.addEventListener("focusout", (event) => {
+    const nextTarget = event.relatedTarget;
+    if (!nextTarget || !carousel.contains(nextTarget)) {
+      startRotation();
+    }
+  });
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      stopRotation();
+    } else {
+      startRotation();
+    }
+  });
+
+  if (motionQuery) {
+    if (typeof motionQuery.addEventListener === "function") {
+      motionQuery.addEventListener("change", handleMotionChange);
+    } else if (typeof motionQuery.addListener === "function") {
+      motionQuery.addListener(handleMotionChange);
+    }
+  }
+}
+
 function init() {
   allInOneState = { skinId: null, optionalIds: [] };
   if (document.body.dataset.page === "home") {
@@ -3705,6 +3786,7 @@ function init() {
   bindBookingForm();
   bindGlobalEvents();
   applyLocale();
+  initAllInOneHeroCarousel();
 }
 
 document.addEventListener("DOMContentLoaded", init);

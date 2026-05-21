@@ -27,20 +27,11 @@
   <main>
     <section class="section-sm">
       <div class="container hero">
-        <div class="card hero-copy">
-          <p class="eyebrow" id="homeHeroEyebrow">PREMIUM K-BEAUTY, SIMPLIFIED</p>
-          <h1 id="homeHeroTitle">Beauty,<br>privately arranged.</h1>
-          <p class="lead" id="homeHeroLead">Private K-beauty concierge for international guests visiting Seoul. Explore curated programs or request a private consultation.</p>
-          <div style="display:flex; gap:8px; flex-wrap:wrap;">
-            <a class="btn btn-primary" id="homeHeroPrimary" href="programs.html">Explore Programs</a>
-            <a class="btn btn-secondary" id="homeHeroSecondary" href="booking.html">Request Consultation</a>
-          </div>
-        </div>
         <aside class="hero-media hero-package card" aria-labelledby="allInOnePackageTitle">
           <div class="all-in-one-hero">
             <div class="hero-package-inner">
               <p class="eyebrow" id="allInOneCardEyebrow">Signature itinerary</p>
-              <h3 id="allInOnePackageTitle" class="hero-package-title">All-in-One Package</h3>
+              <h1 id="allInOnePackageTitle" class="hero-package-title">Beauty, privately arranged.</h1>
               <p class="hero-package-price" id="allInOneCardPrice">Starting from $1,499</p>
               <p class="muted" id="allInOneCardDescription">A private all-in-one Seoul beauty day built around clinic care, salon care, recovery, and optional refinements.</p>
               <p class="hero-package-note" id="allInOneCardNote">Includes 1 skin clinic care option + 3 optional programs.</p>
@@ -48,8 +39,11 @@
                 <button class="btn btn-primary" id="allInOneCardButton" type="button" data-builder-toggle>Build Your Journey</button>
               </div>
             </div>
-            <figure class="all-in-one-visual">
-              <img src="all-in-one-hero.png" alt="Premium Seoul beauty spa with Han River and Namsan Tower view" loading="lazy" decoding="async">
+            <figure class="all-in-one-carousel" data-allinone-carousel tabindex="0" aria-label="All-in-One package visual slideshow">
+              <img class="all-in-one-slide is-active" src="hero-slide-1.png" alt="Premium Seoul beauty spa with Namsan view" loading="lazy" decoding="async">
+              <img class="all-in-one-slide" src="hero-slide-2.png" alt="Luxury K-beauty concierge boutique with city view" loading="lazy" decoding="async">
+              <img class="all-in-one-slide" src="hero-slide-3.png" alt="Serene Seoul spa room with sunset view" loading="lazy" decoding="async">
+              <img class="all-in-one-slide" src="hero-slide-4.png" alt="Elegant Seoul beauty salon with Han River view" loading="lazy" decoding="async">
             </figure>
           </div>
           <section class="allinone-builder" id="allInOneBuilder" hidden aria-live="polite">
