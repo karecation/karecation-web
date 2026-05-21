@@ -3741,7 +3741,7 @@ function initAllInOneHeroCarousel() {
   const startRotation = () => {
     stopRotation();
     if (!canRotate()) return;
-    timerId = window.setInterval(stepSlide, 3000);
+    timerId = window.setInterval(stepSlide, 2000);
   };
 
   const handleMotionChange = () => {
