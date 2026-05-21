@@ -1,0 +1,19 @@
+﻿# Karecation Static Web Upload (Clean)
+
+Upload this folder contents to your GitHub repository root for GitHub Pages static hosting.
+
+Included:
+- index.html
+- programs.html
+- program-detail.html
+- cart.html
+- booking.html
+- about.html
+- faq.html
+- contact.html
+- style.css
+- script.js
+
+Note:
+- Current script.js uses external image URLs (Unsplash) for program cards.
+- If you want local images, upload image files and update paths in script.js.

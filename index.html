@@ -1,21 +1,21 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Karecation | Private K-beauty concierge</title>
-  <meta name="description" content="Private K-beauty concierge for international guests visiting Seoul.">
+  <title>Karecation | Premium K-Beauty Booking</title>
+  <meta name="description" content="Simple premium K-beauty reservation platform for global visitors.">
   <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
 </head>
 <body data-page="home">
   <header class="site-header">
     <div class="container nav-row">
-      <a class="brand" href="index.html">Karecation<small>Private K-beauty concierge</small></a>
+      <a class="brand" href="index.html">Karecation<small>Premium K-Beauty Concierge</small></a>
       <nav class="main-nav" aria-label="Main">
         <a data-page="home" href="index.html">Home</a>
         <a data-page="programs" href="programs.html">Programs</a>
-        <a data-page="booking" href="booking.html">Consultation</a>
+        <a data-page="booking" href="booking.html">Book</a>
         <a data-page="about" href="about.html">About</a>
         <a data-page="faq" href="faq.html">FAQ</a>
         <a data-page="contact" href="contact.html">Contact</a>
@@ -25,129 +25,11 @@
   </header>
 
   <main>
-    <section class="section-sm home-hero-section">
-      <div class="container hero-wide-container">
-        <aside class="hero-background-card card" aria-labelledby="allInOnePackageTitle">
-          <figure class="hero-carousel-bg all-in-one-carousel" data-allinone-carousel tabindex="0" aria-label="All-in-One package visual slideshow">
-            <img class="hero-bg-slide all-in-one-slide is-active" src="hero-slide-1-v2.png" alt="Premium Seoul beauty spa with Namsan view" loading="lazy" decoding="async">
-            <img class="hero-bg-slide all-in-one-slide" src="hero-slide-2.png" alt="Luxury K-beauty concierge boutique with city view" loading="lazy" decoding="async">
-            <img class="hero-bg-slide all-in-one-slide" src="hero-slide-3.png" alt="Serene Seoul spa room with sunset view" loading="lazy" decoding="async">
-            <img class="hero-bg-slide all-in-one-slide" src="hero-slide-4.png" alt="Elegant Seoul beauty salon with Han River view" loading="lazy" decoding="async">
-          </figure>
-          <div class="hero-bg-overlay" aria-hidden="true"></div>
-          <div class="hero-overlay-content">
-            <p class="eyebrow" id="allInOneCardEyebrow">Signature itinerary</p>
-            <h1 id="allInOnePackageTitle" class="hero-package-title">Beauty, privately arranged.</h1>
-            <p class="hero-package-price" id="allInOneCardPrice">Starting from $1,499</p>
-            <p class="muted" id="allInOneCardDescription">A private all-in-one Seoul beauty day built around clinic care, salon care, recovery, and optional refinements.</p>
-            <p class="hero-package-note" id="allInOneCardNote">Includes 1 skin clinic care option + 3 optional programs.</p>
-            <div class="home-package-cta">
-              <button class="btn btn-primary" id="allInOneCardButton" type="button" data-builder-toggle>Build Your Journey</button>
-            </div>
-          </div>
-        </aside>
-        <section class="allinone-builder allinone-builder-card card" id="allInOneBuilder" hidden aria-live="polite">
-          <header class="allinone-builder-head">
-            <h4 id="allInOneBuilderTitle">Build your beauty journey.</h4>
-            <p class="muted" id="allInOneBuilderLead">Choose 1 skin clinic care option and 3 optional programs to complete your All-in-One Package.</p>
-            <div class="allinone-pricing" aria-label="All-in-One package pricing">
-              <p><span id="allInOneBaseLabel">Base package:</span><strong id="allInOneBasePrice">$1,499</strong></p>
-              <p><span id="allInOneAddonsLabel">Add-ons:</span><strong id="allInOneAddonPrice">$0</strong></p>
-              <p><span id="allInOneTotalLabel">Total:</span><strong id="allInOneTotalPrice">$1,499</strong></p>
-            </div>
-            <p class="allinone-counter" id="allInOneCounter">0 / 4 selected</p>
-            <p class="allinone-ready" id="allInOneReady" hidden>Your journey is ready.</p>
-          </header>
-
-          <div class="allinone-group">
-            <p class="allinone-group-label" id="allInOneRequiredLabel">Required: Choose 1 Skin Clinic Care</p>
-            <div class="allinone-options">
-              <button class="allinone-option" type="button" data-builder-option data-builder-group="skin" data-program-id="skin-clinic-care-1">
-                <strong id="allInOneSkin1Title">Skin Clinic Care 1 (+$0)</strong>
-                <span id="allInOneSkin1Desc">Tone, texture, pore care, vitamin tone care, and toning.</span>
-              </button>
-              <button class="allinone-option" type="button" data-builder-option data-builder-group="skin" data-program-id="skin-clinic-care-2">
-                <strong id="allInOneSkin2Title">Skin Clinic Care 2 (+$150)</strong>
-                <span id="allInOneSkin2Desc">Lifting, pigment laser, and wrinkle botox.</span>
-              </button>
-            </div>
-          </div>
-
-          <div class="allinone-group">
-            <p class="allinone-group-label" id="allInOneOptionalLabel">Choose 3 Optional Programs</p>
-            <div class="allinone-options">
-              <button class="allinone-option" type="button" data-builder-option data-builder-group="optional" data-program-id="scalp-diagnosis-spa">
-                <strong id="allInOneOptScalpTitle">Scalp Care (+$0)</strong>
-                <span id="allInOneOptScalpDesc">Scalp diagnosis, scaling, and relaxing treatment support.</span>
-              </button>
-              <button class="allinone-option" type="button" data-builder-option data-builder-group="optional" data-program-id="hair-salon">
-                <strong id="allInOneOptSalonTitle">Hair Salon (+$80)</strong>
-                <span id="allInOneOptSalonDesc">Haircut or hair clinic treatment with consultation and finishing.</span>
-              </button>
-              <button class="allinone-option" type="button" data-builder-option data-builder-group="optional" data-program-id="celebrity-hair-makeup">
-                <strong id="allInOneOptHMUTitle">Hair &amp; Makeup (+$100)</strong>
-                <span id="allInOneOptHMUDesc">Professional hair styling and makeup for a polished, camera-ready look.</span>
-              </button>
-              <button class="allinone-option" type="button" data-builder-option data-builder-group="optional" data-program-id="nail-care">
-                <strong id="allInOneOptNailTitle">Nail/Pedi Care (+$0)</strong>
-                <span id="allInOneOptNailDesc">Nail or pedi care with shaping, cuticle care, and finish.</span>
-              </button>
-              <button class="allinone-option" type="button" data-builder-option data-builder-group="optional" data-program-id="body-massage">
-                <strong id="allInOneOptBodyTitle">Body Massage (+$20)</strong>
-                <span id="allInOneOptBodyDesc">Full-body massage focused on recovery, comfort, and release.</span>
-              </button>
-              <button class="allinone-option" type="button" data-builder-option data-builder-group="optional" data-program-id="beauty-shopping">
-                <strong id="allInOneOptShopTitle">Beauty Shopping (+$0)</strong>
-                <span id="allInOneOptShopDesc">Guided K-beauty shopping support, including destinations such as Olive Young.</span>
-              </button>
-            </div>
-          </div>
-
-          <button class="btn btn-primary" id="allInOneContinueButton" type="button" data-builder-continue>Continue to Consultation</button>
-        </section>
-      </div>
-    </section>
-
-    <section class="section-sm">
+    <section class="section">
       <div class="container">
-        <p class="eyebrow" id="homeHowEyebrow">How It Works</p>
-        <h2 class="section-title" id="homeHowTitle">Choose clearly. Plan privately. Arrive prepared.</h2>
-        <div class="step-grid step-grid-4">
-          <article class="step"><span class="step-index">01</span><h3 id="homeStep1Title">Choose a program</h3><p class="muted" id="homeStep1Text">Browse curated options based on the kind of beauty experience you want in Seoul.</p></article>
-          <article class="step"><span class="step-index">02</span><h3 id="homeStep2Title">Save your selections</h3><p class="muted" id="homeStep2Text">Add the paths you want to discuss before making a final decision.</p></article>
-          <article class="step"><span class="step-index">03</span><h3 id="homeStep3Title">Request consultation</h3><p class="muted" id="homeStep3Text">Share your dates, goals, language needs, and preferred level of support.</p></article>
-          <article class="step"><span class="step-index">04</span><h3 id="homeStep4Title">Get coordinated</h3><p class="muted" id="homeStep4Text">Karecation helps organize the next step with clarity, privacy, and guidance.</p></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section-sm">
-      <div class="container">
-        <p class="eyebrow" id="homeTrustEyebrow">Why Karecation</p>
-        <h2 class="section-title" id="homeTrustTitle">Private support, clearer decisions.</h2>
-        <div class="info-grid">
-          <article class="info-card"><h3 id="homeTrust1Title">Tailored planning</h3><p class="muted" id="homeTrust1Text" style="margin-top:6px;">Built around your goals, timing, comfort level, and beauty priorities.</p></article>
-          <article class="info-card"><h3 id="homeTrust2Title">Trusted discovery</h3><p class="muted" id="homeTrust2Text" style="margin-top:6px;">Explore clinic, beauty, and shopping options with more clarity.</p></article>
-          <article class="info-card"><h3 id="homeTrust3Title">Multilingual support</h3><p class="muted" id="homeTrust3Text" style="margin-top:6px;">Designed to help international guests navigate the process with ease.</p></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section-sm">
-      <div class="container compact-faq">
-        <p class="eyebrow" id="homeFaqEyebrow">FAQ</p>
-        <h2 class="section-title" id="homeFaqTitle">Before you begin.</h2>
-        <div class="faq-list" id="homeFaqList"></div>
-      </div>
-    </section>
-
-    <section class="section-sm final-cta">
-      <div class="container final-cta-inner">
-        <div>
-          <p class="eyebrow" id="homeFinalEyebrow">Start Planning</p>
-          <h2 id="homeFinalTitle">Ready to plan your Seoul beauty experience?</h2>
-        </div>
-        <a class="btn btn-primary" id="homeFinalCta" href="booking.html">Request Consultation</a>
+        <p class="eyebrow">PREMIUM K-BEAUTY, SIMPLIFIED</p>
+        <h2 style="margin-bottom:10px;">Beauty, privately arranged.</h2>
+        <div class="grid-programs" id="homeFeaturedPrograms"></div>
       </div>
     </section>
 
@@ -155,8 +37,8 @@
 
   <footer class="site-footer">
     <div class="container footer-grid">
-      <div><h4>Karecation</h4><p>Private K-beauty concierge for international guests visiting Seoul.</p></div>
-      <div><h4>Browse</h4><div class="footer-links"><a href="programs.html">Programs</a><a href="booking.html">Consultation</a></div></div>
+      <div><h4>Karecation</h4><p>Private K-beauty concierge support for international guests in Seoul.</p></div>
+      <div><h4>Browse</h4><div class="footer-links"><a href="programs.html">Programs</a><a href="booking.html">Booking</a></div></div>
       <div><h4>Support</h4><div class="footer-links"><a href="faq.html">FAQ</a><a href="contact.html">Contact</a></div></div>
     </div>
   </footer>
