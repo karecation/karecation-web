@@ -25,87 +25,86 @@
   </header>
 
   <main>
-    <section class="section-sm">
-      <div class="container hero">
-        <aside class="hero-media hero-package card" aria-labelledby="allInOnePackageTitle">
-          <div class="all-in-one-hero">
-            <div class="hero-package-inner">
-              <p class="eyebrow" id="allInOneCardEyebrow">Signature itinerary</p>
-              <h1 id="allInOnePackageTitle" class="hero-package-title">Beauty, privately arranged.</h1>
-              <p class="hero-package-price" id="allInOneCardPrice">Starting from $1,499</p>
-              <p class="muted" id="allInOneCardDescription">A private all-in-one Seoul beauty day built around clinic care, salon care, recovery, and optional refinements.</p>
-              <p class="hero-package-note" id="allInOneCardNote">Includes 1 skin clinic care option + 3 optional programs.</p>
-              <div class="home-package-cta">
-                <button class="btn btn-primary" id="allInOneCardButton" type="button" data-builder-toggle>Build Your Journey</button>
-              </div>
+    <section class="section-sm home-hero-section">
+      <div class="container hero-wide-container">
+        <aside class="hero-background-card card" aria-labelledby="allInOnePackageTitle">
+          <figure class="hero-carousel-bg all-in-one-carousel" data-allinone-carousel tabindex="0" aria-label="All-in-One package visual slideshow">
+            <img class="hero-bg-slide all-in-one-slide is-active" src="hero-slide-1.png" alt="Premium Seoul beauty spa with Namsan view" loading="lazy" decoding="async">
+            <img class="hero-bg-slide all-in-one-slide" src="hero-slide-2.png" alt="Luxury K-beauty concierge boutique with city view" loading="lazy" decoding="async">
+            <img class="hero-bg-slide all-in-one-slide" src="hero-slide-3.png" alt="Serene Seoul spa room with sunset view" loading="lazy" decoding="async">
+            <img class="hero-bg-slide all-in-one-slide" src="hero-slide-4.png" alt="Elegant Seoul beauty salon with Han River view" loading="lazy" decoding="async">
+          </figure>
+          <div class="hero-bg-overlay" aria-hidden="true"></div>
+          <div class="hero-overlay-content">
+            <p class="eyebrow" id="allInOneCardEyebrow">Signature itinerary</p>
+            <h1 id="allInOnePackageTitle" class="hero-package-title">Beauty, privately arranged.</h1>
+            <p class="hero-package-price" id="allInOneCardPrice">Starting from $1,499</p>
+            <p class="muted" id="allInOneCardDescription">A private all-in-one Seoul beauty day built around clinic care, salon care, recovery, and optional refinements.</p>
+            <p class="hero-package-note" id="allInOneCardNote">Includes 1 skin clinic care option + 3 optional programs.</p>
+            <div class="home-package-cta">
+              <button class="btn btn-primary" id="allInOneCardButton" type="button" data-builder-toggle>Build Your Journey</button>
             </div>
-            <figure class="all-in-one-carousel" data-allinone-carousel tabindex="0" aria-label="All-in-One package visual slideshow">
-              <img class="all-in-one-slide is-active" src="hero-slide-1.png" alt="Premium Seoul beauty spa with Namsan view" loading="lazy" decoding="async">
-              <img class="all-in-one-slide" src="hero-slide-2.png" alt="Luxury K-beauty concierge boutique with city view" loading="lazy" decoding="async">
-              <img class="all-in-one-slide" src="hero-slide-3.png" alt="Serene Seoul spa room with sunset view" loading="lazy" decoding="async">
-              <img class="all-in-one-slide" src="hero-slide-4.png" alt="Elegant Seoul beauty salon with Han River view" loading="lazy" decoding="async">
-            </figure>
           </div>
-          <section class="allinone-builder" id="allInOneBuilder" hidden aria-live="polite">
-            <header class="allinone-builder-head">
-              <h4 id="allInOneBuilderTitle">Build your beauty journey.</h4>
-              <p class="muted" id="allInOneBuilderLead">Choose 1 skin clinic care option and 3 optional programs to complete your All-in-One Package.</p>
-              <div class="allinone-pricing" aria-label="All-in-One package pricing">
-                <p><span id="allInOneBaseLabel">Base package:</span><strong id="allInOneBasePrice">$1,499</strong></p>
-                <p><span id="allInOneAddonsLabel">Add-ons:</span><strong id="allInOneAddonPrice">$0</strong></p>
-                <p><span id="allInOneTotalLabel">Total:</span><strong id="allInOneTotalPrice">$1,499</strong></p>
-              </div>
-              <p class="allinone-counter" id="allInOneCounter">0 / 4 selected</p>
-              <p class="allinone-ready" id="allInOneReady" hidden>Your journey is ready.</p>
-            </header>
-
-            <div class="allinone-group">
-              <p class="allinone-group-label" id="allInOneRequiredLabel">Required: Choose 1 Skin Clinic Care</p>
-              <div class="allinone-options">
-                <button class="allinone-option" type="button" data-builder-option data-builder-group="skin" data-program-id="skin-clinic-care-1">
-                  <strong id="allInOneSkin1Title">Skin Clinic Care 1 (+$0)</strong>
-                  <span id="allInOneSkin1Desc">Tone, texture, pore care, vitamin tone care, and toning.</span>
-                </button>
-                <button class="allinone-option" type="button" data-builder-option data-builder-group="skin" data-program-id="skin-clinic-care-2">
-                  <strong id="allInOneSkin2Title">Skin Clinic Care 2 (+$150)</strong>
-                  <span id="allInOneSkin2Desc">Lifting, pigment laser, and wrinkle botox.</span>
-                </button>
-              </div>
-            </div>
-
-            <div class="allinone-group">
-              <p class="allinone-group-label" id="allInOneOptionalLabel">Choose 3 Optional Programs</p>
-              <div class="allinone-options">
-                <button class="allinone-option" type="button" data-builder-option data-builder-group="optional" data-program-id="scalp-diagnosis-spa">
-                  <strong id="allInOneOptScalpTitle">Scalp Care (+$0)</strong>
-                  <span id="allInOneOptScalpDesc">Scalp diagnosis, scaling, and relaxing treatment support.</span>
-                </button>
-                <button class="allinone-option" type="button" data-builder-option data-builder-group="optional" data-program-id="hair-salon">
-                  <strong id="allInOneOptSalonTitle">Hair Salon (+$80)</strong>
-                  <span id="allInOneOptSalonDesc">Haircut or hair clinic treatment with consultation and finishing.</span>
-                </button>
-                <button class="allinone-option" type="button" data-builder-option data-builder-group="optional" data-program-id="celebrity-hair-makeup">
-                  <strong id="allInOneOptHMUTitle">Hair &amp; Makeup (+$100)</strong>
-                  <span id="allInOneOptHMUDesc">Professional hair styling and makeup for a polished, camera-ready look.</span>
-                </button>
-                <button class="allinone-option" type="button" data-builder-option data-builder-group="optional" data-program-id="nail-care">
-                  <strong id="allInOneOptNailTitle">Nail/Pedi Care (+$0)</strong>
-                  <span id="allInOneOptNailDesc">Nail or pedi care with shaping, cuticle care, and finish.</span>
-                </button>
-                <button class="allinone-option" type="button" data-builder-option data-builder-group="optional" data-program-id="body-massage">
-                  <strong id="allInOneOptBodyTitle">Body Massage (+$20)</strong>
-                  <span id="allInOneOptBodyDesc">Full-body massage focused on recovery, comfort, and release.</span>
-                </button>
-                <button class="allinone-option" type="button" data-builder-option data-builder-group="optional" data-program-id="beauty-shopping">
-                  <strong id="allInOneOptShopTitle">Beauty Shopping (+$0)</strong>
-                  <span id="allInOneOptShopDesc">Guided K-beauty shopping support, including destinations such as Olive Young.</span>
-                </button>
-              </div>
-            </div>
-
-            <button class="btn btn-primary" id="allInOneContinueButton" type="button" data-builder-continue>Continue to Consultation</button>
-          </section>
         </aside>
+        <section class="allinone-builder allinone-builder-card card" id="allInOneBuilder" hidden aria-live="polite">
+          <header class="allinone-builder-head">
+            <h4 id="allInOneBuilderTitle">Build your beauty journey.</h4>
+            <p class="muted" id="allInOneBuilderLead">Choose 1 skin clinic care option and 3 optional programs to complete your All-in-One Package.</p>
+            <div class="allinone-pricing" aria-label="All-in-One package pricing">
+              <p><span id="allInOneBaseLabel">Base package:</span><strong id="allInOneBasePrice">$1,499</strong></p>
+              <p><span id="allInOneAddonsLabel">Add-ons:</span><strong id="allInOneAddonPrice">$0</strong></p>
+              <p><span id="allInOneTotalLabel">Total:</span><strong id="allInOneTotalPrice">$1,499</strong></p>
+            </div>
+            <p class="allinone-counter" id="allInOneCounter">0 / 4 selected</p>
+            <p class="allinone-ready" id="allInOneReady" hidden>Your journey is ready.</p>
+          </header>
+
+          <div class="allinone-group">
+            <p class="allinone-group-label" id="allInOneRequiredLabel">Required: Choose 1 Skin Clinic Care</p>
+            <div class="allinone-options">
+              <button class="allinone-option" type="button" data-builder-option data-builder-group="skin" data-program-id="skin-clinic-care-1">
+                <strong id="allInOneSkin1Title">Skin Clinic Care 1 (+$0)</strong>
+                <span id="allInOneSkin1Desc">Tone, texture, pore care, vitamin tone care, and toning.</span>
+              </button>
+              <button class="allinone-option" type="button" data-builder-option data-builder-group="skin" data-program-id="skin-clinic-care-2">
+                <strong id="allInOneSkin2Title">Skin Clinic Care 2 (+$150)</strong>
+                <span id="allInOneSkin2Desc">Lifting, pigment laser, and wrinkle botox.</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="allinone-group">
+            <p class="allinone-group-label" id="allInOneOptionalLabel">Choose 3 Optional Programs</p>
+            <div class="allinone-options">
+              <button class="allinone-option" type="button" data-builder-option data-builder-group="optional" data-program-id="scalp-diagnosis-spa">
+                <strong id="allInOneOptScalpTitle">Scalp Care (+$0)</strong>
+                <span id="allInOneOptScalpDesc">Scalp diagnosis, scaling, and relaxing treatment support.</span>
+              </button>
+              <button class="allinone-option" type="button" data-builder-option data-builder-group="optional" data-program-id="hair-salon">
+                <strong id="allInOneOptSalonTitle">Hair Salon (+$80)</strong>
+                <span id="allInOneOptSalonDesc">Haircut or hair clinic treatment with consultation and finishing.</span>
+              </button>
+              <button class="allinone-option" type="button" data-builder-option data-builder-group="optional" data-program-id="celebrity-hair-makeup">
+                <strong id="allInOneOptHMUTitle">Hair &amp; Makeup (+$100)</strong>
+                <span id="allInOneOptHMUDesc">Professional hair styling and makeup for a polished, camera-ready look.</span>
+              </button>
+              <button class="allinone-option" type="button" data-builder-option data-builder-group="optional" data-program-id="nail-care">
+                <strong id="allInOneOptNailTitle">Nail/Pedi Care (+$0)</strong>
+                <span id="allInOneOptNailDesc">Nail or pedi care with shaping, cuticle care, and finish.</span>
+              </button>
+              <button class="allinone-option" type="button" data-builder-option data-builder-group="optional" data-program-id="body-massage">
+                <strong id="allInOneOptBodyTitle">Body Massage (+$20)</strong>
+                <span id="allInOneOptBodyDesc">Full-body massage focused on recovery, comfort, and release.</span>
+              </button>
+              <button class="allinone-option" type="button" data-builder-option data-builder-group="optional" data-program-id="beauty-shopping">
+                <strong id="allInOneOptShopTitle">Beauty Shopping (+$0)</strong>
+                <span id="allInOneOptShopDesc">Guided K-beauty shopping support, including destinations such as Olive Young.</span>
+              </button>
+            </div>
+          </div>
+
+          <button class="btn btn-primary" id="allInOneContinueButton" type="button" data-builder-continue>Continue to Consultation</button>
+        </section>
       </div>
     </section>
 

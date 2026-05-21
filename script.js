@@ -3699,18 +3699,25 @@ function initAllInOneHeroCarousel() {
   const carousel = document.querySelector("[data-allinone-carousel]");
   if (!carousel) return;
 
-  const slides = Array.from(carousel.querySelectorAll(".all-in-one-slide"));
+  let slides = Array.from(carousel.querySelectorAll(".all-in-one-slide"));
   if (!slides.length) return;
 
-  let activeIndex = slides.findIndex((slide) => slide.classList.contains("is-active"));
-  if (activeIndex < 0) activeIndex = 0;
   let timerId = null;
+  let activeIndex = 0;
 
   const motionQuery = typeof window.matchMedia === "function"
     ? window.matchMedia("(prefers-reduced-motion: reduce)")
     : null;
 
+  const refreshSlides = () => {
+    slides = Array.from(carousel.querySelectorAll(".all-in-one-slide"));
+    if (!slides.length) return false;
+    if (activeIndex >= slides.length) activeIndex = 0;
+    return true;
+  };
+
   const setActiveSlide = (nextIndex) => {
+    if (!slides.length) return;
     slides.forEach((slide, slideIndex) => {
       slide.classList.toggle("is-active", slideIndex === nextIndex);
     });
@@ -3746,6 +3753,33 @@ function initAllInOneHeroCarousel() {
     startRotation();
   };
 
+  const wireSlideErrorFallback = (slide) => {
+    slide.addEventListener("error", () => {
+      const wasActive = slide.classList.contains("is-active");
+      slide.remove();
+      if (!refreshSlides()) {
+        stopRotation();
+        return;
+      }
+      if (wasActive) {
+        setActiveSlide(0);
+      }
+      startRotation();
+    }, { once: true });
+  };
+
+  slides.forEach((slide) => {
+    if (slide.complete && slide.naturalWidth === 0) {
+      slide.remove();
+    } else {
+      wireSlideErrorFallback(slide);
+    }
+  });
+
+  if (!refreshSlides()) return;
+
+  activeIndex = slides.findIndex((slide) => slide.classList.contains("is-active"));
+  if (activeIndex < 0) activeIndex = 0;
   setActiveSlide(0);
   startRotation();
 
