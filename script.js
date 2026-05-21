@@ -132,21 +132,21 @@ const CONTACT_CHANNELS = [
   {
     id: "instagram",
     name: "Instagram",
-    address: "ID: @karecation",
+    address: "@karecation",
     qrSrc: "instagram-qr.png",
     qrAlt: "Instagram QR code for Karecation"
   },
   {
     id: "wechat",
     name: "WeChat",
-    address: "ID: @karecation",
+    address: "@karecation",
     qrSrc: "wechat-qr.png",
     qrAlt: "WeChat QR code for Karecation"
   },
   {
     id: "line",
     name: "LINE",
-    address: "ID: @karecation",
+    address: "@karecation",
     qrSrc: "line-qr.png",
     qrAlt: "LINE QR code for Karecation"
   }
@@ -1699,6 +1699,889 @@ Object.keys(LOCALE_PATCH).forEach((locale) => {
   if (I18N[locale]) deepMerge(I18N[locale], LOCALE_PATCH[locale]);
 });
 
+const LANGUAGE_SYNC_PATCH = {
+  en: {
+    meta: {
+      brandSub: "Private K-beauty concierge",
+      nav: ["Home", "Programs", "Consultation", "About", "FAQ", "Contact"],
+      cart: "Cart",
+      footerAbout: "Private K-beauty concierge for international guests visiting Seoul.",
+      browse: "Browse",
+      support: "Support"
+    },
+    cta: {
+      viewPrograms: "Explore Programs",
+      requestConsultation: "Request Consultation"
+    },
+    common: {
+      noCartItems: "No cart items",
+      noMatchTitle: "No matching programs",
+      noMatchText: "Try another keyword or category.",
+      traveler: "traveler",
+      travelers: "travelers",
+      subtotal: "Subtotal",
+      service: "Service (5%)",
+      total: "Total",
+      remove: "Remove",
+      selected: "added to cart."
+    },
+    categories: {
+      all: "All",
+      package: "Package",
+      starter: "Starter",
+      skin: "Skin",
+      wellness: "Wellness",
+      styling: "Styling"
+    },
+    home: {
+      heroEyebrow: "PREMIUM K-BEAUTY, SIMPLIFIED",
+      heroTitleLines: ["Beauty,", "privately arranged."],
+      heroLead: "Private K-beauty concierge support for international guests in Seoul. Explore trusted programs or request a tailored consultation with ease.",
+      howEyebrow: "How It Works",
+      howTitle: "Choose clearly. Plan privately. Arrive prepared.",
+      steps: [
+        ["Choose a program", "Browse curated options based on the kind of beauty experience you want in Seoul."],
+        ["Save your selections", "Add the paths you want to discuss before making a final decision."],
+        ["Request consultation", "Share your dates, goals, language needs, and preferred level of support."],
+        ["Get coordinated", "Karecation helps organize the next step with clarity, privacy, and guidance."]
+      ],
+      trustEyebrow: "Why Karecation",
+      trustTitle: "Private support, clearer decisions.",
+      trust: [
+        ["Tailored planning", "Built around your goals, timing, comfort level, and beauty priorities."],
+        ["Trusted discovery", "Explore clinic, beauty, and shopping options with more clarity."],
+        ["Multilingual support", "Designed to help international guests navigate the process with ease."]
+      ],
+      faqEyebrow: "FAQ",
+      faqTitle: "Before you begin.",
+      finalEyebrow: "Start Planning",
+      finalTitle: "Ready to plan your Seoul beauty experience?"
+    },
+    page: {
+      programsEyebrow: "Programs",
+      programsTitle: "Choose the Seoul beauty path that fits you best.",
+      programsLead: "Explore complete packages, focused services, and private consultation options for international guests.",
+      programsHelper: "Not sure where to start? Begin with a Private Consultation.",
+      aboutEyebrow: "About",
+      aboutTitle: "Private K-beauty concierge support for international guests visiting Seoul.",
+      aboutLead: "Karecation helps guests explore beauty, clinic, wellness, and salon experiences with more clarity, coordination, and calm.",
+      aboutCards: [
+        ["Curated discovery", "We help narrow beauty and wellness options around your goals."],
+        ["Clear coordination", "Timing, planning, and support stay organized in one guided process."],
+        ["Private-first planning", "Review your options and move forward only when the plan feels right."]
+      ],
+      faqEyebrow: "FAQ",
+      faqTitle: "Clear answers before you plan.",
+      faqLead: "Learn how consultation, coordination, and booking support work.",
+      contactTitle: "Concierge support, when you need it.",
+      contactLead: "For tailored planning, request a private consultation with your dates and preferred services.",
+      bookingTitle: "Tell us how you want to experience K-beauty in Seoul.",
+      bookingLead: "Share your goals, dates, and support needs. Karecation will guide the next step with more clarity and care.",
+      bookingDetails: "Your Details",
+      selectedPath: "Selected Path",
+      searchPlaceholder: "Search concierge path",
+      sortRecommended: "Sort: Recommended",
+      priceAsc: "Price: Low to High",
+      priceDesc: "Price: High to Low",
+      fullName: "Full Name",
+      email: "Email",
+      nationality: "Nationality",
+      requestNote: "Additional Request",
+      requestPlaceholder: "Share preferred programs, dates, language needs, and support priorities.",
+      cartEyebrow: "Preferred Date",
+      cartTitle: "Review Your Selections",
+      cartLead: "Check your programs and continue to consultation request.",
+      estimatedScope: "Estimated Scope",
+      proceed: "Proceed to Consultation",
+      exploreMore: "Browse More Programs",
+      noProgramSelectedTitle: "No program selected yet.",
+      noProgramSelectedText: "Please choose a program or build your All-in-One journey first.",
+      bookingFillRequired: "Please fill in name, email, and nationality.",
+      bookingSending: "Sending request...",
+      bookingSent: "Your request has been sent. We’ll contact you at the information provided within a few hours.",
+      bookingFailed: "Failed to send request. Please try again.",
+      contactEmailTitle: "Email",
+      contactEmailLine: "karecation.official@gmail.com",
+      contactInstagramLine: "Instagram: @karecation",
+      contactWeChatLine: "WeChat: @karecation",
+      contactLineLine: "LINE: @karecation",
+      contactHoursTitle: "Hours (KST)",
+      contactHoursLine: "Mon-Sat, 10:00-18:00",
+      contactNextTitle: "Best Next Step",
+      contactNextLine: "Request a private consultation with your preferred programs and dates.",
+      allInOneCardEyebrow: "SIGNATURE ITINERARY",
+      allInOneCardPrice: "Starting from $1,499",
+      allInOneCardDescription: "A private all-in-one Seoul beauty day built around clinic care, salon care, recovery, and optional refinements.",
+      allInOneCardNote: "Includes 1 skin clinic care option + 3 optional programs.",
+      allInOneCardButton: "Build Your Journey",
+      allInOneBuilderTitle: "Build your beauty journey.",
+      allInOneBuilderLead: "Choose 1 skin clinic care option and 3 optional programs to complete your All-in-One Package.",
+      allInOneBaseLabel: "Base package:",
+      allInOneAddonsLabel: "Add-ons:",
+      allInOneTotalLabel: "Total:",
+      allInOneRequiredLabel: "Required: Choose 1 Skin Clinic Care",
+      allInOneOptionalLabel: "Choose 3 Optional Programs",
+      allInOneSkin1Title: "Skin Clinic Care 1 (+$0)",
+      allInOneSkin1Desc: "Tone, texture, pore care, vitamin tone care, and toning.",
+      allInOneSkin2Title: "Skin Clinic Care 2 (+$150)",
+      allInOneSkin2Desc: "Lifting, pigment laser, and wrinkle botox.",
+      allInOneOptScalpTitle: "Scalp Care (+$0)",
+      allInOneOptScalpDesc: "Scalp diagnosis, scaling, and relaxing treatment support.",
+      allInOneOptSalonTitle: "Hair Salon (+$80)",
+      allInOneOptSalonDesc: "Haircut or hair clinic treatment with consultation and finishing.",
+      allInOneOptHMUTitle: "Hair & Makeup (+$100)",
+      allInOneOptHMUDesc: "Professional hair styling and makeup for a polished, camera-ready look.",
+      allInOneOptNailTitle: "Nail/Pedi Care (+$0)",
+      allInOneOptNailDesc: "Nail or pedi care with shaping, cuticle care, and finish.",
+      allInOneOptBodyTitle: "Body Massage (+$20)",
+      allInOneOptBodyDesc: "Full-body massage focused on recovery, comfort, and release.",
+      allInOneOptShopTitle: "Beauty Shopping (+$0)",
+      allInOneOptShopDesc: "Guided K-beauty shopping support, including destinations such as Olive Young.",
+      allInOneContinueButton: "Continue to Consultation",
+      allInOneCounterTemplate: "{count} / 4 selected",
+      allInOneReady: "Your journey is ready.",
+      allInOneNeedOneMore: "Please choose 1 more program to complete your journey.",
+      allInOneNeedMore: "Please choose {n} more program(s) to complete your journey.",
+      allInOneMaxPrograms: "You have already selected all 4 programs.",
+      allInOneMaxOptional: "You have already selected all 3 optional programs.",
+      allInOneSummary: {
+        base: "Base package:",
+        addons: "Add-ons:",
+        total: "Total:"
+      },
+      footer: {
+        programs: "Need a starting point? Begin with <strong>Private Consultation</strong>.",
+        about: "Private planning for international guests visiting Seoul.",
+        faq: "Need a direct answer? Request a private consultation.",
+        contact: "For tailored planning, request a private consultation.",
+        booking: "Consultation is request-first. Availability, scope, and final payment guidance are confirmed before any visit is finalized.",
+        cart: "Prefer to begin with clarity? Start with <strong>Private Consultation</strong>.",
+        "program-detail": "Need clarity first? Start with <strong>Private Consultation</strong>."
+      }
+    },
+    faq: [
+      ["What does Karecation help coordinate?", "We help coordinate consultation, scheduling flow, and concierge-level guidance across your preferred programs."],
+      ["Do I need to choose a full package right away?", "No. You can begin with a private consultation and decide the scope afterward."],
+      ["What is included in the All-in-One Package?", "It includes 1 skin clinic care option and 3 optional programs, coordinated as one private itinerary."],
+      ["What is the difference between Skin Clinic Care 1 and Skin Clinic Care 2?", "Skin Clinic Care 1 focuses on tone and texture refresh. Skin Clinic Care 2 is a more advanced, clinic-focused path."],
+      ["Can I request only one service?", "Yes. You can request one focused service or build a wider plan."],
+      ["Can Karecation help with beauty shopping?", "Yes. We can include guided beauty shopping support, including destinations such as Olive Young."],
+      ["How does payment work?", "Consultation is request-first. Availability, scope, and final payment guidance are confirmed before any visit is finalized."]
+    ],
+    programs: {
+      "quick-concierge-consultation": {
+        name: "Private Consultation",
+        duration: "20 mins",
+        tagline: "Start with clarity",
+        cardDescription: "Best for guests who want tailored guidance before choosing.<br>Includes personalized planning based on goals, timing, and support needs.<br>Ideal if you want clarity before booking anything else."
+      },
+      "skin-clinic-care-1": {
+        name: "Skin Clinic Care 1",
+        duration: "60–90 mins",
+        tagline: "Tone & texture",
+        cardDescription: "Best for guests focused on visible skin refresh.<br>Includes pore care, vitamin tone care, and toning.<br>Optional add-on: beard hair removal for men / underarm or upper-lip hair removal for women."
+      },
+      "skin-clinic-care-2": {
+        name: "Skin Clinic Care 2",
+        duration: "90–120 mins",
+        tagline: "Advanced clinic care",
+        cardDescription: "Best for guests who want a more targeted clinic-focused visit.<br>Includes lifting, pigment laser, and wrinkle botox.<br>Final treatment suitability is confirmed through clinic consultation."
+      },
+      "scalp-diagnosis-spa": {
+        name: "Scalp Care",
+        duration: "60–90 mins",
+        tagline: "Clean scalp reset",
+        cardDescription: "Best for guests who want focused scalp care and a cleaner reset.<br>Includes scalp diagnosis, scaling, and relaxing care.<br>Ideal for a calm, specialized beauty stop."
+      },
+      "hair-salon": {
+        name: "Hair Salon",
+        duration: "60–90 mins",
+        tagline: "Cut or clinic",
+        cardDescription: "Best for guests who want a refreshed salon finish.<br>Includes a haircut or hair clinic treatment with consultation and finishing.<br>Ideal for a polished Seoul salon experience."
+      },
+      "celebrity-hair-makeup": {
+        name: "Hair & Makeup",
+        duration: "90–120 mins",
+        tagline: "Camera-ready styling",
+        cardDescription: "Best for guests who want a styled, polished look.<br>Includes professional hair styling and makeup support.<br>Ideal for events, photos, or a refined day out in Seoul."
+      },
+      "nail-care": {
+        name: "Nail/Pedi Care",
+        duration: "60–90 mins",
+        tagline: "Polished finishing touch",
+        cardDescription: "Best for guests who want a neat finishing detail.<br>Includes nail shaping, cuticle care, and nail or pedi finish.<br>Ideal for a more complete beauty itinerary."
+      },
+      "body-massage": {
+        name: "Body Massage",
+        duration: "90 mins",
+        tagline: "Recovery & relaxation",
+        cardDescription: "Best for guests who want recovery, relaxation, and body reset.<br>Includes full-body massage with a focus on comfort and release.<br>Ideal after travel, shopping, or a full beauty day."
+      }
+    }
+  },
+  ko: {
+    meta: {
+      brandSub: "프라이빗 K-뷰티 컨시어지",
+      nav: ["Home", "프로그램", "상담", "소개", "FAQ", "문의"],
+      cart: "카트",
+      footerAbout: "서울 방문 국제 고객을 위한 프라이빗 K-뷰티 컨시어지.",
+      browse: "메뉴",
+      support: "지원"
+    },
+    cta: {
+      viewPrograms: "프로그램 보기",
+      requestConsultation: "상담 요청"
+    },
+    common: {
+      noCartItems: "선택된 항목이 없습니다",
+      noMatchTitle: "일치하는 프로그램이 없습니다",
+      noMatchText: "검색어 또는 카테고리를 바꿔보세요.",
+      traveler: "명",
+      travelers: "명",
+      subtotal: "소계",
+      service: "서비스(5%)",
+      total: "총액",
+      remove: "삭제",
+      selected: "카트에 담겼습니다."
+    },
+    categories: {
+      all: "전체",
+      package: "패키지",
+      starter: "상담",
+      skin: "스킨",
+      wellness: "케어",
+      styling: "스타일링"
+    },
+    home: {
+      heroEyebrow: "프리미엄 K-뷰티, 더 간결하게",
+      heroTitleLines: ["서울 K-뷰티를", "프라이빗하게."],
+      heroLead: "서울을 찾는 국제 고객을 위한 프라이빗 K-뷰티 컨시어지. 신뢰 가능한 프로그램을 둘러보거나 맞춤 상담을 요청하세요.",
+      howEyebrow: "이용 방법",
+      howTitle: "명확하게 선택하고, 프라이빗하게 준비하세요.",
+      steps: [
+        ["프로그램 선택", "서울에서 원하는 뷰티 경험에 맞춰 큐레이션된 옵션을 비교하세요."],
+        ["선택 저장", "최종 결정 전, 논의할 경로를 담아 정리하세요."],
+        ["상담 요청", "일정, 목표, 언어 지원, 선호 지원 수준을 알려주세요."],
+        ["조율 진행", "Karecation이 다음 단계를 명확하고 프라이빗하게 안내합니다."]
+      ],
+      trustEyebrow: "Why Karecation",
+      trustTitle: "더 프라이빗하게, 더 명확하게.",
+      trust: [
+        ["맞춤 설계", "목표, 일정, 편안함, 뷰티 우선순위에 맞춰 설계합니다."],
+        ["신뢰 기반 탐색", "클리닉, 뷰티, 쇼핑 옵션을 더 명확하게 비교할 수 있습니다."],
+        ["다국어 지원", "국제 고객이 서울에서 편하게 진행할 수 있도록 설계했습니다."]
+      ],
+      faqEyebrow: "FAQ",
+      faqTitle: "시작 전에 확인하세요.",
+      finalEyebrow: "시작하기",
+      finalTitle: "서울 뷰티 여정을 준비할까요?"
+    },
+    page: {
+      programsEyebrow: "프로그램",
+      programsTitle: "나에게 맞는 서울 뷰티 경로를 선택하세요.",
+      programsLead: "완성형 패키지, 집중 케어, 프라이빗 상담 옵션을 국제 고객 기준으로 비교해보세요.",
+      programsHelper: "어디서 시작할지 고민된다면 프라이빗 상담부터 시작하세요.",
+      aboutEyebrow: "소개",
+      aboutTitle: "서울 방문 국제 고객을 위한 프라이빗 K-뷰티 컨시어지.",
+      aboutLead: "Karecation은 뷰티, 클리닉, 웰니스, 살롱 경험을 더 명확하고 차분하게 조율합니다.",
+      aboutCards: [
+        ["큐레이티드 탐색", "목표에 맞춰 필요한 뷰티·웰니스 옵션만 정리해드립니다."],
+        ["명확한 조율", "일정, 플로우, 지원을 하나의 가이드 프로세스로 정리합니다."],
+        ["프라이빗 우선 플래닝", "계획이 충분히 맞다고 느껴질 때 다음 단계로 진행하세요."]
+      ],
+      faqEyebrow: "FAQ",
+      faqTitle: "계획 전에 명확하게 확인하세요.",
+      faqLead: "상담, 조율, 예약 지원이 어떻게 진행되는지 안내합니다.",
+      contactTitle: "필요할 때 바로 연결되는 컨시어지 지원.",
+      contactLead: "원하는 일정과 서비스와 함께 프라이빗 상담을 요청해 주세요.",
+      bookingTitle: "서울에서 어떤 K-뷰티 경험을 원하시는지 알려주세요.",
+      bookingLead: "목표, 일정, 지원 요청을 남겨주세요. Karecation이 다음 단계를 차분하게 안내합니다.",
+      bookingDetails: "기본 정보",
+      selectedPath: "선택 경로",
+      searchPlaceholder: "프로그램 검색",
+      sortRecommended: "정렬: 추천순",
+      priceAsc: "가격: 낮은 순",
+      priceDesc: "가격: 높은 순",
+      fullName: "이름",
+      email: "이메일",
+      nationality: "국적",
+      requestNote: "추가 요청",
+      requestPlaceholder: "선호 프로그램, 날짜, 언어 지원, 우선순위를 남겨주세요.",
+      cartEyebrow: "희망 날짜",
+      cartTitle: "선택 내용 확인",
+      cartLead: "선택 프로그램을 확인하고 상담 요청으로 진행하세요.",
+      estimatedScope: "예상 금액",
+      proceed: "상담 요청 진행",
+      exploreMore: "프로그램 더 보기",
+      noProgramSelectedTitle: "아직 선택된 프로그램이 없습니다.",
+      noProgramSelectedText: "프로그램을 선택하거나 All-in-One 여정을 먼저 구성해 주세요.",
+      bookingFillRequired: "이름, 이메일, 국적을 입력해 주세요.",
+      bookingSending: "요청을 전송하는 중입니다...",
+      bookingSent: "요청이 정상적으로 전송되었습니다. 입력하신 정보로 몇 시간 내 연락드릴게요.",
+      bookingFailed: "요청 전송에 실패했습니다. 잠시 후 다시 시도해 주세요.",
+      contactEmailTitle: "이메일",
+      contactEmailLine: "karecation.official@gmail.com",
+      contactInstagramLine: "Instagram: @karecation",
+      contactWeChatLine: "WeChat: @karecation",
+      contactLineLine: "LINE: @karecation",
+      contactHoursTitle: "운영시간 (KST)",
+      contactHoursLine: "월-토, 10:00-18:00",
+      contactNextTitle: "가장 빠른 시작",
+      contactNextLine: "원하는 프로그램과 날짜를 남겨 프라이빗 상담을 요청하세요.",
+      allInOneCardEyebrow: "시그니처 일정",
+      allInOneCardPrice: "$1,499부터",
+      allInOneCardDescription: "클리닉 케어, 살롱 케어, 리커버리, 선택 옵션까지 한 번에 담은 프라이빗 서울 뷰티 데이.",
+      allInOneCardNote: "스킨 클리닉 1개 + 선택 프로그램 3개 포함",
+      allInOneCardButton: "여정 구성하기",
+      allInOneBuilderTitle: "나만의 뷰티 여정을 구성하세요.",
+      allInOneBuilderLead: "스킨 클리닉 1개와 선택 프로그램 3개를 골라 All-in-One 패키지를 완성하세요.",
+      allInOneBaseLabel: "기본 패키지:",
+      allInOneAddonsLabel: "추가 옵션:",
+      allInOneTotalLabel: "합계:",
+      allInOneRequiredLabel: "필수: 스킨 클리닉 1개 선택",
+      allInOneOptionalLabel: "선택 프로그램 3개 선택",
+      allInOneSkin1Title: "Skin Clinic Care 1 (+$0)",
+      allInOneSkin1Desc: "톤, 결, 모공, 비타민 톤 케어와 토닝 중심 케어.",
+      allInOneSkin2Title: "Skin Clinic Care 2 (+$150)",
+      allInOneSkin2Desc: "리프팅, 색소 레이저, 주름 보톡스 중심 케어.",
+      allInOneOptScalpTitle: "Scalp Care (+$0)",
+      allInOneOptScalpDesc: "두피 진단, 스케일링, 릴랙싱 케어 지원.",
+      allInOneOptSalonTitle: "Hair Salon (+$80)",
+      allInOneOptSalonDesc: "상담 후 커트 또는 헤어 클리닉 케어와 마무리.",
+      allInOneOptHMUTitle: "Hair & Makeup (+$100)",
+      allInOneOptHMUDesc: "카메라-레디 룩을 위한 프로 헤어·메이크업.",
+      allInOneOptNailTitle: "Nail/Pedi Care (+$0)",
+      allInOneOptNailDesc: "쉐이핑, 큐티클 케어, 네일 또는 페디 마무리.",
+      allInOneOptBodyTitle: "Body Massage (+$20)",
+      allInOneOptBodyDesc: "회복과 이완 중심의 풀바디 마사지.",
+      allInOneOptShopTitle: "Beauty Shopping (+$0)",
+      allInOneOptShopDesc: "올리브영 등 목적지 중심의 K-뷰티 쇼핑 가이드.",
+      allInOneContinueButton: "상담 페이지로 이동",
+      allInOneCounterTemplate: "{count} / 4 선택됨",
+      allInOneReady: "여정 구성이 완료되었습니다.",
+      allInOneNeedOneMore: "여정을 완성하려면 프로그램 1개를 더 선택해 주세요.",
+      allInOneNeedMore: "여정을 완성하려면 프로그램 {n}개를 더 선택해 주세요.",
+      allInOneMaxPrograms: "이미 4개 프로그램을 모두 선택하셨습니다.",
+      allInOneMaxOptional: "선택 프로그램 3개를 모두 선택하셨습니다.",
+      allInOneSummary: {
+        base: "기본 패키지:",
+        addons: "추가 옵션:",
+        total: "합계:"
+      },
+      footer: {
+        programs: "시작이 고민된다면 <strong>프라이빗 상담</strong>부터.",
+        about: "서울 방문 전, 더 프라이빗하고 명확한 결정.",
+        faq: "빠른 답변이 필요하면 프라이빗 상담을 요청하세요.",
+        contact: "맞춤 계획이 필요하면 프라이빗 상담을 요청하세요.",
+        booking: "상담은 요청 우선 방식입니다. 방문 확정 전 가용 여부, 범위, 결제 안내를 확인합니다.",
+        cart: "명확하게 시작하고 싶다면 <strong>프라이빗 상담</strong>을 먼저 선택하세요.",
+        "program-detail": "방향 확인이 먼저라면 <strong>프라이빗 상담</strong>으로 시작하세요."
+      }
+    },
+    faq: [
+      ["Karecation은 무엇을 조율해주나요?", "상담, 일정 플로우, 프로그램 간 연결, 컨시어지 가이드를 중심으로 조율합니다."],
+      ["처음부터 전체 패키지를 선택해야 하나요?", "아니요. 프라이빗 상담으로 시작한 뒤 범위를 결정하셔도 됩니다."],
+      ["All-in-One Package에는 무엇이 포함되나요?", "스킨 클리닉 1개와 선택 프로그램 3개를 하나의 프라이빗 일정으로 조율해 드립니다."],
+      ["Skin Clinic Care 1과 2의 차이는 무엇인가요?", "1은 톤·결 중심 리프레시, 2는 더 타깃된 클리닉 중심 케어입니다."],
+      ["한 가지 서비스만 요청할 수 있나요?", "네. 단일 프로그램만 요청하거나 확장 플랜으로 구성하실 수 있습니다."],
+      ["뷰티 쇼핑도 도와주나요?", "네. 올리브영 등 목적지 중심의 쇼핑 가이드를 일정에 포함할 수 있습니다."],
+      ["결제는 어떻게 진행되나요?", "상담 요청 후 가용 여부와 최종 범위를 확인한 뒤 결제 안내를 드립니다."]
+    ],
+    programs: {
+      "quick-concierge-consultation": {
+        name: "Private Consultation",
+        duration: "20분",
+        tagline: "명확한 시작",
+        cardDescription: "선택 전 방향 정리가 필요한 분께 추천.<br>목표, 일정, 지원 요청에 맞춘 맞춤 플래닝 포함.<br>예약 전 명확하게 정리하고 싶다면 가장 적합합니다."
+      },
+      "skin-clinic-care-1": {
+        name: "Skin Clinic Care 1",
+        duration: "60–90분",
+        tagline: "톤 & 결",
+        cardDescription: "눈에 보이는 피부 리프레시가 필요한 분께 추천.<br>모공, 비타민 톤 케어, 토닝 포함.<br>남성 수염 제모 / 여성 겨드랑이·인중 제모 옵션 추가 가능."
+      },
+      "skin-clinic-care-2": {
+        name: "Skin Clinic Care 2",
+        duration: "90–120분",
+        tagline: "어드밴스드 클리닉",
+        cardDescription: "더 타깃된 클리닉 케어가 필요한 분께 추천.<br>리프팅, 색소 레이저, 주름 보톡스 포함.<br>최종 시술 적합성은 클리닉 상담 후 확정됩니다."
+      },
+      "scalp-diagnosis-spa": {
+        name: "Scalp Care",
+        duration: "60–90분",
+        tagline: "클린 두피 리셋",
+        cardDescription: "집중 두피 케어와 리셋이 필요한 분께 추천.<br>두피 진단, 스케일링, 릴랙싱 케어 포함.<br>차분한 전문 케어 스톱으로 적합합니다."
+      },
+      "hair-salon": {
+        name: "Hair Salon",
+        duration: "60–90분",
+        tagline: "커트 또는 클리닉",
+        cardDescription: "정돈된 살롱 피니시가 필요한 분께 추천.<br>상담 후 커트 또는 헤어 클리닉 케어와 마무리 포함.<br>서울 살롱 경험을 깔끔하게 완성하기 좋습니다."
+      },
+      "celebrity-hair-makeup": {
+        name: "Hair & Makeup",
+        duration: "90–120분",
+        tagline: "카메라-레디 스타일링",
+        cardDescription: "스타일드되고 정돈된 룩이 필요한 분께 추천.<br>프로 헤어 스타일링과 메이크업 지원 포함.<br>행사, 촬영, 세련된 데이 아웃에 적합합니다."
+      },
+      "nail-care": {
+        name: "Nail/Pedi Care",
+        duration: "60–90분",
+        tagline: "정돈된 마무리 디테일",
+        cardDescription: "깔끔한 마무리 디테일을 원하는 분께 추천.<br>쉐이핑, 큐티클 케어, 네일 또는 페디 마무리 포함.<br>전체 뷰티 일정 완성도를 높이기 좋습니다."
+      },
+      "body-massage": {
+        name: "Body Massage",
+        duration: "90분",
+        tagline: "회복 & 이완",
+        cardDescription: "회복, 이완, 바디 리셋이 필요한 분께 추천.<br>편안함과 이완 중심의 풀바디 마사지 포함.<br>이동·쇼핑·풀데이 일정 후에 특히 적합합니다."
+      }
+    }
+  },
+  zh: {
+    meta: {
+      brandSub: "私享 K-beauty 礼宾服务",
+      nav: ["首页", "项目", "咨询", "关于", "FAQ", "联系"],
+      cart: "购物车",
+      footerAbout: "为到访首尔的国际访客提供私享 K-beauty 礼宾服务。",
+      browse: "浏览",
+      support: "支持"
+    },
+    cta: {
+      viewPrograms: "查看项目",
+      requestConsultation: "提交咨询"
+    },
+    common: {
+      noCartItems: "暂无已选项目",
+      noMatchTitle: "未找到匹配项目",
+      noMatchText: "请尝试其他关键词或分类。",
+      traveler: "位",
+      travelers: "位",
+      subtotal: "小计",
+      service: "服务费 (5%)",
+      total: "合计",
+      remove: "移除",
+      selected: "已加入购物车。"
+    },
+    categories: {
+      all: "全部",
+      package: "套餐",
+      starter: "咨询",
+      skin: "皮肤",
+      wellness: "护理",
+      styling: "造型"
+    },
+    home: {
+      heroEyebrow: "高端 K-BEAUTY，更加从容",
+      heroTitleLines: ["在首尔，", "私享你的美丽安排。"],
+      heroLead: "为到访首尔的国际访客提供私享 K-beauty 礼宾服务。浏览可信项目，或轻松提交定制咨询。",
+      howEyebrow: "流程",
+      howTitle: "清晰选择，私享规划，从容出发。",
+      steps: [
+        ["选择项目", "根据你在首尔想要的美丽体验，浏览精选方案。"],
+        ["先保存选择", "在最终决定前，把想讨论的路径先加入清单。"],
+        ["提交咨询", "告知日期、目标、语言需求与偏好支持方式。"],
+        ["进入协调", "Karecation 以清晰、私密、可靠的方式推进下一步。"]
+      ],
+      trustEyebrow: "Why Karecation",
+      trustTitle: "更私密，也更清晰。",
+      trust: [
+        ["定制规划", "围绕你的目标、时间、舒适度与美丽优先级来设计。"],
+        ["可信探索", "更清晰地比较诊疗、美妆与购物选项。"],
+        ["多语言支持", "帮助国际访客在首尔轻松完成整个流程。"]
+      ],
+      faqEyebrow: "FAQ",
+      faqTitle: "开始前先了解。",
+      finalEyebrow: "开始规划",
+      finalTitle: "准备开启你的首尔美丽体验？"
+    },
+    page: {
+      programsEyebrow: "项目",
+      programsTitle: "选择最适合你的首尔美丽路径。",
+      programsLead: "为国际访客提供完整套餐、单项护理与私享咨询选项。",
+      programsHelper: "不知道从哪里开始？先从 Private Consultation 开始。",
+      aboutEyebrow: "关于",
+      aboutTitle: "为到访首尔的国际访客提供私享 K-beauty 礼宾服务。",
+      aboutLead: "Karecation 让美妆、诊疗、护理与沙龙体验更清晰、更有秩序、更从容。",
+      aboutCards: [
+        ["精选探索", "围绕你的目标，筛选真正适合的美妆与护理选项。"],
+        ["清晰协调", "时间、流程与支持整合在同一条引导路径中。"],
+        ["私享优先规划", "当方案足够明确、足够安心时再进入下一步。"]
+      ],
+      faqEyebrow: "FAQ",
+      faqTitle: "规划前的清晰解答。",
+      faqLead: "了解咨询、协调与预约支持如何进行。",
+      contactTitle: "需要时，随时连接礼宾支持。",
+      contactLead: "提交你的日期与偏好项目，开启私享咨询。",
+      bookingTitle: "告诉我们，你希望如何体验首尔 K-beauty。",
+      bookingLead: "分享你的目标、日期与支持需求。Karecation 会清晰地引导下一步。",
+      bookingDetails: "你的信息",
+      selectedPath: "已选路径",
+      searchPlaceholder: "搜索项目",
+      sortRecommended: "排序：推荐",
+      priceAsc: "价格：从低到高",
+      priceDesc: "价格：从高到低",
+      fullName: "姓名",
+      email: "邮箱",
+      nationality: "国籍",
+      requestNote: "附加需求",
+      requestPlaceholder: "请填写偏好项目、日期、语言需求与优先事项。",
+      cartEyebrow: "意向日期",
+      cartTitle: "确认你的选择",
+      cartLead: "确认已选项目后继续提交咨询请求。",
+      estimatedScope: "预计金额",
+      proceed: "继续咨询",
+      exploreMore: "查看更多项目",
+      noProgramSelectedTitle: "暂未选择项目。",
+      noProgramSelectedText: "请先选择项目，或先完成 All-in-One 路径配置。",
+      bookingFillRequired: "请填写姓名、邮箱和国籍。",
+      bookingSending: "正在提交请求...",
+      bookingSent: "请求已发送。我们会在数小时内通过你提供的联系方式与你联系。",
+      bookingFailed: "发送失败，请稍后重试。",
+      contactEmailTitle: "邮箱",
+      contactEmailLine: "karecation.official@gmail.com",
+      contactInstagramLine: "Instagram: @karecation",
+      contactWeChatLine: "WeChat: @karecation",
+      contactLineLine: "LINE: @karecation",
+      contactHoursTitle: "服务时间 (KST)",
+      contactHoursLine: "周一至周六, 10:00-18:00",
+      contactNextTitle: "最佳下一步",
+      contactNextLine: "提交你的偏好项目与日期，开始私享咨询。",
+      allInOneCardEyebrow: "SIGNATURE ITINERARY",
+      allInOneCardPrice: "$1,499 起",
+      allInOneCardDescription: "围绕诊疗护理、沙龙护理、放松恢复与可选优化打造的一日私享首尔美丽行程。",
+      allInOneCardNote: "包含 1 个 Skin Clinic Care + 3 个可选项目",
+      allInOneCardButton: "开始构建旅程",
+      allInOneBuilderTitle: "构建你的美丽旅程。",
+      allInOneBuilderLead: "选择 1 个 Skin Clinic Care 选项 + 3 个可选项目，完成 All-in-One Package。",
+      allInOneBaseLabel: "基础套餐：",
+      allInOneAddonsLabel: "加项：",
+      allInOneTotalLabel: "合计：",
+      allInOneRequiredLabel: "必选：选择 1 个 Skin Clinic Care",
+      allInOneOptionalLabel: "选择 3 个可选项目",
+      allInOneSkin1Title: "Skin Clinic Care 1 (+$0)",
+      allInOneSkin1Desc: "聚焦肤色、肤质、毛孔、维稳提亮与调理。",
+      allInOneSkin2Title: "Skin Clinic Care 2 (+$150)",
+      allInOneSkin2Desc: "聚焦提升、色素激光与皱纹肉毒。",
+      allInOneOptScalpTitle: "Scalp Care (+$0)",
+      allInOneOptScalpDesc: "头皮诊断、深层清洁与放松护理支持。",
+      allInOneOptSalonTitle: "Hair Salon (+$80)",
+      allInOneOptSalonDesc: "咨询后进行剪发或发质护理并完成定型。",
+      allInOneOptHMUTitle: "Hair & Makeup (+$100)",
+      allInOneOptHMUDesc: "专业发型与妆容支持，打造镜头友好效果。",
+      allInOneOptNailTitle: "Nail/Pedi Care (+$0)",
+      allInOneOptNailDesc: "包含修形、角质护理与手足部收尾。",
+      allInOneOptBodyTitle: "Body Massage (+$20)",
+      allInOneOptBodyDesc: "以恢复与舒缓为核心的全身按摩。",
+      allInOneOptShopTitle: "Beauty Shopping (+$0)",
+      allInOneOptShopDesc: "提供 Olive Young 等目的地导购支持。",
+      allInOneContinueButton: "继续前往咨询",
+      allInOneCounterTemplate: "已选择 {count} / 4",
+      allInOneReady: "你的旅程已准备就绪。",
+      allInOneNeedOneMore: "还需选择 1 个项目即可完成旅程。",
+      allInOneNeedMore: "还需选择 {n} 个项目即可完成旅程。",
+      allInOneMaxPrograms: "你已选择满 4 个项目。",
+      allInOneMaxOptional: "你已选择满 3 个可选项目。",
+      allInOneSummary: {
+        base: "基础套餐：",
+        addons: "加项：",
+        total: "合计："
+      },
+      footer: {
+        programs: "如果不确定从哪里开始，可先选择 <strong>Private Consultation</strong>。",
+        about: "在到访首尔前，做出更私密、更有把握的决定。",
+        faq: "需要直接答复？提交私享咨询即可。",
+        contact: "需要定制规划时，请提交私享咨询。",
+        booking: "咨询采用 request-first 流程。到访确认前会先确认可约性、范围与支付说明。",
+        cart: "若希望先明确方向，可先加入 <strong>Private Consultation</strong>。",
+        "program-detail": "若需要先明确方向，可先从 <strong>Private Consultation</strong> 开始。"
+      }
+    },
+    faq: [
+      ["Karecation 可以协助协调哪些内容？", "我们可协助咨询沟通、时间安排、项目衔接与礼宾级引导支持。"],
+      ["我需要一开始就选择完整套餐吗？", "不需要。你可以先做私享咨询，再决定最终范围。"],
+      ["All-in-One Package 包含什么？", "包含 1 个 Skin Clinic Care 选项和 3 个可选项目，并由我们整合为一条私享行程。"],
+      ["Skin Clinic Care 1 和 2 有什么区别？", "1 更侧重肤色与肤质焕新；2 是更进阶、目标更明确的诊疗路径。"],
+      ["我可以只申请一个服务吗？", "可以。你可先从单项服务开始，也可逐步扩展。"],
+      ["可以协助美妆购物吗？", "可以。可按你的目标加入 Olive Young 等目的地导购支持。"],
+      ["付款如何进行？", "咨询为 request-first。确认可约与最终范围后，再提供支付指引。"]
+    ],
+    programs: {
+      "quick-concierge-consultation": {
+        name: "Private Consultation",
+        duration: "20分钟",
+        tagline: "先明确方向",
+        cardDescription: "适合在选择前希望获得定制建议的访客。<br>包含基于目标、时间与支持需求的个性化规划。<br>若你希望先清晰再决定，这是最好的起点。"
+      },
+      "skin-clinic-care-1": {
+        name: "Skin Clinic Care 1",
+        duration: "60–90分钟",
+        tagline: "肤色与肤质",
+        cardDescription: "适合希望获得可见焕肤效果的访客。<br>包含毛孔护理、维稳提亮与调理。<br>可选加项：男性胡须脱毛 / 女性腋下或唇部脱毛。"
+      },
+      "skin-clinic-care-2": {
+        name: "Skin Clinic Care 2",
+        duration: "90–120分钟",
+        tagline: "进阶诊疗护理",
+        cardDescription: "适合希望更聚焦诊疗型护理的访客。<br>包含提升、色素激光与皱纹肉毒。<br>最终适配项目以诊所面诊结果为准。"
+      },
+      "scalp-diagnosis-spa": {
+        name: "Scalp Care",
+        duration: "60–90分钟",
+        tagline: "头皮净化重启",
+        cardDescription: "适合希望进行头皮深度护理与重启的访客。<br>包含头皮诊断、深层清洁与舒缓护理。<br>是安静、专业的护理停靠点。"
+      },
+      "hair-salon": {
+        name: "Hair Salon",
+        duration: "60–90分钟",
+        tagline: "剪发或发质护理",
+        cardDescription: "适合希望获得精致沙龙收尾的访客。<br>包含咨询后剪发或发质护理与定型。<br>适合打造利落高级的首尔沙龙体验。"
+      },
+      "celebrity-hair-makeup": {
+        name: "Hair & Makeup",
+        duration: "90–120分钟",
+        tagline: "镜头友好造型",
+        cardDescription: "适合希望获得完整造型与妆发的访客。<br>包含专业发型设计与妆容支持。<br>适用于活动、拍摄或精致出行日。"
+      },
+      "nail-care": {
+        name: "Nail/Pedi Care",
+        duration: "60–90分钟",
+        tagline: "精致收尾细节",
+        cardDescription: "适合希望完善细节感的访客。<br>包含修形、角质护理与手足部收尾。<br>让整体美丽行程更完整。"
+      },
+      "body-massage": {
+        name: "Body Massage",
+        duration: "90分钟",
+        tagline: "恢复与放松",
+        cardDescription: "适合希望恢复、放松与身体重置的访客。<br>包含以舒适释放为核心的全身按摩。<br>适合在出行、购物或满日程后安排。"
+      }
+    }
+  },
+  ja: {
+    meta: {
+      brandSub: "プライベート K-beauty コンシェルジュ",
+      nav: ["ホーム", "プログラム", "相談", "About", "FAQ", "お問い合わせ"],
+      cart: "カート",
+      footerAbout: "ソウルを訪れる海外ゲストのためのプライベート K-beauty コンシェルジュ。",
+      browse: "メニュー",
+      support: "サポート"
+    },
+    cta: {
+      viewPrograms: "プログラムを見る",
+      requestConsultation: "相談を依頼"
+    },
+    common: {
+      noCartItems: "選択された項目はありません",
+      noMatchTitle: "一致するプログラムがありません",
+      noMatchText: "別のキーワードまたはカテゴリをお試しください。",
+      traveler: "名",
+      travelers: "名",
+      subtotal: "小計",
+      service: "サービス料 (5%)",
+      total: "合計",
+      remove: "削除",
+      selected: "カートに追加しました。"
+    },
+    categories: {
+      all: "すべて",
+      package: "パッケージ",
+      starter: "相談",
+      skin: "スキン",
+      wellness: "ケア",
+      styling: "スタイリング"
+    },
+    home: {
+      heroEyebrow: "PREMIUM K-BEAUTY, SIMPLIFIED",
+      heroTitleLines: ["ソウルの美しさを、", "もっとプライベートに。"],
+      heroLead: "ソウルを訪れる海外ゲスト向けのプライベート K-beauty コンシェルジュ。信頼できるプログラムを比較し、必要に応じて個別相談をご依頼ください。",
+      howEyebrow: "ご利用の流れ",
+      howTitle: "迷わず選び、静かに整え、安心して訪問へ。",
+      steps: [
+        ["プログラムを選ぶ", "ソウルで叶えたい美容体験に合わせて、厳選オプションを比較します。"],
+        ["候補を保存", "最終決定前に、相談したい候補を先にまとめます。"],
+        ["相談を依頼", "日程、目的、言語サポート、希望する支援レベルを共有します。"],
+        ["調整を開始", "Karecation が次のステップを明確かつプライベートにご案内します。"]
+      ],
+      trustEyebrow: "Why Karecation",
+      trustTitle: "よりプライベートに、より明確に。",
+      trust: [
+        ["目的別プラン設計", "目標、日程、快適さ、優先順位に沿って設計します。"],
+        ["信頼できる比較", "クリニック、美容、ショッピングの選択肢を整理して比較できます。"],
+        ["多言語サポート", "海外ゲストがソウルで安心して進められる設計です。"]
+      ],
+      faqEyebrow: "FAQ",
+      faqTitle: "はじめる前にご確認ください。",
+      finalEyebrow: "プラン開始",
+      finalTitle: "ソウル美容体験の準備を始めますか？"
+    },
+    page: {
+      programsEyebrow: "プログラム",
+      programsTitle: "あなたに合うソウル美容の道を選びましょう。",
+      programsLead: "海外ゲスト向けに、完成型パッケージ、集中ケア、プライベート相談オプションを用意しています。",
+      programsHelper: "迷ったら、まず Private Consultation から始めてください。",
+      aboutEyebrow: "About",
+      aboutTitle: "ソウルを訪れる海外ゲストのためのプライベート K-beauty コンシェルジュ。",
+      aboutLead: "Karecation は美容、クリニック、ウェルネス、サロン体験を、より明確に、落ち着いて整えます。",
+      aboutCards: [
+        ["厳選された提案", "目的に合わせて必要な美容・ケア選択肢を絞り込みます。"],
+        ["明確なコーディネート", "日程、順序、支援を一つのガイドプロセスで整理します。"],
+        ["プライベート優先の設計", "納得できる計画になってから次のステップへ進めます。"]
+      ],
+      faqEyebrow: "FAQ",
+      faqTitle: "計画前に、明確な答えを。",
+      faqLead: "相談、調整、予約サポートの進み方をご案内します。",
+      contactTitle: "必要なときに、すぐ届くコンシェルジュ対応。",
+      contactLead: "ご希望の日程とサービスを添えて、プライベート相談をご依頼ください。",
+      bookingTitle: "ソウルでどんな K-beauty 体験をしたいか教えてください。",
+      bookingLead: "目的、日程、サポート希望を共有してください。Karecation が次の一歩を丁寧にご案内します。",
+      bookingDetails: "お客様情報",
+      selectedPath: "選択内容",
+      searchPlaceholder: "プログラムを検索",
+      sortRecommended: "並び替え: おすすめ順",
+      priceAsc: "価格: 低い順",
+      priceDesc: "価格: 高い順",
+      fullName: "お名前",
+      email: "メール",
+      nationality: "国籍",
+      requestNote: "追加リクエスト",
+      requestPlaceholder: "希望プログラム、日程、言語支援、優先事項をご記入ください。",
+      cartEyebrow: "希望日",
+      cartTitle: "選択内容を確認",
+      cartLead: "選択したプログラムを確認し、相談依頼へ進んでください。",
+      estimatedScope: "見積金額",
+      proceed: "相談依頼へ進む",
+      exploreMore: "他のプログラムを見る",
+      noProgramSelectedTitle: "まだプログラムが選択されていません。",
+      noProgramSelectedText: "先にプログラムを選ぶか、All-in-One 旅程を作成してください。",
+      bookingFillRequired: "名前、メール、国籍を入力してください。",
+      bookingSending: "依頼を送信しています...",
+      bookingSent: "ご依頼を受け付けました。数時間以内に入力情報へご連絡します。",
+      bookingFailed: "送信に失敗しました。時間をおいて再度お試しください。",
+      contactEmailTitle: "メール",
+      contactEmailLine: "karecation.official@gmail.com",
+      contactInstagramLine: "Instagram: @karecation",
+      contactWeChatLine: "WeChat: @karecation",
+      contactLineLine: "LINE: @karecation",
+      contactHoursTitle: "対応時間 (KST)",
+      contactHoursLine: "月-土, 10:00-18:00",
+      contactNextTitle: "おすすめの次の一歩",
+      contactNextLine: "希望プログラムと日程を添えて、プライベート相談をご依頼ください。",
+      allInOneCardEyebrow: "SIGNATURE ITINERARY",
+      allInOneCardPrice: "$1,499〜",
+      allInOneCardDescription: "クリニックケア、サロンケア、回復、オプション調整を一日にまとめたプライベートソウル美容ルート。",
+      allInOneCardNote: "Skin Clinic Care 1件 + オプション3件を含みます",
+      allInOneCardButton: "旅程を組み立てる",
+      allInOneBuilderTitle: "あなたの美容ジャーニーを作成。",
+      allInOneBuilderLead: "Skin Clinic Care を1つ、オプションを3つ選んで All-in-One Package を完成させてください。",
+      allInOneBaseLabel: "基本パッケージ:",
+      allInOneAddonsLabel: "追加オプション:",
+      allInOneTotalLabel: "合計:",
+      allInOneRequiredLabel: "必須: Skin Clinic Care を1つ選択",
+      allInOneOptionalLabel: "オプションを3つ選択",
+      allInOneSkin1Title: "Skin Clinic Care 1 (+$0)",
+      allInOneSkin1Desc: "トーン、キメ、毛穴、ビタミントーンケア、トーニング中心ケア。",
+      allInOneSkin2Title: "Skin Clinic Care 2 (+$150)",
+      allInOneSkin2Desc: "リフティング、色素レーザー、しわボトックス中心ケア。",
+      allInOneOptScalpTitle: "Scalp Care (+$0)",
+      allInOneOptScalpDesc: "頭皮診断、スケーリング、リラックスケア支援。",
+      allInOneOptSalonTitle: "Hair Salon (+$80)",
+      allInOneOptSalonDesc: "相談後、カットまたはヘアクリニックケアと仕上げ。",
+      allInOneOptHMUTitle: "Hair & Makeup (+$100)",
+      allInOneOptHMUDesc: "洗練されたカメラ映えのためのプロヘア＆メイク。",
+      allInOneOptNailTitle: "Nail/Pedi Care (+$0)",
+      allInOneOptNailDesc: "シェイプ、キューティクルケア、ネイルまたはペディ仕上げ。",
+      allInOneOptBodyTitle: "Body Massage (+$20)",
+      allInOneOptBodyDesc: "回復とリリースを重視したフルボディマッサージ。",
+      allInOneOptShopTitle: "Beauty Shopping (+$0)",
+      allInOneOptShopDesc: "Olive Young などを含む K-beauty ショッピングガイド。",
+      allInOneContinueButton: "相談ページへ進む",
+      allInOneCounterTemplate: "{count} / 4 選択済み",
+      allInOneReady: "ジャーニーの準備が整いました。",
+      allInOneNeedOneMore: "ジャーニー完成には、あと1件選択してください。",
+      allInOneNeedMore: "ジャーニー完成には、あと{n}件選択してください。",
+      allInOneMaxPrograms: "すでに4件すべて選択済みです。",
+      allInOneMaxOptional: "オプション3件はすでに選択済みです。",
+      allInOneSummary: {
+        base: "基本パッケージ:",
+        addons: "追加オプション:",
+        total: "合計:"
+      },
+      footer: {
+        programs: "迷ったら <strong>Private Consultation</strong> から始めてください。",
+        about: "ソウル訪問前に、よりプライベートで確かな判断を。",
+        faq: "すぐに回答が必要なら、プライベート相談をご依頼ください。",
+        contact: "個別設計が必要な場合は、プライベート相談をご依頼ください。",
+        booking: "相談は request-first 方式です。訪問確定前に可用性、範囲、支払い案内を確認します。",
+        cart: "まず明確に始めるなら <strong>Private Consultation</strong> から。",
+        "program-detail": "方向整理が先なら <strong>Private Consultation</strong> から始めてください。"
+      }
+    },
+    faq: [
+      ["Karecation は何を調整してくれますか？", "相談、日程フロー、プログラム間のつながり、コンシェルジュ案内を中心に調整します。"],
+      ["最初からフルパッケージを選ぶ必要がありますか？", "いいえ。まずプライベート相談から始め、あとで範囲を決められます。"],
+      ["All-in-One Package には何が含まれますか？", "Skin Clinic Care 1件とオプション3件を、1つのプライベート旅程として調整します。"],
+      ["Skin Clinic Care 1 と 2 の違いは？", "1はトーン・キメのリフレッシュ中心、2はよりターゲットを絞ったクリニック中心ケアです。"],
+      ["1つのサービスだけ依頼できますか？", "はい。単体プログラムから始めることも、後で拡張することも可能です。"],
+      ["美容ショッピングのサポートはありますか？", "はい。目的に合わせて Olive Young などのショッピングガイドを組み込めます。"],
+      ["支払いはどのように進みますか？", "相談は request-first。可用性と最終範囲を確認後、支払い案内をお送りします。"]
+    ],
+    programs: {
+      "quick-concierge-consultation": {
+        name: "Private Consultation",
+        duration: "20分",
+        tagline: "まず明確に",
+        cardDescription: "選ぶ前に方向性を整えたい方に最適。<br>目標、日程、支援希望に基づく個別プラン設計を含みます。<br>予約前に整理したい方に最適です。"
+      },
+      "skin-clinic-care-1": {
+        name: "Skin Clinic Care 1",
+        duration: "60–90分",
+        tagline: "トーン & キメ",
+        cardDescription: "目に見える肌リフレッシュを求める方に最適。<br>毛穴ケア、ビタミントーンケア、トーニングを含みます。<br>男性のヒゲ脱毛 / 女性の脇・口元脱毛を追加可能。"
+      },
+      "skin-clinic-care-2": {
+        name: "Skin Clinic Care 2",
+        duration: "90–120分",
+        tagline: "アドバンスドクリニック",
+        cardDescription: "よりターゲットを絞ったクリニックケアを求める方に最適。<br>リフティング、色素レーザー、しわボトックスを含みます。<br>最終的な施術適合はクリニック相談で確定します。"
+      },
+      "scalp-diagnosis-spa": {
+        name: "Scalp Care",
+        duration: "60–90分",
+        tagline: "クリーンスカルプリセット",
+        cardDescription: "頭皮ケアを集中して受けたい方に最適。<br>頭皮診断、スケーリング、リラックスケアを含みます。<br>落ち着いた専門ケアの立ち寄り先として最適です。"
+      },
+      "hair-salon": {
+        name: "Hair Salon",
+        duration: "60–90分",
+        tagline: "カット or クリニック",
+        cardDescription: "上質なサロン仕上げを求める方に最適。<br>相談後のカットまたはヘアクリニックケアと仕上げを含みます。<br>洗練されたソウルサロン体験に最適です。"
+      },
+      "celebrity-hair-makeup": {
+        name: "Hair & Makeup",
+        duration: "90–120分",
+        tagline: "カメラレディスタイリング",
+        cardDescription: "整ったスタイルと印象的な仕上がりを求める方に最適。<br>プロのヘアスタイリングとメイク支援を含みます。<br>イベント、撮影、洗練された外出日に最適です。"
+      },
+      "nail-care": {
+        name: "Nail/Pedi Care",
+        duration: "60–90分",
+        tagline: "仕上げのディテール",
+        cardDescription: "全体の完成度を高めたい方に最適。<br>シェイプ、キューティクルケア、ネイルまたはペディ仕上げを含みます。<br>美容旅程の仕上げとして最適です。"
+      },
+      "body-massage": {
+        name: "Body Massage",
+        duration: "90分",
+        tagline: "回復 & リラクゼーション",
+        cardDescription: "回復、リラックス、ボディリセットを求める方に最適。<br>快適さとリリースに重点を置いた全身マッサージを含みます。<br>移動・買い物・フルデー後に特におすすめです。"
+      }
+    }
+  }
+};
+
+Object.keys(LANGUAGE_SYNC_PATCH).forEach((locale) => {
+  if (I18N[locale]) deepMerge(I18N[locale], LANGUAGE_SYNC_PATCH[locale]);
+});
+
 function getLocale() {
   const params = new URLSearchParams(window.location.search);
   const requested = params.get("lang") || localStorage.getItem(LOCALE_KEY) || "en";
@@ -1811,9 +2694,12 @@ function allInOnePriceBreakdown() {
 }
 
 function remainingProgramsMessage(remaining) {
+  const copy = t();
   if (remaining <= 0) return "";
-  if (remaining === 1) return "Please choose 1 more program to complete your journey.";
-  return `Please choose ${remaining} more program(s) to complete your journey.`;
+  const oneTemplate = copy.page.allInOneNeedOneMore || "Please choose 1 more program to complete your journey.";
+  const manyTemplate = copy.page.allInOneNeedMore || "Please choose {n} more program(s) to complete your journey.";
+  if (remaining === 1) return oneTemplate;
+  return manyTemplate.replace("{n}", String(remaining));
 }
 
 function getProgramById(id) {
@@ -2085,6 +2971,35 @@ function renderStaticPageCopy() {
     setText("homeFinalEyebrow", copy.home.finalEyebrow);
     setText("homeFinalTitle", copy.home.finalTitle);
     setText("homeFinalCta", copy.cta.requestConsultation);
+    setText("allInOneCardEyebrow", copy.page.allInOneCardEyebrow);
+    setText("allInOneCardPrice", copy.page.allInOneCardPrice);
+    setText("allInOneCardDescription", copy.page.allInOneCardDescription);
+    setText("allInOneCardNote", copy.page.allInOneCardNote);
+    setText("allInOneCardButton", copy.page.allInOneCardButton);
+    setText("allInOneBuilderTitle", copy.page.allInOneBuilderTitle);
+    setText("allInOneBuilderLead", copy.page.allInOneBuilderLead);
+    setText("allInOneBaseLabel", copy.page.allInOneBaseLabel);
+    setText("allInOneAddonsLabel", copy.page.allInOneAddonsLabel);
+    setText("allInOneTotalLabel", copy.page.allInOneTotalLabel);
+    setText("allInOneRequiredLabel", copy.page.allInOneRequiredLabel);
+    setText("allInOneOptionalLabel", copy.page.allInOneOptionalLabel);
+    setText("allInOneSkin1Title", copy.page.allInOneSkin1Title);
+    setText("allInOneSkin1Desc", copy.page.allInOneSkin1Desc);
+    setText("allInOneSkin2Title", copy.page.allInOneSkin2Title);
+    setText("allInOneSkin2Desc", copy.page.allInOneSkin2Desc);
+    setText("allInOneOptScalpTitle", copy.page.allInOneOptScalpTitle);
+    setText("allInOneOptScalpDesc", copy.page.allInOneOptScalpDesc);
+    setText("allInOneOptSalonTitle", copy.page.allInOneOptSalonTitle);
+    setText("allInOneOptSalonDesc", copy.page.allInOneOptSalonDesc);
+    setText("allInOneOptHMUTitle", copy.page.allInOneOptHMUTitle);
+    setText("allInOneOptHMUDesc", copy.page.allInOneOptHMUDesc);
+    setText("allInOneOptNailTitle", copy.page.allInOneOptNailTitle);
+    setText("allInOneOptNailDesc", copy.page.allInOneOptNailDesc);
+    setText("allInOneOptBodyTitle", copy.page.allInOneOptBodyTitle);
+    setText("allInOneOptBodyDesc", copy.page.allInOneOptBodyDesc);
+    setText("allInOneOptShopTitle", copy.page.allInOneOptShopTitle);
+    setText("allInOneOptShopDesc", copy.page.allInOneOptShopDesc);
+    setText("allInOneContinueButton", copy.page.allInOneContinueButton);
   }
 
   const pageHero = document.querySelector(".page-hero .container");
@@ -2120,6 +3035,18 @@ function renderStaticPageCopy() {
       setText(`aboutStep${index + 1}Title`, step[0]);
       setText(`aboutStep${index + 1}Text`, step[1]);
     });
+  }
+
+  if (page === "contact") {
+    setText("contactEmailTitle", copy.page.contactEmailTitle);
+    setText("contactEmailLine", copy.page.contactEmailLine);
+    setText("contactInstagramLine", copy.page.contactInstagramLine);
+    setText("contactWeChatLine", copy.page.contactWeChatLine);
+    setText("contactLineLine", copy.page.contactLineLine);
+    setText("contactHoursTitle", copy.page.contactHoursTitle);
+    setText("contactHoursLine", copy.page.contactHoursLine);
+    setText("contactNextTitle", copy.page.contactNextTitle);
+    setText("contactNextLine", copy.page.contactNextLine);
   }
 
   setPlaceholder("programSearch", copy.page.searchPlaceholder);
@@ -2362,12 +3289,17 @@ function renderBookingSummary() {
   const totals = getCartTotals();
   const journey = readAllInOneJourney();
   const hasAllInOneInCart = details.some((item) => item.program?.id === "all-in-one-package");
+  const journeyLabels = copy.page.allInOneSummary || {
+    base: "Base package:",
+    addons: "Add-ons:",
+    total: "Total:"
+  };
   const journeySummary = hasAllInOneInCart && journey?.packageType === "all-in-one" && journey?.selectedNames?.length
-    ? `<div class="list-item"><strong>${journey.packageName || "All-in-One Package"}</strong><p class="muted" style="font-size:.8rem; margin-top:6px;">${journey.selectedNames.join(" / ")}</p><p class="muted" style="font-size:.78rem; margin-top:6px;">Base package: ${formatPrice(journey.basePrice || ALLINONE_BUILDER_CONFIG.basePrice)} / Add-ons: ${formatPrice(journey.addOnsTotal ?? journey.addonTotal ?? 0)} / Total: ${formatPrice(journey.finalTotal ?? journey.totalPrice ?? ALLINONE_BUILDER_CONFIG.basePrice)}</p></div>`
+    ? `<div class="list-item"><strong>${journey.packageName || "All-in-One Package"}</strong><p class="muted" style="font-size:.8rem; margin-top:6px;">${journey.selectedNames.join(" / ")}</p><p class="muted" style="font-size:.78rem; margin-top:6px;">${journeyLabels.base} ${formatPrice(journey.basePrice || ALLINONE_BUILDER_CONFIG.basePrice)} / ${journeyLabels.addons} ${formatPrice(journey.addOnsTotal ?? journey.addonTotal ?? 0)} / ${journeyLabels.total} ${formatPrice(journey.finalTotal ?? journey.totalPrice ?? ALLINONE_BUILDER_CONFIG.basePrice)}</p></div>`
     : "";
 
   if (!details.length) {
-    root.innerHTML = `<div class="empty-state"><h3 class="display">No program selected yet.</h3><p class="muted" style="margin-top:6px;">Please choose a program or build your All-in-One journey first.</p></div>`;
+    root.innerHTML = `<div class="empty-state"><h3 class="display">${copy.page.noProgramSelectedTitle || "No program selected yet."}</h3><p class="muted" style="margin-top:6px;">${copy.page.noProgramSelectedText || "Please choose a program or build your All-in-One journey first."}</p></div>`;
   } else {
     root.innerHTML = `${journeySummary}${details.map((item) => {
       const text = programText(item.program);
@@ -2429,6 +3361,7 @@ function renderFaqPage() {
 }
 
 function syncAllInOneBuilderUI() {
+  const copy = t();
   const counter = document.getElementById("allInOneCounter");
   const ready = document.getElementById("allInOneReady");
   const basePriceNode = document.getElementById("allInOneBasePrice");
@@ -2437,7 +3370,8 @@ function syncAllInOneBuilderUI() {
   if (!counter) return;
 
   const selectedCount = allInOneSelectedCount();
-  counter.textContent = `${selectedCount} / 4 selected`;
+  const counterTemplate = copy.page.allInOneCounterTemplate || "{count} / 4 selected";
+  counter.textContent = counterTemplate.replace("{count}", String(selectedCount));
   const price = allInOnePriceBreakdown();
   if (basePriceNode) basePriceNode.textContent = formatPrice(price.basePrice);
   if (addonPriceNode) addonPriceNode.textContent = formatPrice(price.addonTotal);
@@ -2446,6 +3380,7 @@ function syncAllInOneBuilderUI() {
   if (ready) {
     const isReady = Boolean(allInOneState.skinId) && allInOneState.optionalIds.length === 3;
     ready.hidden = !isReady;
+    ready.textContent = copy.page.allInOneReady || "Your journey is ready.";
   }
 
   document.querySelectorAll("[data-builder-option]").forEach((option) => {
@@ -2467,6 +3402,7 @@ function openAllInOneBuilder() {
 }
 
 function selectAllInOneOption(group, programId) {
+  const copy = t();
   if (group === "skin") {
     allInOneState.skinId = programId;
     saveAllInOneSelection(allInOneState);
@@ -2485,12 +3421,12 @@ function selectAllInOneOption(group, programId) {
   }
 
   if (allInOneSelectedCount() >= 4) {
-    alert("You have already selected all 4 programs.");
+    alert(copy.page.allInOneMaxPrograms || "You have already selected all 4 programs.");
     return;
   }
 
   if (allInOneState.optionalIds.length >= 3) {
-    alert("You have already selected all 3 optional programs.");
+    alert(copy.page.allInOneMaxOptional || "You have already selected all 3 optional programs.");
     return;
   }
 
@@ -2642,7 +3578,7 @@ function bindBookingForm() {
     const details = getCartDetails();
 
     if (!fullName || !email || !nationality) {
-      status.textContent = "Please fill in name, email, and nationality.";
+      status.textContent = copy.page.bookingFillRequired || "Please fill in name, email, and nationality.";
       status.className = "status-message error";
       return;
     }
@@ -2693,13 +3629,13 @@ function bindBookingForm() {
 
     try {
       if (submitButton) submitButton.disabled = true;
-      status.textContent = "Sending request...";
+      status.textContent = copy.page.bookingSending || "Sending request...";
       status.className = "status-message";
       await sendReservationToSheet(payload);
-      status.textContent = "Your request has been sent. Karecation will contact you with the next step.";
+      status.textContent = copy.page.bookingSent || "Your request has been sent. Karecation will contact you with the next step.";
       status.className = "status-message success";
     } catch (error) {
-      status.textContent = "Failed to send request. Please try again.";
+      status.textContent = copy.page.bookingFailed || "Failed to send request. Please try again.";
       status.className = "status-message error";
     } finally {
       if (submitButton) submitButton.disabled = false;
