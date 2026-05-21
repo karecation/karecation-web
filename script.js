@@ -3040,7 +3040,6 @@ function applyLocale() {
     button.classList.toggle("active", button.dataset.locale === currentLocale);
   });
   renderStaticPageCopy();
-  renderHomePrograms();
   renderProgramsPage();
   renderDetailPage();
   renderCartPage();
@@ -3256,15 +3255,6 @@ function programCard(program, useCardDescription = true, options = {}) {
       </div>
     </article>
   `;
-}
-
-function renderHomePrograms() {
-  const target = document.getElementById("homeFeaturedPrograms");
-  if (!target) return;
-  const picks = ["all-in-one-package", "skin-clinic-care-1", "quick-concierge-consultation"]
-    .map(getProgramById)
-    .filter(Boolean);
-  target.innerHTML = picks.map((program) => programCard(program, false)).join("");
 }
 
 function renderProgramsPage() {
