@@ -2582,6 +2582,77 @@ Object.keys(LANGUAGE_SYNC_PATCH).forEach((locale) => {
   if (I18N[locale]) deepMerge(I18N[locale], LANGUAGE_SYNC_PATCH[locale]);
 });
 
+const PAYMENT_COPY_PATCH = {
+  en: {
+    common: {
+      subtotal: "Subtotal",
+      service: "Service fee included for card payment (5%)",
+      cardPaymentTotal: "Card payment total",
+      cashBankTransferTotal: "Cash / Bank Transfer Total",
+      cashBankDiscountApplied: "5% service fee discount applied for cash or bank transfer."
+    },
+    page: {
+      paymentAfterConfirmationTitle: "Payment after confirmation",
+      paymentAfterConfirmationBody: "Karecation confirms availability, scope, and timing before collecting payment. After your request is reviewed, we will share a secure payment link or cash / bank transfer instructions.",
+      paymentNote: "Card payments include the 5% service fee. Cash or bank transfer payments receive a 5% service fee discount after availability and final scope are confirmed.",
+      payByCard: "Pay by Card",
+      requestCashBankInstructions: "Request Cash / Bank Transfer Instructions"
+    }
+  },
+  ko: {
+    common: {
+      subtotal: "소계",
+      service: "카드 결제 포함 서비스 수수료 (5%)",
+      cardPaymentTotal: "카드 결제 총액",
+      cashBankTransferTotal: "현금 / 계좌이체 결제 총액",
+      cashBankDiscountApplied: "현금 또는 계좌이체 결제 시 5% 서비스 수수료 할인이 적용됩니다."
+    },
+    page: {
+      paymentAfterConfirmationTitle: "확정 후 결제 안내",
+      paymentAfterConfirmationBody: "Karecation은 가능 일정, 서비스 범위, 진행 시간을 확인한 뒤 결제를 안내합니다. 요청 내용을 검토한 후 보안 결제 링크 또는 현금 / 계좌이체 안내를 공유드립니다.",
+      paymentNote: "카드 결제 금액에는 5% 서비스 수수료가 포함됩니다. 현금 또는 계좌이체 결제 시 가능 일정과 최종 범위 확인 후 5% 서비스 수수료 할인이 적용됩니다.",
+      payByCard: "카드로 결제하기",
+      requestCashBankInstructions: "현금 / 계좌이체 안내 요청"
+    }
+  },
+  zh: {
+    common: {
+      subtotal: "小计",
+      service: "银行卡支付包含的服务费 (5%)",
+      cardPaymentTotal: "银行卡支付总额",
+      cashBankTransferTotal: "现金 / 银行转账支付总额",
+      cashBankDiscountApplied: "现金或银行转账支付可享受 5% 服务费减免。"
+    },
+    page: {
+      paymentAfterConfirmationTitle: "确认后付款",
+      paymentAfterConfirmationBody: "Karecation 会先确认可预约时间、服务范围和安排节奏，再进行付款。您的请求确认后，我们会分享安全付款链接或现金 / 银行转账说明。",
+      paymentNote: "银行卡支付金额包含 5% 服务费。选择现金或银行转账时，将在确认可预约时间和最终服务范围后减免 5% 服务费。",
+      payByCard: "银行卡支付",
+      requestCashBankInstructions: "申请现金 / 银行转账说明"
+    }
+  },
+  ja: {
+    common: {
+      subtotal: "小計",
+      service: "カード決済に含まれるサービス手数料 (5%)",
+      cardPaymentTotal: "カード決済合計",
+      cashBankTransferTotal: "現金 / 銀行振込の合計",
+      cashBankDiscountApplied: "現金または銀行振込の場合、5%のサービス手数料割引が適用されます。"
+    },
+    page: {
+      paymentAfterConfirmationTitle: "確定後のお支払い",
+      paymentAfterConfirmationBody: "Karecationは空き状況、サービス範囲、進行時間を確認した後にお支払いをご案内します。リクエスト確認後、安全な決済リンクまたは現金 / 銀行振込のご案内を共有します。",
+      paymentNote: "カード決済には5%のサービス手数料が含まれます。現金または銀行振込の場合、空き状況と最終内容の確認後、5%のサービス手数料割引が適用されます。",
+      payByCard: "カードで支払う",
+      requestCashBankInstructions: "現金 / 銀行振込の案内を依頼"
+    }
+  }
+};
+
+Object.keys(PAYMENT_COPY_PATCH).forEach((locale) => {
+  if (I18N[locale]) deepMerge(I18N[locale], PAYMENT_COPY_PATCH[locale]);
+});
+
 function getLocale() {
   const params = new URLSearchParams(window.location.search);
   const requested = params.get("lang") || localStorage.getItem(LOCALE_KEY) || "en";
@@ -3063,6 +3134,12 @@ function renderStaticPageCopy() {
   const summaryTitle = document.querySelector(".summary-card h3");
   if (summaryTitle && page === "booking") summaryTitle.textContent = copy.page.selectedPath;
   if (summaryTitle && page === "cart") summaryTitle.textContent = copy.page.estimatedScope;
+  if (page === "booking") {
+    setText("bookingPaymentCtaTitle", copy.page.paymentAfterConfirmationTitle || "Payment after confirmation");
+    setText("bookingPaymentCtaBody", copy.page.paymentAfterConfirmationBody || "Karecation confirms availability, scope, and timing before collecting payment. After your request is reviewed, we will share a secure payment link or cash / bank transfer instructions.");
+    setText("bookingCardPayCta", copy.page.payByCard || "Pay by Card");
+    setText("bookingCashBankCta", copy.page.requestCashBankInstructions || "Request Cash / Bank Transfer Instructions");
+  }
   setFieldLabel("fullName", copy.page.fullName);
   setFieldLabel("email", copy.page.email);
   setFieldLabel("nationality", copy.page.nationality);
@@ -3273,10 +3350,13 @@ function renderCartPage() {
   setText("cartSubtotal", formatPrice(subtotal));
   setText("cartService", formatPrice(service));
   setText("cartTotal", formatPrice(total));
-  const cartRows = document.querySelectorAll(".summary-card .total-row");
-  if (cartRows[0]) cartRows[0].querySelector("span:first-child").textContent = copy.common.subtotal;
-  if (cartRows[1]) cartRows[1].querySelector("span:first-child").textContent = copy.common.service;
-  if (cartRows[2]) cartRows[2].querySelector("strong:first-child").textContent = copy.common.total;
+  setText("cartCashTotal", formatPrice(subtotal));
+  setText("cartSubtotalLabel", copy.common.subtotal);
+  setText("cartServiceLabel", copy.common.service || "Service fee included for card payment (5%)");
+  setText("cartCardTotalLabel", copy.common.cardPaymentTotal || "Card payment total");
+  setText("cartCashTotalLabel", copy.common.cashBankTransferTotal || "Cash / Bank Transfer Total");
+  setText("cartCashDiscountLine", copy.common.cashBankDiscountApplied || "5% service fee discount applied for cash or bank transfer.");
+  setText("cartPaymentNote", copy.page.paymentNote || "Card payments include the 5% service fee. Cash or bank transfer payments receive a 5% service fee discount after availability and final scope are confirmed.");
   document.querySelector(".summary-card a.btn-primary")?.replaceChildren(document.createTextNode(copy.page.proceed));
   document.querySelector(".summary-card a.btn-secondary")?.replaceChildren(document.createTextNode(copy.page.exploreMore));
 }
@@ -3317,10 +3397,13 @@ function renderBookingSummary() {
   setText("bookingSubtotal", formatPrice(totals.subtotal));
   setText("bookingService", formatPrice(totals.service));
   setText("bookingTotal", formatPrice(totals.total));
-  const bookingRows = document.querySelectorAll(".summary-card .total-row");
-  if (bookingRows[0]) bookingRows[0].querySelector("span:first-child").textContent = copy.common.subtotal;
-  if (bookingRows[1]) bookingRows[1].querySelector("span:first-child").textContent = copy.common.service;
-  if (bookingRows[2]) bookingRows[2].querySelector("strong:first-child").textContent = copy.common.total;
+  setText("bookingCashTotal", formatPrice(totals.subtotal));
+  setText("bookingSubtotalLabel", copy.common.subtotal);
+  setText("bookingServiceLabel", copy.common.service || "Service fee included for card payment (5%)");
+  setText("bookingCardTotalLabel", copy.common.cardPaymentTotal || "Card payment total");
+  setText("bookingCashTotalLabel", copy.common.cashBankTransferTotal || "Cash / Bank Transfer Total");
+  setText("bookingCashDiscountLine", copy.common.cashBankDiscountApplied || "5% service fee discount applied for cash or bank transfer.");
+  setText("bookingPaymentNote", copy.page.paymentNote || "Card payments include the 5% service fee. Cash or bank transfer payments receive a 5% service fee discount after availability and final scope are confirmed.");
 }
 
 function renderContactChannels() {

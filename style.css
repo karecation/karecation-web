@@ -1000,6 +1000,11 @@ textarea {
   font-size: 0.96rem;
 }
 
+.payment-note {
+  font-size: 0.78rem;
+  margin: 8px 0 0;
+}
+
 .booking-grid {
   display: grid;
   grid-template-columns: 1.2fr 1fr;
@@ -1016,6 +1021,26 @@ textarea {
   border-radius: 12px;
   background: #fff;
   padding: 16px;
+}
+
+.payment-cta-wrap {
+  margin-top: 14px;
+}
+
+.payment-cta-card {
+  display: grid;
+  gap: 10px;
+}
+
+.payment-cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.payment-cta-actions .btn {
+  flex: 1 1 260px;
+  min-height: 44px;
 }
 
 .field-grid {
