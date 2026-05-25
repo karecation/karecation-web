@@ -541,6 +541,7 @@ p {
   color: #4e535d;
 }
 
+#allInOneBuilder,
 .allinone-builder {
   border-top: 1px solid var(--line);
   padding: 18px 22px 22px;
@@ -1107,6 +1108,12 @@ label {
   gap: 5px;
 }
 
+.field-helper {
+  color: var(--muted);
+  font-size: 0.74rem;
+  line-height: 1.45;
+}
+
 .status-message {
   margin-top: 8px;
   min-height: 1.1em;
@@ -1168,6 +1175,17 @@ label {
   border-radius: 12px;
   background: #fff;
   padding: 14px;
+}
+
+.contact-line-list {
+  margin-top: 8px;
+  display: grid;
+  gap: 6px;
+}
+
+.contact-line-list p {
+  margin: 0;
+  line-height: 1.45;
 }
 
 .contact-channels-section {
@@ -1325,6 +1343,12 @@ label {
   font-size: 0.68rem;
 }
 
+a[href="cart.html"],
+.cart-entry,
+.floating-cart {
+  display: none !important;
+}
+
 .site-footer {
   padding: 26px 0 38px;
   color: var(--muted);
@@ -1352,7 +1376,7 @@ label {
 
 @media (max-width: 920px) {
   body {
-    padding-bottom: 76px;
+    padding-bottom: 0;
   }
 
   .hero,

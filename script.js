@@ -1800,8 +1800,8 @@ const LANGUAGE_SYNC_PATCH = {
       bookingSending: "Sending request...",
       bookingSent: "Your request has been sent. We’ll contact you at the information provided within a few hours.",
       bookingFailed: "Failed to send request. Please try again.",
-      contactEmailTitle: "Email",
-      contactEmailLine: "karecation.official@gmail.com",
+      contactEmailTitle: "Contact",
+      contactEmailLine: "Email : karecation.official@gmail.com",
       contactInstagramLine: "Instagram: @karecation",
       contactWeChatLine: "WeChat: @karecation",
       contactLineLine: "LINE: @karecation",
@@ -2019,8 +2019,8 @@ const LANGUAGE_SYNC_PATCH = {
       bookingSending: "요청을 전송하는 중입니다...",
       bookingSent: "요청이 정상적으로 전송되었습니다. 입력하신 정보로 몇 시간 내 연락드릴게요.",
       bookingFailed: "요청 전송에 실패했습니다. 잠시 후 다시 시도해 주세요.",
-      contactEmailTitle: "이메일",
-      contactEmailLine: "karecation.official@gmail.com",
+      contactEmailTitle: "연락처",
+      contactEmailLine: "Email : karecation.official@gmail.com",
       contactInstagramLine: "Instagram: @karecation",
       contactWeChatLine: "WeChat: @karecation",
       contactLineLine: "LINE: @karecation",
@@ -2238,8 +2238,8 @@ const LANGUAGE_SYNC_PATCH = {
       bookingSending: "正在提交请求...",
       bookingSent: "请求已发送。我们会在数小时内通过你提供的联系方式与你联系。",
       bookingFailed: "发送失败，请稍后重试。",
-      contactEmailTitle: "邮箱",
-      contactEmailLine: "karecation.official@gmail.com",
+      contactEmailTitle: "联系方式",
+      contactEmailLine: "Email : karecation.official@gmail.com",
       contactInstagramLine: "Instagram: @karecation",
       contactWeChatLine: "WeChat: @karecation",
       contactLineLine: "LINE: @karecation",
@@ -2457,8 +2457,8 @@ const LANGUAGE_SYNC_PATCH = {
       bookingSending: "依頼を送信しています...",
       bookingSent: "ご依頼を受け付けました。数時間以内に入力情報へご連絡します。",
       bookingFailed: "送信に失敗しました。時間をおいて再度お試しください。",
-      contactEmailTitle: "メール",
-      contactEmailLine: "karecation.official@gmail.com",
+      contactEmailTitle: "連絡先",
+      contactEmailLine: "Email : karecation.official@gmail.com",
       contactInstagramLine: "Instagram: @karecation",
       contactWeChatLine: "WeChat: @karecation",
       contactLineLine: "LINE: @karecation",
@@ -2580,6 +2580,33 @@ const LANGUAGE_SYNC_PATCH = {
 
 Object.keys(LANGUAGE_SYNC_PATCH).forEach((locale) => {
   if (I18N[locale]) deepMerge(I18N[locale], LANGUAGE_SYNC_PATCH[locale]);
+});
+
+const PREFERRED_DATE_COPY_PATCH = {
+  en: {
+    preferredDate: "Preferred Date",
+    preferredDateHelper: "Final availability will be confirmed after reviewing your request.",
+    preferredDateRequired: "Please select your preferred date."
+  },
+  ko: {
+    preferredDate: "희망 날짜",
+    preferredDateHelper: "요청 확인 후 최종 가능 일정을 안내드립니다.",
+    preferredDateRequired: "희망 날짜를 선택해 주세요."
+  },
+  zh: {
+    preferredDate: "期望日期",
+    preferredDateHelper: "确认请求后将另行 안내最终可预约时间。",
+    preferredDateRequired: "请选择期望日期。"
+  },
+  ja: {
+    preferredDate: "ご希望日",
+    preferredDateHelper: "リクエスト確認後、最終的な空き状況をご案内します。",
+    preferredDateRequired: "ご希望日を選択してください。"
+  }
+};
+
+Object.keys(PREFERRED_DATE_COPY_PATCH).forEach((locale) => {
+  if (I18N[locale]?.page) Object.assign(I18N[locale].page, PREFERRED_DATE_COPY_PATCH[locale]);
 });
 
 function getLocale() {
@@ -3066,6 +3093,8 @@ function renderStaticPageCopy() {
   setFieldLabel("fullName", copy.page.fullName);
   setFieldLabel("email", copy.page.email);
   setFieldLabel("nationality", copy.page.nationality);
+  setFieldLabel("preferredDate", copy.page.preferredDate);
+  setText("preferredDateHelper", copy.page.preferredDateHelper);
   setFieldLabel("requestNote", copy.page.requestNote);
   setPlaceholder("requestNote", copy.page.requestPlaceholder);
   document.querySelector("button[type='submit']")?.replaceChildren(document.createTextNode(copy.cta.requestConsultation));
@@ -3297,11 +3326,16 @@ function renderBookingSummary() {
   const journeySummary = hasAllInOneInCart && journey?.packageType === "all-in-one" && journey?.selectedNames?.length
     ? `<div class="list-item"><strong>${journey.packageName || "All-in-One Package"}</strong><p class="muted" style="font-size:.8rem; margin-top:6px;">${journey.selectedNames.join(" / ")}</p><p class="muted" style="font-size:.78rem; margin-top:6px;">${journeyLabels.base} ${formatPrice(journey.basePrice || ALLINONE_BUILDER_CONFIG.basePrice)} / ${journeyLabels.addons} ${formatPrice(journey.addOnsTotal ?? journey.addonTotal ?? 0)} / ${journeyLabels.total} ${formatPrice(journey.finalTotal ?? journey.totalPrice ?? ALLINONE_BUILDER_CONFIG.basePrice)}</p></div>`
     : "";
+  const preferredDate = getPreferredDateValue();
+  const preferredDateSummary = preferredDate
+    ? `<div class="list-item"><strong>${copy.page.preferredDate || "Preferred Date"}</strong><p class="muted" style="font-size:.8rem; margin-top:4px;">${preferredDate}</p></div>`
+    : "";
+  const visibleDetails = details.filter((item) => !(hasAllInOneInCart && journey?.packageType === "all-in-one" && item.program?.id === "all-in-one-package"));
 
   if (!details.length) {
     root.innerHTML = `<div class="empty-state"><h3 class="display">${copy.page.noProgramSelectedTitle || "No program selected yet."}</h3><p class="muted" style="margin-top:6px;">${copy.page.noProgramSelectedText || "Please choose a program or build your All-in-One journey first."}</p></div>`;
   } else {
-    root.innerHTML = `${journeySummary}${details.map((item) => {
+    root.innerHTML = `${journeySummary}${preferredDateSummary}${visibleDetails.map((item) => {
       const text = programText(item.program);
       const travelerLabel = item.travelers > 1 ? copy.common.travelers : copy.common.traveler;
       return `
@@ -3397,8 +3431,15 @@ function syncAllInOneBuilderUI() {
 function openAllInOneBuilder() {
   const builder = document.getElementById("allInOneBuilder");
   if (!builder) return;
-  if (builder.hidden) builder.hidden = false;
+  builder.hidden = false;
   syncAllInOneBuilderUI();
+
+  requestAnimationFrame(() => {
+    builder.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+  });
 }
 
 function selectAllInOneOption(group, programId) {
@@ -3510,6 +3551,61 @@ function updateCartItem(programId, patch) {
   renderBookingSummary();
 }
 
+function getTodayDateString() {
+  const today = new Date();
+  today.setMinutes(today.getMinutes() - today.getTimezoneOffset());
+  return today.toISOString().split("T")[0];
+}
+
+function getPreferredDateValue() {
+  return (document.getElementById("preferredDate")?.value || "").trim();
+}
+
+function initPreferredDateField() {
+  const preferredDateInput = document.getElementById("preferredDate");
+  if (!preferredDateInput) return;
+
+  preferredDateInput.min = getTodayDateString();
+
+  preferredDateInput.addEventListener("invalid", () => {
+    if (!preferredDateInput.value || preferredDateInput.validity.rangeUnderflow) {
+      const message = t().page.preferredDateRequired || "Please select your preferred date.";
+      const status = document.getElementById("bookingStatus");
+      preferredDateInput.setCustomValidity(message);
+      if (status) {
+        status.textContent = message;
+        status.className = "status-message error";
+      }
+    }
+  });
+
+  preferredDateInput.addEventListener("input", () => {
+    preferredDateInput.setCustomValidity("");
+    renderBookingSummary();
+  });
+
+  preferredDateInput.addEventListener("change", () => {
+    preferredDateInput.setCustomValidity("");
+    renderBookingSummary();
+  });
+}
+
+function allInOneSheetFields(journey, details) {
+  const fallbackNames = details.map((item) => programText(item.program).name).filter(Boolean);
+  const skinCare = ALLINONE_BUILDER_CONFIG.labels[journey?.selectedSkinClinic] || "";
+  const optionalPrograms = Array.isArray(journey?.selectedOptionalPrograms)
+    ? journey.selectedOptionalPrograms.map((id) => ALLINONE_BUILDER_CONFIG.labels[id]).filter(Boolean)
+    : [];
+  const programs = optionalPrograms.length ? optionalPrograms : fallbackNames;
+
+  return {
+    skinCare,
+    program1: programs[0] || "",
+    program2: programs[1] || "",
+    program3: programs[2] || ""
+  };
+}
+
 async function sendReservationToSheet(payload) {
   const formBody = new URLSearchParams();
   Object.entries(payload).forEach(([key, value]) => {
@@ -3574,6 +3670,8 @@ function bindBookingForm() {
     const fullName = (form.querySelector("#fullName")?.value || form.querySelector("[name='name']")?.value || "").trim();
     const email = (form.querySelector("#email")?.value || form.querySelector("[name='email']")?.value || "").trim();
     const nationality = (form.querySelector("#nationality")?.value || form.querySelector("[name='nationality']")?.value || "").trim();
+    const preferredDateInput = form.querySelector("#preferredDate");
+    const preferredDate = (preferredDateInput?.value || "").trim();
     const additionalRequest = (form.querySelector("#requestNote")?.value || form.querySelector("[name='message']")?.value || "").trim();
     const details = getCartDetails();
 
@@ -3583,48 +3681,46 @@ function bindBookingForm() {
       return;
     }
 
+    if (!preferredDate) {
+      const message = copy.page.preferredDateRequired || "Please select your preferred date.";
+      if (preferredDateInput) {
+        preferredDateInput.setCustomValidity(message);
+        preferredDateInput.focus();
+      }
+      status.textContent = message;
+      status.className = "status-message error";
+      return;
+    }
+
+    if (preferredDateInput?.min && preferredDate < preferredDateInput.min) {
+      const message = copy.page.preferredDateRequired || "Please select your preferred date.";
+      status.textContent = message;
+      status.className = "status-message error";
+      preferredDateInput.focus();
+      return;
+    }
+
     const journey = readAllInOneJourney();
     const hasAllInOneInCart = details.some((item) => item.program?.id === "all-in-one-package");
     const journeyBasePrice = hasAllInOneInCart ? (journey?.basePrice ?? ALLINONE_BUILDER_CONFIG.basePrice) : 0;
     const journeyAddonTotal = hasAllInOneInCart ? (journey?.addOnsTotal ?? journey?.addonTotal ?? 0) : 0;
     const journeyTotalPrice = hasAllInOneInCart ? (journey?.finalTotal ?? journey?.totalPrice ?? journeyBasePrice) : 0;
-    const journeyAddons = hasAllInOneInCart && Array.isArray(journey?.selectedAddons)
-      ? journey.selectedAddons.map((item) => `${item.name} (+${formatPrice(item.addonPrice || 0)})`).join(", ")
-      : "";
-    const journeySummary = hasAllInOneInCart && journey?.selectedNames?.length
-      ? `All-in-One Journey: ${journey.selectedNames.join(", ")}`
-      : "";
-    const lineItems = details.length
-      ? details.map((item) => `${programText(item.program).name} x${item.travelers}${item.preferredDate ? ` (${item.preferredDate})` : ""}`).join(" | ")
-      : "";
-    const cartSummary = [lineItems, journeySummary].filter(Boolean).join(" | ") || copy.common.noCartItems;
+    const sheetFields = allInOneSheetFields(hasAllInOneInCart ? journey : null, details);
+    const totals = getCartTotals();
 
     const payload = {
+      Timestamp: new Date().toISOString(),
       "Full Name": fullName,
       Email: email,
       Nationality: nationality,
-      "Additional Request": additionalRequest,
-      "Cart Summary": cartSummary,
-      "All-in-One Journey": journeySummary,
-      "All-in-One Base Price": formatPrice(journeyBasePrice),
-      "All-in-One Add-ons": formatPrice(journeyAddonTotal),
-      "All-in-One Total Price": formatPrice(journeyTotalPrice),
-      "All-in-One Add-on Details": journeyAddons,
-      Locale: currentLocale,
-      fullName,
-      name: fullName,
-      email,
-      nationality,
-      additionalRequest,
-      message: additionalRequest,
-      cartSummary,
-      allInOneJourney: journeySummary,
-      allInOneBasePrice: journeyBasePrice,
-      allInOneAddonTotal: journeyAddonTotal,
-      allInOneTotalPrice: journeyTotalPrice,
-      allInOneAddonDetails: journeyAddons,
-      locale: currentLocale,
-      submittedAt: new Date().toISOString()
+      "Preferred Date": preferredDate,
+      "Skin care": sheetFields.skinCare,
+      "Program 1": sheetFields.program1,
+      "Program 2": sheetFields.program2,
+      "Program 3": sheetFields.program3,
+      Value: formatPrice(totals.total || journeyTotalPrice || journeyBasePrice + journeyAddonTotal),
+      "결제 방식": "Consultation first",
+      "Additional Request": additionalRequest
     };
 
     try {
@@ -3836,6 +3932,7 @@ function init() {
   }
   insertLanguageSelector();
   setActiveNav();
+  initPreferredDateField();
   bindBookingForm();
   bindGlobalEvents();
   applyLocale();
