@@ -1123,7 +1123,6 @@ const LOCALE_PATCH = {
     },
     faq: [
       ["What does Karecation help coordinate?", "We help coordinate consultation, scheduling flow, and concierge-level guidance across your preferred programs."],
-      ["Can I request only one service?", "Yes. You can request one focused service or build a wider plan."],
       ["Do I need to book a package right away?", "No. You can begin with a private consultation and decide the scope afterward."],
       ["Do you support international guests?", "Yes. Karecation is designed for international guests visiting Seoul."],
       ["Can Karecation help with beauty shopping such as Olive Young?", "Yes. We can include curated beauty shopping support based on your goals and schedule."],
@@ -1864,7 +1863,6 @@ const LANGUAGE_SYNC_PATCH = {
       ["Do I need to choose a full package right away?", "No. You can begin with a private consultation and decide the scope afterward."],
       ["What is included in the All-in-One Package?", "It includes 1 skin clinic care option and 3 optional programs, coordinated as one private itinerary."],
       ["What is the difference between Skin Clinic Care 1 and Skin Clinic Care 2?", "Skin Clinic Care 1 focuses on tone and texture refresh. Skin Clinic Care 2 is a more advanced, clinic-focused path."],
-      ["Can I request only one service?", "Yes. You can request one focused service or build a wider plan."],
       ["Can Karecation help with beauty shopping?", "Yes. We can include guided beauty shopping support, including destinations such as Olive Young."],
       ["How does payment work?", "Consultation is request-first. Availability, scope, and final payment guidance are confirmed before any visit is finalized."]
     ],
