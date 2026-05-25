@@ -2624,6 +2624,16 @@ function contactChannelCopy() {
   return CONTACT_CHANNEL_COPY[currentLocale] || CONTACT_CHANNEL_COPY.en;
 }
 
+function emptySelectedPathMessage() {
+  const messages = {
+    en: "Build your beauty journey first.",
+    ko: "먼저 뷰티 여정을 구성해 주세요.",
+    zh: "请先规划您的美丽旅程。",
+    ja: "まずビューティージャーニーを組み立ててください。"
+  };
+  return messages[currentLocale] || messages.en;
+}
+
 function programText(program) {
   return t().programs[program.id] || I18N.en.programs[program.id];
 }
@@ -3559,6 +3569,21 @@ function getPreferredDateValue() {
   return (document.getElementById("preferredDate")?.value || "").trim();
 }
 
+function selectedProgramSummary(details) {
+  return details
+    .map((item) => `${programText(item.program).name} x${item.travelers}${item.preferredDate ? ` (${item.preferredDate})` : ""}`)
+    .join(" | ");
+}
+
+function selectedAddonSummary(journey) {
+  const addons = Array.isArray(journey?.selectedAddons)
+    ? journey.selectedAddons
+    : Array.isArray(journey?.selectedAddOns)
+      ? journey.selectedAddOns
+      : [];
+  return addons.map((item) => `${item.name} (+${formatPrice(item.addonPrice || 0)})`).join(", ");
+}
+
 function initPreferredDateField() {
   const preferredDateInput = document.getElementById("preferredDate");
   if (!preferredDateInput) return;
@@ -3672,6 +3697,12 @@ function bindBookingForm() {
     const preferredDate = (preferredDateInput?.value || "").trim();
     const additionalRequest = (form.querySelector("#requestNote")?.value || form.querySelector("[name='message']")?.value || "").trim();
     const details = getCartDetails();
+    const selectedPathTotals = getCartTotals();
+
+    if (!details.length || selectedPathTotals.subtotal <= 0 || selectedPathTotals.total <= 0) {
+      alert(emptySelectedPathMessage());
+      return;
+    }
 
     if (!fullName || !email || !nationality) {
       status.textContent = copy.page.bookingFillRequired || "Please fill in name, email, and nationality.";
@@ -3704,7 +3735,13 @@ function bindBookingForm() {
     const journeyAddonTotal = hasAllInOneInCart ? (journey?.addOnsTotal ?? journey?.addonTotal ?? 0) : 0;
     const journeyTotalPrice = hasAllInOneInCart ? (journey?.finalTotal ?? journey?.totalPrice ?? journeyBasePrice) : 0;
     const sheetFields = allInOneSheetFields(hasAllInOneInCart ? journey : null, details);
-    const totals = getCartTotals();
+    const totals = selectedPathTotals;
+    const selectedPrograms = selectedProgramSummary(details);
+    const selectedAddons = hasAllInOneInCart ? selectedAddonSummary(journey) : "";
+    const journeySummary = hasAllInOneInCart && journey?.selectedNames?.length
+      ? `All-in-One Journey: ${journey.selectedNames.join(", ")}`
+      : "";
+    const selectedPathSummary = [selectedPrograms, journeySummary].filter(Boolean).join(" | ");
 
     const payload = {
       Timestamp: new Date().toISOString(),
@@ -3712,13 +3749,37 @@ function bindBookingForm() {
       Email: email,
       Nationality: nationality,
       "Preferred Date": preferredDate,
+      "Selected Path": selectedPathSummary,
+      "Selected Program/Package": selectedPrograms,
+      "Selected Add-ons": selectedAddons,
       "Skin care": sheetFields.skinCare,
       "Program 1": sheetFields.program1,
       "Program 2": sheetFields.program2,
       "Program 3": sheetFields.program3,
+      Subtotal: formatPrice(totals.subtotal),
+      "Service Fee": formatPrice(totals.service),
+      Total: formatPrice(totals.total),
       Value: formatPrice(totals.total || journeyTotalPrice || journeyBasePrice + journeyAddonTotal),
+      Language: currentLocale,
+      Locale: currentLocale,
       "결제 방식": "Consultation first",
-      "Additional Request": additionalRequest
+      "Additional Request": additionalRequest,
+      fullName,
+      name: fullName,
+      email,
+      nationality,
+      preferredDate,
+      additionalRequest,
+      message: additionalRequest,
+      selectedPath: selectedPathSummary,
+      selectedProgramPackage: selectedPrograms,
+      selectedAddons,
+      subtotal: totals.subtotal,
+      serviceFee: totals.service,
+      total: totals.total,
+      language: currentLocale,
+      locale: currentLocale,
+      submittedAt: new Date().toISOString()
     };
 
     try {
