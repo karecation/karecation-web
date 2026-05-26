@@ -3584,6 +3584,22 @@ function selectedAddonSummary(journey) {
   return addons.map((item) => `${item.name} (+${formatPrice(item.addonPrice || 0)})`).join(", ");
 }
 
+function selectedProgramFieldValues(details, journey) {
+  const hasAllInOneInCart = details.some((item) => item.program?.id === "all-in-one-package");
+  if (hasAllInOneInCart && journey?.packageType === "all-in-one") {
+    const journeyNames = Array.isArray(journey.selectedNames) && journey.selectedNames.length
+      ? journey.selectedNames
+      : [
+          ALLINONE_BUILDER_CONFIG.labels[journey.selectedSkinClinic],
+          ...(Array.isArray(journey.selectedOptionalPrograms)
+            ? journey.selectedOptionalPrograms.map((id) => ALLINONE_BUILDER_CONFIG.labels[id])
+            : [])
+        ].filter(Boolean);
+    if (journeyNames.length) return journeyNames.slice(0, 4);
+  }
+  return details.map((item) => programText(item.program).name).filter(Boolean).slice(0, 4);
+}
+
 function initPreferredDateField() {
   const preferredDateInput = document.getElementById("preferredDate");
   if (!preferredDateInput) return;
@@ -3611,22 +3627,6 @@ function initPreferredDateField() {
     preferredDateInput.setCustomValidity("");
     renderBookingSummary();
   });
-}
-
-function allInOneSheetFields(journey, details) {
-  const fallbackNames = details.map((item) => programText(item.program).name).filter(Boolean);
-  const skinCare = ALLINONE_BUILDER_CONFIG.labels[journey?.selectedSkinClinic] || "";
-  const optionalPrograms = Array.isArray(journey?.selectedOptionalPrograms)
-    ? journey.selectedOptionalPrograms.map((id) => ALLINONE_BUILDER_CONFIG.labels[id]).filter(Boolean)
-    : [];
-  const programs = optionalPrograms.length ? optionalPrograms : fallbackNames;
-
-  return {
-    skinCare,
-    program1: programs[0] || "",
-    program2: programs[1] || "",
-    program3: programs[2] || ""
-  };
 }
 
 async function sendReservationToSheet(payload) {
@@ -3730,19 +3730,7 @@ function bindBookingForm() {
       return;
     }
 
-    const journey = readAllInOneJourney();
-    const hasAllInOneInCart = details.some((item) => item.program?.id === "all-in-one-package");
-    const journeyBasePrice = hasAllInOneInCart ? (journey?.basePrice ?? ALLINONE_BUILDER_CONFIG.basePrice) : 0;
-    const journeyAddonTotal = hasAllInOneInCart ? (journey?.addOnsTotal ?? journey?.addonTotal ?? 0) : 0;
-    const journeyTotalPrice = hasAllInOneInCart ? (journey?.finalTotal ?? journey?.totalPrice ?? journeyBasePrice) : 0;
-    const sheetFields = allInOneSheetFields(hasAllInOneInCart ? journey : null, details);
-    const totals = selectedPathTotals;
-    const selectedPrograms = selectedProgramSummary(details);
-    const selectedAddons = hasAllInOneInCart ? selectedAddonSummary(journey) : "";
-    const journeySummary = hasAllInOneInCart && journey?.selectedNames?.length
-      ? `All-in-One Journey: ${journey.selectedNames.join(", ")}`
-      : "";
-    const selectedPathSummary = [selectedPrograms, journeySummary].filter(Boolean).join(" | ");
+    const programValues = selectedProgramFieldValues(details, readAllInOneJourney());
 
     const payload = {
       Timestamp: new Date().toISOString(),
@@ -3750,37 +3738,14 @@ function bindBookingForm() {
       Email: email,
       Nationality: nationality,
       "Preferred Date": preferredDate,
-      "Selected Path": selectedPathSummary,
-      "Selected Program/Package": selectedPrograms,
-      "Selected Add-ons": selectedAddons,
-      "Skin care": sheetFields.skinCare,
-      "Program 1": sheetFields.program1,
-      "Program 2": sheetFields.program2,
-      "Program 3": sheetFields.program3,
-      Subtotal: formatPrice(totals.subtotal),
-      "Service Fee": formatPrice(totals.service),
-      Total: formatPrice(totals.total),
-      Value: formatPrice(totals.total || journeyTotalPrice || journeyBasePrice + journeyAddonTotal),
-      Language: currentLocale,
-      Locale: currentLocale,
-      "결제 방식": "Consultation first",
-      "Additional Request": additionalRequest,
-      fullName,
-      name: fullName,
-      email,
-      nationality,
-      preferredDate,
-      additionalRequest,
-      message: additionalRequest,
-      selectedPath: selectedPathSummary,
-      selectedProgramPackage: selectedPrograms,
-      selectedAddons,
-      subtotal: totals.subtotal,
-      serviceFee: totals.service,
-      total: totals.total,
-      language: currentLocale,
-      locale: currentLocale,
-      submittedAt: new Date().toISOString()
+      "Program 1": programValues[0] || "",
+      "Program 2": programValues[1] || "",
+      "Program 3": programValues[2] || "",
+      "Program 4": programValues[3] || "",
+      Subtotal: formatPrice(selectedPathTotals.subtotal),
+      "Service (5%)": formatPrice(selectedPathTotals.service),
+      Value: formatPrice(selectedPathTotals.total),
+      "Additional Request": additionalRequest
     };
 
     try {
