@@ -3630,18 +3630,19 @@ function allInOneSheetFields(journey, details) {
 }
 
 async function sendReservationToSheet(payload) {
-  const formBody = new URLSearchParams();
+  const formBody = new FormData();
   Object.entries(payload).forEach(([key, value]) => {
     formBody.append(key, value == null ? "" : String(value));
   });
 
   try {
-    await fetch(BOOKING_ENDPOINT, {
+    const request = fetch(BOOKING_ENDPOINT, {
       method: "POST",
       mode: "no-cors",
-      headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" },
-      body: formBody.toString()
+      body: formBody
     });
+    console.log("Consultation request sent to Apps Script");
+    await request;
     return { ok: true, confirmed: false };
   } catch (primaryError) {
     await new Promise((resolve, reject) => {
@@ -3786,6 +3787,7 @@ function bindBookingForm() {
       if (submitButton) submitButton.disabled = true;
       status.textContent = copy.page.bookingSending || "Sending request...";
       status.className = "status-message";
+      console.log("Submitting consultation payload", payload);
       await sendReservationToSheet(payload);
       status.textContent = copy.page.bookingSent || "Your request has been sent. Karecation will contact you with the next step.";
       status.className = "status-message success";
