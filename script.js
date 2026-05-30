@@ -1,6 +1,9 @@
 const STORAGE_KEY = "karecation_cart_simple_v1";
 const LOCALE_KEY = "karecation_locale_v1";
 const SERVICE_RATE = 0.05;
+const ALLINONE_BASE_PRICE = 1599;
+const LAUNCH_OFFER_CODE = "LOVEKARECATION";
+const LAUNCH_OFFER_DISCOUNT = 100;
 const BOOKING_ENDPOINT = "https://script.google.com/macros/s/AKfycbw3QYQcz4yEfooj5JHimeEjPhEMiwr9d-thze96WrjQJxzgkjCVRDlG1XG6iM6TJEEU/exec";
 const ALLINONE_SELECTION_KEY = "karecation_allinone_selection_v1";
 const ALLINONE_JOURNEY_KEY = "karecation_allinone_journey_v1";
@@ -24,11 +27,42 @@ const SUPPORTED_LOCALES = [
   { code: "ja", label: "日本語", htmlLang: "ja" }
 ];
 
+const LAUNCH_OFFER_COPY = {
+  en: {
+    label: "Launch Offer Code",
+    placeholder: "Enter discount code",
+    discount: "Discount",
+    invalid: "Invalid discount code.",
+    applied: "Launch offer applied."
+  },
+  ko: {
+    label: "런칭 할인 코드",
+    placeholder: "할인 코드를 입력하세요",
+    discount: "할인",
+    invalid: "유효하지 않은 할인 코드입니다.",
+    applied: "런칭 혜택이 적용되었습니다."
+  },
+  zh: {
+    label: "开业优惠码",
+    placeholder: "输入优惠码",
+    discount: "优惠",
+    invalid: "优惠码无效。",
+    applied: "开业优惠已应用。"
+  },
+  ja: {
+    label: "ローンチ特典コード",
+    placeholder: "割引コードを入力",
+    discount: "割引",
+    invalid: "無効な割引コードです。",
+    applied: "ローンチ特典が適用されました。"
+  }
+};
+
 const PROGRAMS = [
   {
     id: "all-in-one-package",
     category: "package",
-    startPrice: 1499,
+    startPrice: ALLINONE_BASE_PRICE,
     duration: "Full day+",
     location: "Seoul",
     image: "https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&w=1200&q=80"
@@ -103,7 +137,7 @@ const CATEGORY_ORDER = ["all", "package", "starter", "skin", "wellness", "stylin
 const HIDDEN_PROGRAM_IDS = new Set(["all-in-one-package", "beauty-shopping"]);
 
 const ALLINONE_BUILDER_CONFIG = {
-  basePrice: 1499,
+  basePrice: ALLINONE_BASE_PRICE,
   requiredIds: ["skin-clinic-care-1", "skin-clinic-care-2"],
   optionalIds: ["scalp-diagnosis-spa", "hair-salon", "celebrity-hair-makeup", "nail-care", "body-massage", "beauty-shopping"],
   labels: {
@@ -1809,7 +1843,7 @@ const LANGUAGE_SYNC_PATCH = {
       contactNextTitle: "Best Next Step",
       contactNextLine: "Request a private consultation with your preferred programs and dates.",
       allInOneCardEyebrow: "SIGNATURE ITINERARY",
-      allInOneCardPrice: "Starting from $1,499",
+      allInOneCardPrice: "Starting from $1,599",
       allInOneCardDescription: "A private all-in-one Seoul beauty day built around clinic care, salon care, recovery, and optional refinements.",
       allInOneCardNote: "Includes 1 skin clinic care option + 3 optional programs.",
       allInOneCardButton: "Build Your Journey",
@@ -2027,7 +2061,7 @@ const LANGUAGE_SYNC_PATCH = {
       contactNextTitle: "가장 빠른 시작",
       contactNextLine: "원하는 프로그램과 날짜를 남겨 프라이빗 상담을 요청하세요.",
       allInOneCardEyebrow: "시그니처 일정",
-      allInOneCardPrice: "$1,499부터",
+      allInOneCardPrice: "$1,599부터",
       allInOneCardDescription: "클리닉 케어, 살롱 케어, 리커버리, 선택 옵션까지 한 번에 담은 프라이빗 서울 뷰티 데이.",
       allInOneCardNote: "스킨 클리닉 1개 + 선택 프로그램 3개 포함",
       allInOneCardButton: "여정 구성하기",
@@ -2246,7 +2280,7 @@ const LANGUAGE_SYNC_PATCH = {
       contactNextTitle: "最佳下一步",
       contactNextLine: "提交你的偏好项目与日期，开始私享咨询。",
       allInOneCardEyebrow: "SIGNATURE ITINERARY",
-      allInOneCardPrice: "$1,499 起",
+      allInOneCardPrice: "$1,599 起",
       allInOneCardDescription: "围绕诊疗护理、沙龙护理、放松恢复与可选优化打造的一日私享首尔美丽行程。",
       allInOneCardNote: "包含 1 个 Skin Clinic Care + 3 个可选项目",
       allInOneCardButton: "开始构建旅程",
@@ -2465,7 +2499,7 @@ const LANGUAGE_SYNC_PATCH = {
       contactNextTitle: "おすすめの次の一歩",
       contactNextLine: "希望プログラムと日程を添えて、プライベート相談をご依頼ください。",
       allInOneCardEyebrow: "SIGNATURE ITINERARY",
-      allInOneCardPrice: "$1,499〜",
+      allInOneCardPrice: "$1,599〜",
       allInOneCardDescription: "クリニックケア、サロンケア、回復、オプション調整を一日にまとめたプライベートソウル美容ルート。",
       allInOneCardNote: "Skin Clinic Care 1件 + オプション3件を含みます",
       allInOneCardButton: "旅程を組み立てる",
@@ -2634,6 +2668,10 @@ function emptySelectedPathMessage() {
   return messages[currentLocale] || messages.en;
 }
 
+function launchOfferCopy() {
+  return LAUNCH_OFFER_COPY[currentLocale] || LAUNCH_OFFER_COPY.en;
+}
+
 function programText(program) {
   return t().programs[program.id] || I18N.en.programs[program.id];
 }
@@ -2663,11 +2701,64 @@ function saveAllInOneSelection(selection) {
   localStorage.setItem(ALLINONE_SELECTION_KEY, JSON.stringify(selection));
 }
 
+function normalizeAllInOneIds(journey) {
+  const ids = Array.isArray(journey?.selectedIds)
+    ? journey.selectedIds
+    : [
+        journey?.selectedSkinClinic,
+        ...(Array.isArray(journey?.selectedOptionalPrograms) ? journey.selectedOptionalPrograms : [])
+      ];
+  return ids
+    .filter((id, index, arr) => (
+      (ALLINONE_BUILDER_CONFIG.requiredIds.includes(id) || ALLINONE_BUILDER_CONFIG.optionalIds.includes(id))
+      && arr.indexOf(id) === index
+    ));
+}
+
+function allInOnePriceBreakdownForIds(selectedIds) {
+  const addonTotal = selectedIds.reduce((sum, id) => sum + (ALLINONE_BUILDER_CONFIG.addonPrices[id] || 0), 0);
+  const basePrice = ALLINONE_BUILDER_CONFIG.basePrice;
+  return {
+    basePrice,
+    addonTotal,
+    totalPrice: basePrice + addonTotal,
+    selectedAddons: selectedIds.map((id) => ({
+      id,
+      name: ALLINONE_BUILDER_CONFIG.labels[id],
+      addonPrice: ALLINONE_BUILDER_CONFIG.addonPrices[id] || 0
+    }))
+  };
+}
+
+function normalizeAllInOneJourney(journey) {
+  if (journey?.packageType !== "all-in-one") return null;
+  const selectedIds = normalizeAllInOneIds(journey);
+  if (!selectedIds.length) return null;
+  const pricing = allInOnePriceBreakdownForIds(selectedIds);
+  const selectedNames = selectedIds
+    .map((id) => ALLINONE_BUILDER_CONFIG.labels[id])
+    .filter(Boolean);
+  return {
+    ...journey,
+    packageType: "all-in-one",
+    packageId: "all-in-one-package",
+    packageName: journey.packageName || "All-in-One Package",
+    selectedIds,
+    selectedNames,
+    selectedAddOns: pricing.selectedAddons,
+    selectedAddons: pricing.selectedAddons,
+    basePrice: pricing.basePrice,
+    addOnsTotal: pricing.addonTotal,
+    addonTotal: pricing.addonTotal,
+    finalTotal: pricing.totalPrice,
+    totalPrice: pricing.totalPrice
+  };
+}
+
 function readAllInOneJourney() {
   try {
     const raw = JSON.parse(localStorage.getItem(ALLINONE_JOURNEY_KEY) || "{}");
-    if (!Array.isArray(raw.selectedIds) || !Array.isArray(raw.selectedNames)) return null;
-    return raw;
+    return normalizeAllInOneJourney(raw);
   } catch (error) {
     return null;
   }
@@ -2714,18 +2805,7 @@ function allInOneSelectionNames() {
 
 function allInOnePriceBreakdown() {
   const selectedIds = [allInOneState.skinId, ...allInOneState.optionalIds].filter(Boolean);
-  const addonTotal = selectedIds.reduce((sum, id) => sum + (ALLINONE_BUILDER_CONFIG.addonPrices[id] || 0), 0);
-  const basePrice = ALLINONE_BUILDER_CONFIG.basePrice;
-  return {
-    basePrice,
-    addonTotal,
-    totalPrice: basePrice + addonTotal,
-    selectedAddons: selectedIds.map((id) => ({
-      id,
-      name: ALLINONE_BUILDER_CONFIG.labels[id],
-      addonPrice: ALLINONE_BUILDER_CONFIG.addonPrices[id] || 0
-    }))
-  };
+  return allInOnePriceBreakdownForIds(selectedIds);
 }
 
 function remainingProgramsMessage(remaining) {
@@ -2779,10 +2859,47 @@ function getCartDetails() {
   });
 }
 
-function getCartTotals() {
-  const subtotal = getCartDetails().reduce((sum, item) => sum + item.lineTotal, 0);
+function normalizeDiscountCode(value) {
+  return String(value || "").trim().toUpperCase();
+}
+
+function getLaunchOfferState(value) {
+  const code = normalizeDiscountCode(value);
+  const isValid = code === LAUNCH_OFFER_CODE;
+  return {
+    hasCode: Boolean(code),
+    isValid,
+    discountCode: isValid ? LAUNCH_OFFER_CODE : "",
+    discountAmount: isValid ? LAUNCH_OFFER_DISCOUNT : 0
+  };
+}
+
+function getBookingDiscountCodeValue() {
+  return document.getElementById("bookingDiscountCode")?.value || "";
+}
+
+function calculateSelectedPathTotals(details, discountCode = "") {
+  const subtotal = details.reduce((sum, item) => sum + item.lineTotal, 0);
   const service = Math.round(subtotal * SERVICE_RATE);
-  return { subtotal, service, total: subtotal + service };
+  const discount = getLaunchOfferState(discountCode);
+  const beforeDiscount = subtotal + service;
+  return {
+    subtotal,
+    service,
+    discountCode: discount.discountCode,
+    discountAmount: discount.discountAmount,
+    hasDiscountCode: discount.hasCode,
+    isDiscountValid: discount.isValid,
+    total: Math.max(0, beforeDiscount - discount.discountAmount)
+  };
+}
+
+function getCartTotals() {
+  return calculateSelectedPathTotals(getCartDetails());
+}
+
+function getBookingTotals() {
+  return calculateSelectedPathTotals(getCartDetails(), getBookingDiscountCodeValue());
 }
 
 function updateCartCount() {
@@ -3318,12 +3435,37 @@ function renderCartPage() {
   document.querySelector(".summary-card a.btn-secondary")?.replaceChildren(document.createTextNode(copy.page.exploreMore));
 }
 
+function syncBookingDiscountUI(totals) {
+  const copy = launchOfferCopy();
+  setText("bookingDiscountCodeLabel", copy.label);
+  setPlaceholder("bookingDiscountCode", copy.placeholder);
+  setText("bookingDiscountLabel", copy.discount);
+  setText("bookingDiscountAmount", totals.discountAmount ? `-${formatPrice(totals.discountAmount)}` : "");
+
+  const row = document.getElementById("bookingDiscountRow");
+  if (row) row.hidden = !totals.discountAmount;
+
+  const message = document.getElementById("bookingDiscountMessage");
+  if (!message) return;
+
+  if (!totals.hasDiscountCode) {
+    message.textContent = "";
+    message.className = "discount-code-message";
+  } else if (totals.isDiscountValid) {
+    message.textContent = copy.applied;
+    message.className = "discount-code-message success";
+  } else {
+    message.textContent = copy.invalid;
+    message.className = "discount-code-message error";
+  }
+}
+
 function renderBookingSummary() {
   const root = document.getElementById("bookingSummary");
   if (!root) return;
   const copy = t();
   const details = getCartDetails();
-  const totals = getCartTotals();
+  const totals = getBookingTotals();
   const journey = readAllInOneJourney();
   const hasAllInOneInCart = details.some((item) => item.program?.id === "all-in-one-package");
   const journeyLabels = copy.page.allInOneSummary || {
@@ -3359,10 +3501,10 @@ function renderBookingSummary() {
   setText("bookingSubtotal", formatPrice(totals.subtotal));
   setText("bookingService", formatPrice(totals.service));
   setText("bookingTotal", formatPrice(totals.total));
-  const bookingRows = document.querySelectorAll(".summary-card .total-row");
-  if (bookingRows[0]) bookingRows[0].querySelector("span:first-child").textContent = copy.common.subtotal;
-  if (bookingRows[1]) bookingRows[1].querySelector("span:first-child").textContent = copy.common.service;
-  if (bookingRows[2]) bookingRows[2].querySelector("strong:first-child").textContent = copy.common.total;
+  setText("bookingSubtotalLabel", copy.common.subtotal);
+  setText("bookingServiceLabel", copy.common.service);
+  setText("bookingTotalLabel", copy.common.total);
+  syncBookingDiscountUI(totals);
 }
 
 function renderContactChannels() {
@@ -3682,6 +3824,14 @@ async function sendReservationToSheet(payload) {
   }
 }
 
+function bindBookingDiscountCode() {
+  const input = document.getElementById("bookingDiscountCode");
+  if (!input) return;
+  input.addEventListener("input", renderBookingSummary);
+  input.addEventListener("change", renderBookingSummary);
+  input.addEventListener("keyup", renderBookingSummary);
+}
+
 function bindBookingForm() {
   const form = document.getElementById("bookingForm") || document.getElementById("leadForm");
   if (!form) return;
@@ -3698,7 +3848,7 @@ function bindBookingForm() {
     const preferredDate = (preferredDateInput?.value || "").trim();
     const additionalRequest = (form.querySelector("#requestNote")?.value || form.querySelector("[name='message']")?.value || "").trim();
     const details = getCartDetails();
-    const selectedPathTotals = getCartTotals();
+    const selectedPathTotals = getBookingTotals();
 
     if (!details.length || selectedPathTotals.subtotal <= 0 || selectedPathTotals.total <= 0) {
       alert(emptySelectedPathMessage());
@@ -3744,6 +3894,9 @@ function bindBookingForm() {
       "Program 4": programValues[3] || "",
       Subtotal: formatPrice(selectedPathTotals.subtotal),
       "Service (5%)": formatPrice(selectedPathTotals.service),
+      discountCode: selectedPathTotals.discountCode,
+      discountAmount: formatPrice(selectedPathTotals.discountAmount),
+      finalTotal: formatPrice(selectedPathTotals.total),
       Value: formatPrice(selectedPathTotals.total),
       "Additional Request": additionalRequest
     };
@@ -3959,6 +4112,7 @@ function init() {
   insertLanguageSelector();
   setActiveNav();
   initPreferredDateField();
+  bindBookingDiscountCode();
   bindBookingForm();
   bindGlobalEvents();
   applyLocale();

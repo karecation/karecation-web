@@ -1052,6 +1052,34 @@ textarea {
   font-size: 0.96rem;
 }
 
+.discount-row {
+  color: #6d5538;
+}
+
+.discount-code-field {
+  margin: 10px 0 8px;
+}
+
+.discount-code-label {
+  gap: 5px;
+}
+
+.discount-code-message {
+  min-height: 1.05em;
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 0.76rem;
+  line-height: 1.4;
+}
+
+.discount-code-message.success {
+  color: var(--success);
+}
+
+.discount-code-message.error {
+  color: var(--danger);
+}
+
 .payment-note {
   font-size: 0.78rem;
   margin: 8px 0 0;
