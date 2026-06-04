@@ -136,48 +136,167 @@ const PROGRAMS = [
 const CATEGORY_ORDER = ["all", "package", "starter", "skin", "wellness", "styling"];
 const HIDDEN_PROGRAM_IDS = new Set(["all-in-one-package", "beauty-shopping"]);
 
+const ALLINONE_PROGRAM_GROUPS = [
+  {
+    id: "care-options",
+    title: "Select Your Care Options",
+    builderGroup: "skin",
+    programs: [
+      {
+        id: "advanced-contour-lift",
+        name: "Advanced Contour & Lift",
+        description: "Lifting, pigment care, wrinkle refinement, and facial contour support.",
+        image: "skin-clinic-care-2.jpg",
+        imageAlt: "Premium clinic treatment room for Advanced Contour & Lift"
+      },
+      {
+        id: "clear-calm-skin-care",
+        name: "Clear & Calm Skin Care",
+        description: "Soothing care for sensitive, acne-prone, or irritated skin.",
+        image: "skin-clinic-care-1.jpg",
+        imageAlt: "Calm skincare consultation for Clear & Calm Skin Care"
+      },
+      {
+        id: "glow-hydration-boost",
+        name: "Glow & Hydration Boost",
+        description: "Moisture-focused skin care for a fresh, luminous finish.",
+        image: "hero-slide-3.png",
+        imageAlt: "Soft hydration treatment mood for Glow & Hydration Boost"
+      },
+      {
+        id: "pigment-tone-refinement",
+        name: "Pigment & Tone Refinement",
+        description: "Targeted care for uneven tone, dullness, and visible pigmentation.",
+        image: "skin-clinic-care-2.jpg",
+        imageAlt: "Clean dermatology consultation for Pigment & Tone Refinement"
+      }
+    ]
+  },
+  {
+    id: "recovery-comfort",
+    title: "Recovery & Comfort",
+    builderGroup: "optional",
+    programs: [
+      {
+        id: "scalp-diagnosis-spa",
+        name: "Scalp Recovery Care",
+        description: "Scalp diagnosis, scaling, and relaxing treatment support.",
+        image: "scalp-care.jpg",
+        imageAlt: "Premium scalp spa room for Scalp Recovery Care"
+      },
+      {
+        id: "body-massage",
+        name: "Body Recovery Massage",
+        description: "Full-body massage focused on recovery, comfort, and release.",
+        image: "body-massage.jpg",
+        imageAlt: "Calm spa recovery room for Body Recovery Massage"
+      },
+      {
+        id: "calming-facial-recovery",
+        name: "Calming Facial Recovery",
+        description: "Post-treatment soothing care for sensitive or tired skin.",
+        image: "hero-slide-1-v2.png",
+        imageAlt: "Soothing facial recovery care mood"
+      },
+      {
+        id: "private-rest-tea-time",
+        name: "Private Rest & Tea Time",
+        description: "A quiet recovery break with tea, light refreshments, and concierge support.",
+        image: "hero-slide-3.png",
+        imageAlt: "Quiet hotel lounge tea time for Private Rest & Tea Time"
+      }
+    ]
+  },
+  {
+    id: "beauty-finishing",
+    title: "Beauty Finishing",
+    builderGroup: "optional",
+    programs: [
+      {
+        id: "hair-salon",
+        name: "Salon Finish",
+        description: "Haircut or hair clinic treatment with consultation and finishing.",
+        image: "hair-salon.jpg",
+        imageAlt: "Premium hair salon station for Salon Finish"
+      },
+      {
+        id: "celebrity-hair-makeup",
+        name: "Hair & Makeup Styling",
+        description: "Professional hair styling for a polished, camera-ready look.",
+        image: "hair-makeup.jpg",
+        imageAlt: "Soft makeup table for Hair & Makeup Styling"
+      },
+      {
+        id: "nail-care",
+        name: "Nail/Pedi Detail Care",
+        description: "Nail or pedi care with shaping, cuticle care, and finish.",
+        image: "nail-pedi-care.jpg",
+        imageAlt: "Minimal nail care detail for Nail/Pedi Detail Care"
+      },
+      {
+        id: "k-beauty-makeup-lesson",
+        name: "K-Beauty Makeup Lesson",
+        description: "A guided beauty session focused on Korean makeup style and product use.",
+        image: "hair-makeup.jpg",
+        imageAlt: "Korean makeup table for K-Beauty Makeup Lesson"
+      }
+    ]
+  },
+  {
+    id: "concierge-lifestyle",
+    title: "Concierge & Lifestyle",
+    builderGroup: "optional",
+    programs: [
+      {
+        id: "beauty-shopping",
+        name: "Beauty Shopping Curation",
+        description: "Guided K-beauty shopping support, including destinations such as Olive Young.",
+        image: "hero-slide-2.png",
+        imageAlt: "Premium K-beauty product shelf for Beauty Shopping Curation"
+      },
+      {
+        id: "skincare-product-matching",
+        name: "Skincare Product Matching",
+        description: "Personalized product recommendations based on skin concerns and routine.",
+        image: "private-consultation.jpg",
+        imageAlt: "Skincare products and consultation for Skincare Product Matching"
+      },
+      {
+        id: "clinic-interpreter-support",
+        name: "Clinic Interpreter Support",
+        description: "Language support during clinic visit, consultation, and treatment flow.",
+        image: "private-consultation.jpg",
+        imageAlt: "Consultation desk for Clinic Interpreter Support"
+      },
+      {
+        id: "recovery-meal-recommendation",
+        name: "Recovery Meal Recommendation",
+        description: "Curated restaurant or cafe recommendation after treatment.",
+        image: "hero-slide-4.png",
+        imageAlt: "Quiet Seoul cafe mood for Recovery Meal Recommendation"
+      },
+      {
+        id: "photo-spot-lifestyle-curation",
+        name: "Photo Spot & Lifestyle Curation",
+        description: "Optional Seoul beauty lifestyle routing for photos, cafes, and soft leisure.",
+        image: "hero-slide-4.png",
+        imageAlt: "Soft Seoul lifestyle route for Photo Spot & Lifestyle Curation"
+      }
+    ]
+  }
+];
+
+const ALLINONE_PROGRAMS = ALLINONE_PROGRAM_GROUPS.flatMap((group) => (
+  group.programs.map((program) => ({ ...program, category: group.id, categoryLabel: group.title, builderGroup: group.builderGroup }))
+));
+
+const ALLINONE_PROGRAM_BY_ID = Object.fromEntries(ALLINONE_PROGRAMS.map((program) => [program.id, program]));
+
 const ALLINONE_BUILDER_CONFIG = {
   basePrice: ALLINONE_BASE_PRICE,
-  requiredIds: [
-    "advanced-contour-lift",
-    "clear-calm-skin-care",
-    "glow-hydration-boost",
-    "pigment-tone-refinement"
-  ],
-  optionalIds: [
-    "scalp-diagnosis-spa",
-    "body-massage",
-    "calming-facial-recovery",
-    "private-rest-tea-time",
-    "hair-salon",
-    "celebrity-hair-makeup",
-    "nail-care",
-    "k-beauty-makeup-lesson",
-    "beauty-shopping",
-    "skincare-product-matching",
-    "clinic-interpreter-support",
-    "recovery-meal-recommendation",
-    "photo-spot-lifestyle-curation"
-  ],
-  labels: {
-    "advanced-contour-lift": "Advanced Contour & Lift",
-    "clear-calm-skin-care": "Clear & Calm Skin Care",
-    "glow-hydration-boost": "Glow & Hydration Boost",
-    "pigment-tone-refinement": "Pigment & Tone Refinement",
-    "scalp-diagnosis-spa": "Scalp Recovery Care",
-    "body-massage": "Body Recovery Massage",
-    "calming-facial-recovery": "Calming Facial Recovery",
-    "private-rest-tea-time": "Private Rest & Tea Time",
-    "hair-salon": "Salon Finish",
-    "celebrity-hair-makeup": "Hair & Makeup Styling",
-    "nail-care": "Nail/Pedi Detail Care",
-    "k-beauty-makeup-lesson": "K-Beauty Makeup Lesson",
-    "beauty-shopping": "Beauty Shopping Curation",
-    "skincare-product-matching": "Skincare Product Matching",
-    "clinic-interpreter-support": "Clinic Interpreter Support",
-    "recovery-meal-recommendation": "Recovery Meal Recommendation",
-    "photo-spot-lifestyle-curation": "Photo Spot & Lifestyle Curation"
-  }
+  requiredIds: ALLINONE_PROGRAMS.filter((program) => program.builderGroup === "skin").map((program) => program.id),
+  optionalIds: ALLINONE_PROGRAMS.filter((program) => program.builderGroup === "optional").map((program) => program.id),
+  labels: Object.fromEntries(ALLINONE_PROGRAMS.map((program) => [program.id, program.name]))
 };
 
 const CONTACT_CHANNELS = [
@@ -1879,7 +1998,7 @@ const LANGUAGE_SYNC_PATCH = {
       allInOneOptSalonTitle: "Salon Finish",
       allInOneOptSalonDesc: "Haircut or hair clinic treatment with consultation and finishing.",
       allInOneOptHMUTitle: "Hair & Makeup Styling",
-      allInOneOptHMUDesc: "Professional hair styling and makeup for a polished, camera-ready look.",
+      allInOneOptHMUDesc: "Professional hair styling for a polished, camera-ready look.",
       allInOneOptNailTitle: "Nail/Pedi Detail Care",
       allInOneOptNailDesc: "Nail or pedi care with shaping, cuticle care, and finish.",
       allInOneOptBodyTitle: "Body Recovery Massage",
@@ -2681,7 +2800,7 @@ const ALLINONE_PRIVATE_ITINERARY_COPY = {
       allInOneOptSalonTitle: "Salon Finish",
       allInOneOptSalonDesc: "Haircut or hair clinic treatment with consultation and finishing.",
       allInOneOptHMUTitle: "Hair & Makeup Styling",
-      allInOneOptHMUDesc: "Professional styling for a polished, camera-ready look.",
+      allInOneOptHMUDesc: "Professional hair styling for a polished, camera-ready look.",
       allInOneOptNailTitle: "Nail/Pedi Detail Care",
       allInOneOptNailDesc: "Nail or pedi care with shaping, cuticle care, and finish.",
       allInOneOptLessonTitle: "K-Beauty Makeup Lesson",
@@ -3516,6 +3635,24 @@ function programCard(program, useCardDescription = true, options = {}) {
   `;
 }
 
+function allInOneProgramCard(program) {
+  const imageBlock = program.image
+    ? `<div class="program-card-image"><img src="${program.image}" alt="${program.imageAlt || program.name}" loading="lazy" onerror="this.closest('.program-card-image').classList.add('is-placeholder'); this.remove();"></div>`
+    : `<div class="program-card-image is-placeholder" role="img" aria-label="${program.imageAlt || program.name}"></div>`;
+  return `
+    <article class="program-card">
+      ${imageBlock}
+      <div class="program-card-body">
+        <div class="program-meta">
+          <span class="badge">${program.categoryLabel}</span>
+        </div>
+        <h3 class="program-title">${program.name}</h3>
+        <p class="program-desc">${program.description}</p>
+      </div>
+    </article>
+  `;
+}
+
 function renderHomePrograms() {
   const target = document.getElementById("homeFeaturedPrograms");
   if (!target) return;
@@ -3534,13 +3671,16 @@ function renderProgramsPage() {
   if (!grid || !filterRoot || !activeHolder) return;
 
   const copy = t();
-  const visiblePrograms = PROGRAMS.filter((program) => !HIDDEN_PROGRAM_IDS.has(program.id));
-  const availableCategories = new Set(visiblePrograms.map((program) => program.category));
-  const categoryOrder = CATEGORY_ORDER.filter((name) => name === "all" || availableCategories.has(name));
+  const visiblePrograms = ALLINONE_PROGRAMS;
+  const categoryOrder = ["all", ...ALLINONE_PROGRAM_GROUPS.map((group) => group.id)];
+  const categoryLabels = {
+    all: copy.categories?.all || "All",
+    ...Object.fromEntries(ALLINONE_PROGRAM_GROUPS.map((group) => [group.id, group.title]))
+  };
 
   if (!categoryOrder.includes(activeHolder.value)) activeHolder.value = "all";
   filterRoot.innerHTML = categoryOrder.map((name, index) => (
-    `<button class="chip ${index === 0 ? "active" : ""}" type="button" data-category="${name}">${copy.categories[name]}</button>`
+    `<button class="chip ${index === 0 ? "active" : ""}" type="button" data-category="${name}">${categoryLabels[name]}</button>`
   )).join("");
 
   function paint() {
@@ -3548,21 +3688,20 @@ function renderProgramsPage() {
     const keyword = (search?.value || "").trim().toLowerCase();
     const sortValue = sort?.value || "recommended";
     let list = visiblePrograms.filter((program) => {
-      const text = programText(program);
       const catOk = activeCategory === "all" || program.category === activeCategory;
-      const searchable = `${text.name} ${copy.categories[program.category]} ${text.tagline}`.toLowerCase();
+      const searchable = `${program.name} ${program.categoryLabel} ${program.description}`.toLowerCase();
       return catOk && (!keyword || searchable.includes(keyword));
     });
 
     if (sortValue === "duration-asc" || sortValue === "price-asc") {
-      list.sort((a, b) => String(programText(a).duration).localeCompare(String(programText(b).duration)));
+      list.sort((a, b) => a.name.localeCompare(b.name));
     }
     if (sortValue === "duration-desc" || sortValue === "price-desc") {
-      list.sort((a, b) => String(programText(b).duration).localeCompare(String(programText(a).duration)));
+      list.sort((a, b) => b.name.localeCompare(a.name));
     }
 
     grid.innerHTML = list.length
-      ? list.map((program) => programCard(program, true, { informationalOnly: true })).join("")
+      ? list.map((program) => allInOneProgramCard(program)).join("")
       : `<div class="empty-state" style="grid-column: 1/-1;"><h3 class="display">${copy.common.noMatchTitle}</h3><p class="muted" style="margin-top:6px;">${copy.common.noMatchText}</p></div>`;
   }
 
