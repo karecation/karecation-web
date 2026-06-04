@@ -135,6 +135,98 @@ const PROGRAMS = [
 
 const CATEGORY_ORDER = ["all", "package", "starter", "skin", "wellness", "styling"];
 const HIDDEN_PROGRAM_IDS = new Set(["all-in-one-package"]);
+const ASSET_VERSION = "20260605-program-images-final";
+
+const PROGRAM_THUMBNAIL_MEDIA = {
+  "advanced-contour-lift": {
+    image: "images/advanced-contour-lift.jpg",
+    imageAlt: "Premium Seoul K-beauty contour and lift treatment suite"
+  },
+  "clear-calm-skin-care": {
+    image: "images/clear-calm-skin-care.jpg",
+    imageAlt: "Calming K-beauty treatment room for sensitive skin care"
+  },
+  "glow-hydration-boost": {
+    image: "images/glow-hydration-boost.jpg",
+    imageAlt: "Luminous hydration boost setup in a luxury Seoul beauty suite"
+  },
+  "pigment-tone-refinement": {
+    image: "images/pigment-tone-refinement.jpg",
+    imageAlt: "Brightening tone refinement treatment room with prism light"
+  },
+  "recovery-comfort": {
+    image: "images/recovery-comfort.jpg",
+    imageAlt: "Comforting post-treatment recovery suite with tea and soft blankets"
+  },
+  "scalp-diagnosis-spa": {
+    image: "images/scalp-recovery-care.jpg",
+    imageAlt: "Premium scalp recovery care wash basin with steam"
+  },
+  "body-massage": {
+    image: "images/body-recovery-massage.jpg",
+    imageAlt: "Luxury body recovery massage room with hot stones"
+  },
+  "calming-facial-recovery": {
+    image: "images/calming-facial-recovery.jpg",
+    imageAlt: "Cooling facial recovery setup with ice and compresses"
+  },
+  "private-rest-tea-time": {
+    image: "images/private-heat-ice-time.jpg",
+    imageAlt: "Private heat and ice recovery ritual in a Seoul beauty suite"
+  },
+  "hair-salon": {
+    image: "images/salon-finish.jpg",
+    imageAlt: "Salon finishing vanity with hair styling tools"
+  },
+  "celebrity-hair-makeup": {
+    image: "images/hair-makeup-styling.jpg",
+    imageAlt: "Hair and makeup styling station in a luxury Seoul beauty suite"
+  },
+  "nail-care": {
+    image: "images/nail-pedi-detail-care.jpg",
+    imageAlt: "Luxury nail and pedi detail care station"
+  },
+  "k-beauty-makeup-lesson": {
+    image: "images/k-beauty-makeup-lesson.jpg",
+    imageAlt: "K-beauty makeup lesson setup with face chart and palettes"
+  },
+  "beauty-shopping": {
+    image: "images/beauty-shopping-curation.jpg",
+    imageAlt: "Premium beauty shopping curation setup in Seoul"
+  },
+  "skincare-product-matching": {
+    image: "images/signature-product-matching.jpg",
+    imageAlt: "Signature product matching consultation table"
+  },
+  "clinic-interpreter-support": {
+    image: "images/clinic-interpreter-support.jpg",
+    imageAlt: "Clinic interpreter support desk for international guests"
+  },
+  "recovery-meal-recommendation": {
+    image: "images/recovery-meal-recommendation.jpg",
+    imageAlt: "Recovery meal recommendation tray after K-beauty treatment"
+  },
+  "photo-spot-lifestyle-curation": {
+    image: "images/photo-spot-lifestyle-curation.jpg",
+    imageAlt: "Photo spot and Seoul lifestyle curation setup"
+  },
+  "private-consultation": {
+    image: "images/request-private-consultation.jpg",
+    imageAlt: "Private consultation lounge for tailored K-beauty planning"
+  },
+  "quick-concierge-consultation": {
+    image: "images/request-private-consultation.jpg",
+    imageAlt: "Private consultation lounge for tailored K-beauty planning"
+  },
+  "skin-clinic-care-1": {
+    image: "images/clear-calm-skin-care.jpg",
+    imageAlt: "Calming K-beauty treatment room for sensitive skin care"
+  },
+  "skin-clinic-care-2": {
+    image: "images/advanced-contour-lift.jpg",
+    imageAlt: "Premium Seoul K-beauty contour and lift treatment suite"
+  }
+};
 
 const ALLINONE_PROGRAM_GROUPS = [
   {
@@ -179,14 +271,6 @@ const ALLINONE_PROGRAM_GROUPS = [
     image: "images/recovery-comfort.jpg",
     imageAlt: "Comforting post-treatment recovery suite with tea and soft blankets",
     programs: [
-      {
-        id: "recovery-comfort",
-        name: "Recovery & Comfort",
-        description: "An overall recovery and comfort focus combining calming, scalp, body, and quiet rest care.",
-        image: "images/recovery-comfort.jpg",
-        imageAlt: "Comforting post-treatment recovery suite with tea and soft blankets",
-        builderGroup: "info"
-      },
       {
         id: "scalp-diagnosis-spa",
         name: "Scalp Recovery Care",
@@ -291,29 +375,61 @@ const ALLINONE_PROGRAM_GROUPS = [
         description: "Optional Seoul beauty lifestyle routing for photos, cafes, and soft leisure.",
         image: "images/photo-spot-lifestyle-curation.jpg",
         imageAlt: "Photo spot and Seoul lifestyle curation setup"
-      },
-      {
-        id: "private-consultation",
-        name: "Private Consultation",
-        description: "A private consultation to map your goals, timing, and support needs before any visit.",
-        image: "images/request-private-consultation.jpg",
-        imageAlt: "Private consultation lounge for tailored K-beauty planning",
-        builderGroup: "info"
       }
     ]
   }
 ];
 
 const ALLINONE_PROGRAMS = ALLINONE_PROGRAM_GROUPS.flatMap((group) => (
-  group.programs.map((program) => ({
-    ...program,
-    category: group.id,
-    categoryLabel: group.title,
-    builderGroup: program.builderGroup || group.builderGroup
-  }))
+  group.programs.map((program) => ({ ...program, category: group.id, categoryLabel: group.title, builderGroup: group.builderGroup }))
 ));
 
 const ALLINONE_PROGRAM_BY_ID = Object.fromEntries(ALLINONE_PROGRAMS.map((program) => [program.id, program]));
+
+const PROGRAMS_PAGE_PROGRAMS = [
+  ...ALLINONE_PROGRAM_GROUPS[0].programs.map((program) => ({
+    ...program,
+    category: ALLINONE_PROGRAM_GROUPS[0].id,
+    categoryLabel: ALLINONE_PROGRAM_GROUPS[0].title,
+    builderGroup: ALLINONE_PROGRAM_GROUPS[0].builderGroup
+  })),
+  {
+    id: "recovery-comfort",
+    name: "Recovery & Comfort",
+    description: "Comforting post-treatment recovery suite with tea and soft blankets.",
+    category: "recovery-comfort",
+    categoryLabel: "Recovery & Comfort",
+    builderGroup: "optional"
+  },
+  ...ALLINONE_PROGRAM_GROUPS[1].programs.map((program) => ({
+    ...program,
+    category: ALLINONE_PROGRAM_GROUPS[1].id,
+    categoryLabel: ALLINONE_PROGRAM_GROUPS[1].title,
+    builderGroup: ALLINONE_PROGRAM_GROUPS[1].builderGroup
+  })),
+  ...ALLINONE_PROGRAM_GROUPS[2].programs.map((program) => ({
+    ...program,
+    category: ALLINONE_PROGRAM_GROUPS[2].id,
+    categoryLabel: ALLINONE_PROGRAM_GROUPS[2].title,
+    builderGroup: ALLINONE_PROGRAM_GROUPS[2].builderGroup
+  })),
+  ...ALLINONE_PROGRAM_GROUPS[3].programs.map((program) => ({
+    ...program,
+    category: ALLINONE_PROGRAM_GROUPS[3].id,
+    categoryLabel: ALLINONE_PROGRAM_GROUPS[3].title,
+    builderGroup: ALLINONE_PROGRAM_GROUPS[3].builderGroup
+  })),
+  {
+    id: "private-consultation",
+    name: "Private Consultation",
+    description: "Private consultation lounge for tailored K-beauty planning.",
+    category: "concierge-lifestyle",
+    categoryLabel: "Concierge & Lifestyle",
+    builderGroup: "optional"
+  }
+].map(withProgramThumbnail);
+
+const PROGRAMS_PAGE_PROGRAM_BY_ID = Object.fromEntries(PROGRAMS_PAGE_PROGRAMS.map((program) => [program.id, program]));
 
 const ALLINONE_BUILDER_CONFIG = {
   basePrice: ALLINONE_BASE_PRICE,
@@ -3040,17 +3156,17 @@ function launchOfferCopy() {
 }
 
 function programText(program) {
-  const allInOneProgram = ALLINONE_PROGRAM_BY_ID[program.id];
-  if (allInOneProgram && program.categoryLabel) {
+  const pageProgram = ALLINONE_PROGRAM_BY_ID[program.id] || (program.categoryLabel && program.name ? program : null);
+  if (pageProgram && program.categoryLabel) {
     return {
-      name: allInOneProgram.name,
-      tagline: allInOneProgram.categoryLabel,
-      cardDescription: allInOneProgram.description,
-      description: allInOneProgram.description,
+      name: pageProgram.name,
+      tagline: pageProgram.categoryLabel,
+      cardDescription: pageProgram.description,
+      description: pageProgram.description,
       duration: "Consultation-led",
       location: "Seoul",
       includes: [
-        allInOneProgram.description,
+        pageProgram.description,
         "Concierge review after consultation",
         "Final itinerary tailored around goals, schedule, and availability"
       ],
@@ -3073,6 +3189,34 @@ function programText(program) {
 function programCategoryLabel(program) {
   const copy = t();
   return program.categoryLabel || copy.categories[program.category] || program.category || "";
+}
+
+function versionedAsset(src) {
+  if (!src) return src;
+  return src.includes("?") ? src : `${src}?v=${ASSET_VERSION}`;
+}
+
+function getProgramThumbnailMedia(program) {
+  if (!program) {
+    return { image: "", imageAlt: "Karecation program" };
+  }
+
+  const media = PROGRAM_THUMBNAIL_MEDIA[program.id] || {};
+  const image = media.image || program.image || "";
+
+  return {
+    image: image.replace(/^\/?/, ""),
+    imageAlt: media.imageAlt || program.imageAlt || program.name || "Karecation program"
+  };
+}
+
+function withProgramThumbnail(program) {
+  const media = getProgramThumbnailMedia(program);
+  return {
+    ...program,
+    image: media.image,
+    imageAlt: media.imageAlt
+  };
 }
 
 function formatPrice(value) {
@@ -3199,7 +3343,7 @@ function allInOnePriceBreakdown() {
 }
 
 function getProgramById(id) {
-  return ALLINONE_PROGRAM_BY_ID[id] || PROGRAMS.find((program) => program.id === id);
+  return PROGRAMS_PAGE_PROGRAM_BY_ID[id] || ALLINONE_PROGRAM_BY_ID[id] || PROGRAMS.find((program) => program.id === id);
 }
 
 function readCart() {
@@ -3395,99 +3539,6 @@ const PROGRAMS_PAGE_DURATION_MAP = {
     "celebrity-hair-makeup": "90–120分",
     "nail-care": "60–90分",
     "body-massage": "90分"
-  }
-};
-
-// Programs page media map kept aligned with ALLINONE_PROGRAM_GROUPS so any rendering
-// path (Programs page or future informational-only cards) resolves to the same image.
-const PROGRAMS_PAGE_MEDIA = {
-  "advanced-contour-lift": {
-    image: "images/advanced-contour-lift.jpg",
-    imageAlt: "Premium Seoul K-beauty contour and lift treatment suite"
-  },
-  "clear-calm-skin-care": {
-    image: "images/clear-calm-skin-care.jpg",
-    imageAlt: "Calming K-beauty treatment room for sensitive skin care"
-  },
-  "glow-hydration-boost": {
-    image: "images/glow-hydration-boost.jpg",
-    imageAlt: "Luminous hydration boost setup in a luxury Seoul beauty suite"
-  },
-  "pigment-tone-refinement": {
-    image: "images/pigment-tone-refinement.jpg",
-    imageAlt: "Brightening tone refinement treatment room with prism light"
-  },
-  "recovery-comfort": {
-    image: "images/recovery-comfort.jpg",
-    imageAlt: "Comforting post-treatment recovery suite with tea and soft blankets"
-  },
-  "scalp-diagnosis-spa": {
-    image: "images/scalp-recovery-care.jpg",
-    imageAlt: "Premium scalp recovery care wash basin with steam"
-  },
-  "body-massage": {
-    image: "images/body-recovery-massage.jpg",
-    imageAlt: "Luxury body recovery massage room with hot stones"
-  },
-  "calming-facial-recovery": {
-    image: "images/calming-facial-recovery.jpg",
-    imageAlt: "Cooling facial recovery setup with ice and compresses"
-  },
-  "private-rest-tea-time": {
-    image: "images/private-heat-ice-time.jpg",
-    imageAlt: "Private heat and ice recovery ritual in a Seoul beauty suite"
-  },
-  "hair-salon": {
-    image: "images/salon-finish.jpg",
-    imageAlt: "Salon finishing vanity with hair styling tools"
-  },
-  "celebrity-hair-makeup": {
-    image: "images/hair-makeup-styling.jpg",
-    imageAlt: "Hair and makeup styling station in a luxury Seoul beauty suite"
-  },
-  "nail-care": {
-    image: "images/nail-pedi-detail-care.jpg",
-    imageAlt: "Luxury nail and pedi detail care station"
-  },
-  "k-beauty-makeup-lesson": {
-    image: "images/k-beauty-makeup-lesson.jpg",
-    imageAlt: "K-beauty makeup lesson setup with face chart and palettes"
-  },
-  "beauty-shopping": {
-    image: "images/beauty-shopping-curation.jpg",
-    imageAlt: "Premium beauty shopping curation setup in Seoul"
-  },
-  "skincare-product-matching": {
-    image: "images/signature-product-matching.jpg",
-    imageAlt: "Signature product matching consultation table"
-  },
-  "clinic-interpreter-support": {
-    image: "images/clinic-interpreter-support.jpg",
-    imageAlt: "Clinic interpreter support desk for international guests"
-  },
-  "recovery-meal-recommendation": {
-    image: "images/recovery-meal-recommendation.jpg",
-    imageAlt: "Recovery meal recommendation tray after K-beauty treatment"
-  },
-  "photo-spot-lifestyle-curation": {
-    image: "images/photo-spot-lifestyle-curation.jpg",
-    imageAlt: "Photo spot and Seoul lifestyle curation setup"
-  },
-  "private-consultation": {
-    image: "images/request-private-consultation.jpg",
-    imageAlt: "Private consultation lounge for tailored K-beauty planning"
-  },
-  "quick-concierge-consultation": {
-    image: "images/request-private-consultation.jpg",
-    imageAlt: "Private consultation lounge for tailored K-beauty planning"
-  },
-  "skin-clinic-care-1": {
-    image: "images/clear-calm-skin-care.jpg",
-    imageAlt: "Calming K-beauty treatment room for sensitive skin care"
-  },
-  "skin-clinic-care-2": {
-    image: "images/advanced-contour-lift.jpg",
-    imageAlt: "Premium Seoul K-beauty contour and lift treatment suite"
   }
 };
 
@@ -3711,17 +3762,19 @@ function programCard(program, useCardDescription = true, options = {}) {
   const copy = t();
   const text = programText(program);
   const isProgramsPageCard = Boolean(options.informationalOnly);
-  const media = isProgramsPageCard ? (PROGRAMS_PAGE_MEDIA[program.id] || {}) : {};
+  const media = getProgramThumbnailMedia(program);
   const cardDescription = useCardDescription ? (text.cardDescription || text.tagline) : text.tagline;
   const primaryCta = program.category === "package" ? copy.cta.explorePackage : copy.cta.addToCart;
   const durationText = isProgramsPageCard
     ? getProgramsPageDuration(program.id, text.duration)
     : text.duration;
-  const imageSrc = media.image || program.image;
-  const imageAlt = media.imageAlt || program.imageAlt || text.name;
-  const imageBlock = isProgramsPageCard
-    ? `<div class="program-card-image"><img src="${imageSrc}" alt="${imageAlt}" loading="lazy"></div>`
-    : `<a class="program-card-image" href="program-detail.html?id=${program.id}"><img src="${imageSrc}" alt="${imageAlt}" loading="lazy"></a>`;
+  const imageSrc = versionedAsset(media.image);
+  const imageAlt = media.imageAlt || text.name;
+  const imageBlock = imageSrc
+    ? (isProgramsPageCard
+      ? `<div class="program-card-image"><img src="${imageSrc}" alt="${imageAlt}" loading="lazy" onerror="this.closest('.program-card-image').classList.add('is-placeholder'); this.remove();"></div>`
+      : `<a class="program-card-image" href="program-detail.html?id=${program.id}"><img src="${imageSrc}" alt="${imageAlt}" loading="lazy" onerror="this.closest('.program-card-image').classList.add('is-placeholder'); this.remove();"></a>`)
+    : `<div class="program-card-image is-placeholder" role="img" aria-label="${imageAlt || text.name}"></div>`;
   const tagLine = isProgramsPageCard && text.tagline
     ? `<p class="muted" style="font-size:.78rem; margin-top:2px;">${text.tagline}</p>`
     : "";
@@ -3749,9 +3802,11 @@ function programCard(program, useCardDescription = true, options = {}) {
 
 function allInOneProgramCard(program) {
   const detailHref = `program-detail.html?id=${program.id}`;
-  const imageBlock = program.image
-    ? `<a class="program-card-image" href="${detailHref}"><img src="${program.image}" alt="${program.imageAlt || program.name}" loading="lazy" onerror="this.closest('.program-card-image').classList.add('is-placeholder'); this.remove();"></a>`
-    : `<div class="program-card-image is-placeholder" role="img" aria-label="${program.imageAlt || program.name}"></div>`;
+  const media = getProgramThumbnailMedia(program);
+  const imageSrc = versionedAsset(media.image);
+  const imageBlock = media.image
+    ? `<a class="program-card-image" href="${detailHref}"><img src="${imageSrc}" alt="${media.imageAlt}" loading="lazy" onerror="this.closest('.program-card-image').classList.add('is-placeholder'); this.remove();"></a>`
+    : `<div class="program-card-image is-placeholder" role="img" aria-label="${media.imageAlt || program.name}"></div>`;
   return `
     <article class="program-card">
       ${imageBlock}
@@ -3784,7 +3839,7 @@ function renderProgramsPage() {
   if (!grid || !filterRoot || !activeHolder) return;
 
   const copy = t();
-  const visiblePrograms = ALLINONE_PROGRAMS;
+  const visiblePrograms = PROGRAMS_PAGE_PROGRAMS;
   const categoryOrder = ["all", ...ALLINONE_PROGRAM_GROUPS.map((group) => group.id)];
   const categoryLabels = {
     all: copy.categories?.all || "All",
@@ -3839,6 +3894,7 @@ function renderDetailPage() {
   const params = new URLSearchParams(window.location.search);
   const program = getProgramById(params.get("id")) || PROGRAMS[0];
   const text = programText(program);
+  const media = getProgramThumbnailMedia(program);
 
   document.title = `${text.name} | Karecation`;
   document.getElementById("pdpName").textContent = text.name;
@@ -3848,8 +3904,8 @@ function renderDetailPage() {
   document.getElementById("pdpCategory").textContent = programCategoryLabel(program);
   document.getElementById("pdpLocation").textContent = text.location;
   document.getElementById("pdpDescription").textContent = text.description;
-  document.getElementById("pdpImage").src = program.image;
-  document.getElementById("pdpImage").alt = program.imageAlt || text.name;
+  document.getElementById("pdpImage").src = versionedAsset(media.image);
+  document.getElementById("pdpImage").alt = media.imageAlt || text.name;
   document.getElementById("pdpIncludes").innerHTML = text.includes.map((item) => `<div class="list-item">${item}</div>`).join("");
   document.getElementById("pdpSteps").innerHTML = text.steps.map((item, idx) => `<div class="list-item"><strong class="step-index">${idx + 1}</strong>${item}</div>`).join("");
   document.getElementById("pdpAddons").innerHTML = `<div class="list-item">${copy.home.trust[2][1]}</div>`;
