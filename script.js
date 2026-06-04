@@ -139,7 +139,6 @@ const HIDDEN_PROGRAM_IDS = new Set(["all-in-one-package", "beauty-shopping"]);
 const ALLINONE_BUILDER_CONFIG = {
   basePrice: ALLINONE_BASE_PRICE,
   requiredIds: [
-    "essential-skin-reset",
     "advanced-contour-lift",
     "clear-calm-skin-care",
     "glow-hydration-boost",
@@ -148,13 +147,11 @@ const ALLINONE_BUILDER_CONFIG = {
   optionalIds: [
     "scalp-diagnosis-spa",
     "body-massage",
-    "lymphatic-recovery-care",
     "calming-facial-recovery",
     "private-rest-tea-time",
     "hair-salon",
     "celebrity-hair-makeup",
     "nail-care",
-    "camera-ready-styling",
     "k-beauty-makeup-lesson",
     "beauty-shopping",
     "skincare-product-matching",
@@ -163,20 +160,17 @@ const ALLINONE_BUILDER_CONFIG = {
     "photo-spot-lifestyle-curation"
   ],
   labels: {
-    "essential-skin-reset": "Essential Skin Reset",
     "advanced-contour-lift": "Advanced Contour & Lift",
     "clear-calm-skin-care": "Clear & Calm Skin Care",
     "glow-hydration-boost": "Glow & Hydration Boost",
     "pigment-tone-refinement": "Pigment & Tone Refinement",
     "scalp-diagnosis-spa": "Scalp Recovery Care",
     "body-massage": "Body Recovery Massage",
-    "lymphatic-recovery-care": "Lymphatic Recovery Care",
     "calming-facial-recovery": "Calming Facial Recovery",
     "private-rest-tea-time": "Private Rest & Tea Time",
     "hair-salon": "Salon Finish",
     "celebrity-hair-makeup": "Hair & Makeup Styling",
     "nail-care": "Nail/Pedi Detail Care",
-    "camera-ready-styling": "Camera-Ready Styling",
     "k-beauty-makeup-lesson": "K-Beauty Makeup Lesson",
     "beauty-shopping": "Beauty Shopping Curation",
     "skincare-product-matching": "Skincare Product Matching",
@@ -1868,8 +1862,8 @@ const LANGUAGE_SYNC_PATCH = {
       contactNextLine: "Request a private consultation with your preferred programs and dates.",
       allInOneCardEyebrow: "SIGNATURE ITINERARY",
       allInOneCardPrice: "",
-      allInOneCardDescription: "A private all-in-one Seoul beauty day built around clinic care, salon care, recovery, and optional refinements.",
-      allInOneCardNote: "Curated through consultation. Designed around your skin, schedule, and style.",
+      allInOneCardDescription: "A private all-in-one Seoul beauty day built around clinic care, salon care, recovery, and refined add-ons.",
+      allInOneCardNote: "Curated through consultation.<br>Designed around your skin, schedule, and style.",
       allInOneCardButton: "Build Your Journey",
       allInOneBuilderTitle: "Build your beauty journey.",
       allInOneBuilderLead: "Select any care options you'd like. Your final itinerary will be refined after consultation.",
@@ -1877,9 +1871,7 @@ const LANGUAGE_SYNC_PATCH = {
       allInOneAddonsLabel: "Concierge review",
       allInOneTotalLabel: "Journey Summary",
       allInOneRequiredLabel: "Select Your Care Options",
-      allInOneOptionalLabel: "Select Additional Experiences",
-      allInOneSkin1Title: "Essential Skin Reset",
-      allInOneSkin1Desc: "Tone, texture, pore care, vitamin tone care, and toning.",
+      allInOneOptionalLabel: "",
       allInOneSkin2Title: "Advanced Contour & Lift",
       allInOneSkin2Desc: "Lifting, pigment laser, and wrinkle botox.",
       allInOneOptScalpTitle: "Scalp Recovery Care",
@@ -2096,8 +2088,6 @@ const LANGUAGE_SYNC_PATCH = {
       allInOneTotalLabel: "여정 요약",
       allInOneRequiredLabel: "필수: 스킨 클리닉 1개 선택",
       allInOneOptionalLabel: "선택 프로그램 3개 선택",
-      allInOneSkin1Title: "Essential Skin Reset",
-      allInOneSkin1Desc: "톤, 결, 모공, 비타민 톤 케어와 토닝 중심 케어.",
       allInOneSkin2Title: "Advanced Contour & Lift",
       allInOneSkin2Desc: "리프팅, 색소 레이저, 주름 보톡스 중심 케어.",
       allInOneOptScalpTitle: "Scalp Recovery Care",
@@ -2113,7 +2103,7 @@ const LANGUAGE_SYNC_PATCH = {
       allInOneOptShopTitle: "Beauty Shopping Curation",
       allInOneOptShopDesc: "올리브영 등 목적지 중심의 K-뷰티 쇼핑 가이드.",
       allInOneContinueButton: "상담 페이지로 이동",
-      allInOneCounterTemplate: "{count} / 4 선택됨",
+      allInOneCounterTemplate: "{count} selected",
       allInOneReady: "여정 구성이 완료되었습니다.",
       allInOneNeedOneMore: "여정을 완성하려면 프로그램 1개를 더 선택해 주세요.",
       allInOneNeedMore: "여정을 완성하려면 프로그램 {n}개를 더 선택해 주세요.",
@@ -2315,8 +2305,6 @@ const LANGUAGE_SYNC_PATCH = {
       allInOneTotalLabel: "行程摘要",
       allInOneRequiredLabel: "必选：选择 1 个 Skin Clinic Care",
       allInOneOptionalLabel: "选择 3 个可选项目",
-      allInOneSkin1Title: "Essential Skin Reset",
-      allInOneSkin1Desc: "聚焦肤色、肤质、毛孔、维稳提亮与调理。",
       allInOneSkin2Title: "Advanced Contour & Lift",
       allInOneSkin2Desc: "聚焦提升、色素激光与皱纹肉毒。",
       allInOneOptScalpTitle: "Scalp Recovery Care",
@@ -2332,7 +2320,7 @@ const LANGUAGE_SYNC_PATCH = {
       allInOneOptShopTitle: "Beauty Shopping Curation",
       allInOneOptShopDesc: "提供 Olive Young 等目的地导购支持。",
       allInOneContinueButton: "继续前往咨询",
-      allInOneCounterTemplate: "已选择 {count} / 4",
+      allInOneCounterTemplate: "{count} selected",
       allInOneReady: "你的旅程已准备就绪。",
       allInOneNeedOneMore: "还需选择 1 个项目即可完成旅程。",
       allInOneNeedMore: "还需选择 {n} 个项目即可完成旅程。",
@@ -2534,8 +2522,6 @@ const LANGUAGE_SYNC_PATCH = {
       allInOneTotalLabel: "ジャーニー概要",
       allInOneRequiredLabel: "必須: Skin Clinic Care を1つ選択",
       allInOneOptionalLabel: "オプションを3つ選択",
-      allInOneSkin1Title: "Essential Skin Reset",
-      allInOneSkin1Desc: "トーン、キメ、毛穴、ビタミントーンケア、トーニング中心ケア。",
       allInOneSkin2Title: "Advanced Contour & Lift",
       allInOneSkin2Desc: "リフティング、色素レーザー、しわボトックス中心ケア。",
       allInOneOptScalpTitle: "Scalp Recovery Care",
@@ -2551,7 +2537,7 @@ const LANGUAGE_SYNC_PATCH = {
       allInOneOptShopTitle: "Beauty Shopping Curation",
       allInOneOptShopDesc: "Olive Young などを含む K-beauty ショッピングガイド。",
       allInOneContinueButton: "相談ページへ進む",
-      allInOneCounterTemplate: "{count} / 4 選択済み",
+      allInOneCounterTemplate: "{count} selected",
       allInOneReady: "ジャーニーの準備が整いました。",
       allInOneNeedOneMore: "ジャーニー完成には、あと1件選択してください。",
       allInOneNeedMore: "ジャーニー完成には、あと{n}件選択してください。",
@@ -2672,12 +2658,10 @@ const ALLINONE_PRIVATE_ITINERARY_COPY = {
       allInOneSummaryLead: "Your selected programs will be reviewed and refined after consultation.",
       allInOneSummaryNote: "No fixed program limit — Karecation will tailor the final itinerary around your goals, schedule, and availability.",
       allInOneRequiredLabel: "Select Your Care Options",
-      allInOneOptionalLabel: "Select Additional Experiences",
+      allInOneOptionalLabel: "",
       allInOneRecoveryLabel: "Recovery & Comfort",
       allInOneBeautyLabel: "Beauty Finishing",
       allInOneConciergeLabel: "Concierge & Lifestyle",
-      allInOneSkinEssentialTitle: "Essential Skin Reset",
-      allInOneSkinEssentialDesc: "Tone, texture, hydration, pore care, and vitamin care.",
       allInOneSkinAdvancedTitle: "Advanced Contour & Lift",
       allInOneSkinAdvancedDesc: "Lifting, pigment care, wrinkle refinement, and facial contour support.",
       allInOneSkinClearTitle: "Clear & Calm Skin Care",
@@ -2690,8 +2674,6 @@ const ALLINONE_PRIVATE_ITINERARY_COPY = {
       allInOneOptScalpDesc: "Scalp diagnosis, scaling, and relaxing treatment support.",
       allInOneOptBodyTitle: "Body Recovery Massage",
       allInOneOptBodyDesc: "Full-body massage focused on recovery, comfort, and release.",
-      allInOneOptLymphaticTitle: "Lymphatic Recovery Care",
-      allInOneOptLymphaticDesc: "Gentle recovery-focused care to support facial and body comfort.",
       allInOneOptCalmingTitle: "Calming Facial Recovery",
       allInOneOptCalmingDesc: "Post-treatment soothing care for sensitive or tired skin.",
       allInOneOptTeaTitle: "Private Rest & Tea Time",
@@ -2702,8 +2684,6 @@ const ALLINONE_PRIVATE_ITINERARY_COPY = {
       allInOneOptHMUDesc: "Professional styling for a polished, camera-ready look.",
       allInOneOptNailTitle: "Nail/Pedi Detail Care",
       allInOneOptNailDesc: "Nail or pedi care with shaping, cuticle care, and finish.",
-      allInOneOptCameraTitle: "Camera-Ready Styling",
-      allInOneOptCameraDesc: "A refined finish before photos, dinner, or a special occasion.",
       allInOneOptLessonTitle: "K-Beauty Makeup Lesson",
       allInOneOptLessonDesc: "A guided beauty session focused on Korean makeup style and product use.",
       allInOneOptShopTitle: "Beauty Shopping Curation",
@@ -2734,8 +2714,6 @@ const ALLINONE_PRIVATE_ITINERARY_COPY = {
       allInOneRecoveryLabel: "리커버리 & 컴포트",
       allInOneBeautyLabel: "뷰티 피니싱",
       allInOneConciergeLabel: "컨시어지 & 라이프스타일",
-      allInOneSkinEssentialTitle: "에센셜 스킨 리셋",
-      allInOneSkinEssentialDesc: "톤, 결, 수분, 모공, 비타민 케어.",
       allInOneSkinAdvancedTitle: "어드밴스드 윤곽 & 리프트",
       allInOneSkinAdvancedDesc: "리프팅, 색소 케어, 주름 개선, 얼굴 윤곽 서포트.",
       allInOneSkinClearTitle: "클리어 & 카밍 스킨 케어",
@@ -2748,8 +2726,6 @@ const ALLINONE_PRIVATE_ITINERARY_COPY = {
       allInOneOptScalpDesc: "두피 진단, 스케일링, 릴랙싱 트리트먼트 서포트.",
       allInOneOptBodyTitle: "바디 리커버리 마사지",
       allInOneOptBodyDesc: "회복, 편안함, 이완에 집중한 전신 마사지.",
-      allInOneOptLymphaticTitle: "림프 리커버리 케어",
-      allInOneOptLymphaticDesc: "얼굴과 몸의 편안함을 돕는 부드러운 회복 케어.",
       allInOneOptCalmingTitle: "카밍 페이셜 리커버리",
       allInOneOptCalmingDesc: "시술 후 민감하거나 지친 피부를 위한 진정 케어.",
       allInOneOptTeaTitle: "프라이빗 휴식 & 티타임",
@@ -2760,8 +2736,6 @@ const ALLINONE_PRIVATE_ITINERARY_COPY = {
       allInOneOptHMUDesc: "세련되고 카메라에 잘 어울리는 룩을 위한 프로 스타일링.",
       allInOneOptNailTitle: "네일/페디 디테일 케어",
       allInOneOptNailDesc: "쉐이핑, 큐티클 케어, 네일 또는 페디 마무리.",
-      allInOneOptCameraTitle: "카메라 레디 스타일링",
-      allInOneOptCameraDesc: "촬영, 디너, 특별한 일정 전 정돈된 피니시.",
       allInOneOptLessonTitle: "K-뷰티 메이크업 레슨",
       allInOneOptLessonDesc: "한국식 메이크업 스타일과 제품 사용을 중심으로 한 가이드 세션.",
       allInOneOptShopTitle: "뷰티 쇼핑 큐레이션",
@@ -2792,8 +2766,6 @@ const ALLINONE_PRIVATE_ITINERARY_COPY = {
       allInOneRecoveryLabel: "恢复与舒适",
       allInOneBeautyLabel: "美丽收尾",
       allInOneConciergeLabel: "礼宾与生活方式",
-      allInOneSkinEssentialTitle: "基础焕肤重启",
-      allInOneSkinEssentialDesc: "肤色、肤质、补水、毛孔与维他命护理。",
       allInOneSkinAdvancedTitle: "进阶轮廓与提升",
       allInOneSkinAdvancedDesc: "提升、色素护理、皱纹细化与面部轮廓支持。",
       allInOneSkinClearTitle: "净透舒缓皮肤护理",
@@ -2806,8 +2778,6 @@ const ALLINONE_PRIVATE_ITINERARY_COPY = {
       allInOneOptScalpDesc: "头皮诊断、清洁与放松护理支持。",
       allInOneOptBodyTitle: "身体恢复按摩",
       allInOneOptBodyDesc: "专注恢复、舒适与放松的全身按摩。",
-      allInOneOptLymphaticTitle: "淋巴恢复护理",
-      allInOneOptLymphaticDesc: "温和恢复护理，支持面部与身体舒适感。",
       allInOneOptCalmingTitle: "舒缓面部恢复",
       allInOneOptCalmingDesc: "适合护理后敏感或疲惫肌肤的舒缓护理。",
       allInOneOptTeaTitle: "私享休息与茶点",
@@ -2818,8 +2788,6 @@ const ALLINONE_PRIVATE_ITINERARY_COPY = {
       allInOneOptHMUDesc: "专业造型，打造精致上镜效果。",
       allInOneOptNailTitle: "美甲/足部细节护理",
       allInOneOptNailDesc: "指甲或足部护理，含修形、角质护理与收尾。",
-      allInOneOptCameraTitle: "上镜造型整理",
-      allInOneOptCameraDesc: "适合拍照、晚餐或特别场合前的精致收尾。",
       allInOneOptLessonTitle: "K-Beauty 妆容课程",
       allInOneOptLessonDesc: "围绕韩式妆容风格与产品使用的指导体验。",
       allInOneOptShopTitle: "美妆购物策划",
@@ -2850,8 +2818,6 @@ const ALLINONE_PRIVATE_ITINERARY_COPY = {
       allInOneRecoveryLabel: "リカバリー & コンフォート",
       allInOneBeautyLabel: "ビューティーフィニッシュ",
       allInOneConciergeLabel: "コンシェルジュ & ライフスタイル",
-      allInOneSkinEssentialTitle: "エッセンシャルスキンリセット",
-      allInOneSkinEssentialDesc: "トーン、キメ、保湿、毛穴、ビタミンケア。",
       allInOneSkinAdvancedTitle: "アドバンスド輪郭 & リフト",
       allInOneSkinAdvancedDesc: "リフティング、色素ケア、しわの refinement、フェイスラインサポート。",
       allInOneSkinClearTitle: "クリア & カームスキンケア",
@@ -2864,8 +2830,6 @@ const ALLINONE_PRIVATE_ITINERARY_COPY = {
       allInOneOptScalpDesc: "頭皮診断、スケーリング、リラックストリートメントサポート。",
       allInOneOptBodyTitle: "ボディリカバリーマッサージ",
       allInOneOptBodyDesc: "回復、心地よさ、リリースを重視した全身マッサージ。",
-      allInOneOptLymphaticTitle: "リンパリカバリーケア",
-      allInOneOptLymphaticDesc: "顔と身体の心地よさを支える穏やかな回復ケア。",
       allInOneOptCalmingTitle: "カーミングフェイシャルリカバリー",
       allInOneOptCalmingDesc: "施術後の敏感肌や疲れた肌のための鎮静ケア。",
       allInOneOptTeaTitle: "プライベート休憩 & ティータイム",
@@ -2876,8 +2840,6 @@ const ALLINONE_PRIVATE_ITINERARY_COPY = {
       allInOneOptHMUDesc: "洗練されたカメラ映えのためのプロスタイリング。",
       allInOneOptNailTitle: "ネイル/ペディディテールケア",
       allInOneOptNailDesc: "シェイプ、キューティクルケア、ネイルまたはペディ仕上げ。",
-      allInOneOptCameraTitle: "カメラレディスタイリング",
-      allInOneOptCameraDesc: "写真、ディナー、特別な予定の前に整える上品な仕上げ。",
       allInOneOptLessonTitle: "K-Beauty メイクレッスン",
       allInOneOptLessonDesc: "韓国メイクスタイルと製品使いに焦点を当てたガイドセッション。",
       allInOneOptShopTitle: "ビューティーショッピングキュレーション",
@@ -3371,7 +3333,7 @@ function renderStaticPageCopy() {
     setText("allInOneCardEyebrow", copy.page.allInOneCardEyebrow);
     setText("allInOneCardPrice", copy.page.allInOneCardPrice);
     setText("allInOneCardDescription", copy.page.allInOneCardDescription);
-    setText("allInOneCardNote", copy.page.allInOneCardNote);
+    setHtml("allInOneCardNote", copy.page.allInOneCardNote);
     setText("allInOneCardButton", copy.page.allInOneCardButton);
     setText("allInOneBuilderTitle", copy.page.allInOneBuilderTitle);
     setText("allInOneBuilderLead", copy.page.allInOneBuilderLead);
@@ -3383,8 +3345,6 @@ function renderStaticPageCopy() {
     setText("allInOneRecoveryLabel", copy.page.allInOneRecoveryLabel);
     setText("allInOneBeautyLabel", copy.page.allInOneBeautyLabel);
     setText("allInOneConciergeLabel", copy.page.allInOneConciergeLabel);
-    setText("allInOneSkinEssentialTitle", copy.page.allInOneSkinEssentialTitle);
-    setText("allInOneSkinEssentialDesc", copy.page.allInOneSkinEssentialDesc);
     setText("allInOneSkinAdvancedTitle", copy.page.allInOneSkinAdvancedTitle);
     setText("allInOneSkinAdvancedDesc", copy.page.allInOneSkinAdvancedDesc);
     setText("allInOneSkinClearTitle", copy.page.allInOneSkinClearTitle);
@@ -3397,8 +3357,6 @@ function renderStaticPageCopy() {
     setText("allInOneOptScalpDesc", copy.page.allInOneOptScalpDesc);
     setText("allInOneOptBodyTitle", copy.page.allInOneOptBodyTitle);
     setText("allInOneOptBodyDesc", copy.page.allInOneOptBodyDesc);
-    setText("allInOneOptLymphaticTitle", copy.page.allInOneOptLymphaticTitle);
-    setText("allInOneOptLymphaticDesc", copy.page.allInOneOptLymphaticDesc);
     setText("allInOneOptCalmingTitle", copy.page.allInOneOptCalmingTitle);
     setText("allInOneOptCalmingDesc", copy.page.allInOneOptCalmingDesc);
     setText("allInOneOptTeaTitle", copy.page.allInOneOptTeaTitle);
@@ -3409,8 +3367,6 @@ function renderStaticPageCopy() {
     setText("allInOneOptHMUDesc", copy.page.allInOneOptHMUDesc);
     setText("allInOneOptNailTitle", copy.page.allInOneOptNailTitle);
     setText("allInOneOptNailDesc", copy.page.allInOneOptNailDesc);
-    setText("allInOneOptCameraTitle", copy.page.allInOneOptCameraTitle);
-    setText("allInOneOptCameraDesc", copy.page.allInOneOptCameraDesc);
     setText("allInOneOptLessonTitle", copy.page.allInOneOptLessonTitle);
     setText("allInOneOptLessonDesc", copy.page.allInOneOptLessonDesc);
     setText("allInOneOptShopTitle", copy.page.allInOneOptShopTitle);
