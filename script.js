@@ -1869,15 +1869,15 @@ const LANGUAGE_SYNC_PATCH = {
       allInOneCardEyebrow: "SIGNATURE ITINERARY",
       allInOneCardPrice: "",
       allInOneCardDescription: "A private all-in-one Seoul beauty day built around clinic care, salon care, recovery, and optional refinements.",
-      allInOneCardNote: "Includes 1 skin clinic care option + 3 optional programs.",
+      allInOneCardNote: "Curated through consultation. Designed around your skin, schedule, and style.",
       allInOneCardButton: "Build Your Journey",
       allInOneBuilderTitle: "Build your beauty journey.",
-      allInOneBuilderLead: "Choose 1 skin clinic care option and 3 optional programs to complete your All-in-One Package.",
+      allInOneBuilderLead: "Select any care options you'd like. Your final itinerary will be refined after consultation.",
       allInOneBaseLabel: "Journey Summary",
       allInOneAddonsLabel: "Concierge review",
       allInOneTotalLabel: "Journey Summary",
-      allInOneRequiredLabel: "Required: Choose 1 Skin Clinic Care",
-      allInOneOptionalLabel: "Choose 3 Optional Programs",
+      allInOneRequiredLabel: "Select Your Care Options",
+      allInOneOptionalLabel: "Select Additional Experiences",
       allInOneSkin1Title: "Essential Skin Reset",
       allInOneSkin1Desc: "Tone, texture, pore care, vitamin tone care, and toning.",
       allInOneSkin2Title: "Advanced Contour & Lift",
@@ -1895,12 +1895,12 @@ const LANGUAGE_SYNC_PATCH = {
       allInOneOptShopTitle: "Beauty Shopping Curation",
       allInOneOptShopDesc: "Guided K-beauty shopping support, including destinations such as Olive Young.",
       allInOneContinueButton: "Continue to Consultation",
-      allInOneCounterTemplate: "{count} / 4 selected",
+      allInOneCounterTemplate: "{count} selected",
       allInOneReady: "Your journey is ready.",
-      allInOneNeedOneMore: "Please choose 1 more program to complete your journey.",
-      allInOneNeedMore: "Please choose {n} more program(s) to complete your journey.",
-      allInOneMaxPrograms: "You have already selected all 4 programs.",
-      allInOneMaxOptional: "You have already selected all 3 optional programs.",
+      allInOneNeedOneMore: "Please select at least one program to continue.",
+      allInOneNeedMore: "Please select at least one program to continue.",
+      allInOneMaxPrograms: "",
+      allInOneMaxOptional: "",
       allInOneSummary: {
         title: "Journey Summary",
         note: "Concierge review",
@@ -1919,7 +1919,7 @@ const LANGUAGE_SYNC_PATCH = {
     faq: [
       ["What does Karecation help coordinate?", "We help coordinate consultation, scheduling flow, and concierge-level guidance across your preferred programs."],
       ["Do I need to choose a full package right away?", "No. You can begin with a private consultation and decide the scope afterward."],
-      ["What is included in the All-in-One Package?", "It includes 1 skin clinic care option and 3 optional programs, coordinated as one private itinerary."],
+      ["What is included in the All-in-One Package?", "You can select any care options you would like, and Karecation will refine the final itinerary after consultation."],
       ["What is the difference between Skin Clinic Care 1 and Skin Clinic Care 2?", "Skin Clinic Care 1 focuses on tone and texture refresh. Skin Clinic Care 2 is a more advanced, clinic-focused path."],
       ["Can Karecation help with beauty shopping?", "Yes. We can include guided beauty shopping support, including destinations such as Olive Young."],
       ["How does payment work?", "Consultation is request-first. Availability, scope, and final payment guidance are confirmed before any visit is finalized."]
@@ -2669,10 +2669,10 @@ const ALLINONE_PRIVATE_ITINERARY_COPY = {
   en: {
     page: {
       allInOneSummaryTitle: "Journey Summary",
-      allInOneSummaryLead: "Your private itinerary will be refined after consultation.",
-      allInOneSummaryNote: "Selected clinic care and enhancements will be reviewed by the Karecation concierge team.",
-      allInOneRequiredLabel: "Required: Choose 1 Clinic Care Option",
-      allInOneOptionalLabel: "Choose 3 Optional Enhancements",
+      allInOneSummaryLead: "Your selected programs will be reviewed and refined after consultation.",
+      allInOneSummaryNote: "No fixed program limit — Karecation will tailor the final itinerary around your goals, schedule, and availability.",
+      allInOneRequiredLabel: "Select Your Care Options",
+      allInOneOptionalLabel: "Select Additional Experiences",
       allInOneRecoveryLabel: "Recovery & Comfort",
       allInOneBeautyLabel: "Beauty Finishing",
       allInOneConciergeLabel: "Concierge & Lifestyle",
@@ -2719,8 +2719,8 @@ const ALLINONE_PRIVATE_ITINERARY_COPY = {
       allInOneContinueButton: "Request Private Consultation",
       allInOneSummary: {
         title: "Journey Summary",
-        lead: "Your private itinerary will be refined after consultation.",
-        note: "Selected clinic care and enhancements will be reviewed by the Karecation concierge team."
+        lead: "Your selected programs will be reviewed and refined after consultation.",
+        note: "No fixed program limit — Karecation will tailor the final itinerary around your goals, schedule, and availability."
       }
     }
   },
@@ -2911,7 +2911,7 @@ function getLocale() {
 }
 
 let currentLocale = getLocale();
-let allInOneState = { skinId: null, optionalIds: [] };
+let allInOneState = { selectedIds: [] };
 
 function t() {
   return I18N[currentLocale] || I18N.en;
@@ -2950,13 +2950,9 @@ function formatPrice(value) {
 function readAllInOneSelection() {
   try {
     const raw = JSON.parse(localStorage.getItem(ALLINONE_SELECTION_KEY) || "{}");
-    const skinId = ALLINONE_BUILDER_CONFIG.requiredIds.includes(raw.skinId) ? raw.skinId : null;
-    const optionalIds = Array.isArray(raw.optionalIds)
-      ? raw.optionalIds.filter((id, index, arr) => ALLINONE_BUILDER_CONFIG.optionalIds.includes(id) && arr.indexOf(id) === index).slice(0, 3)
-      : [];
-    return { skinId, optionalIds };
+    return { selectedIds: normalizeAllInOneIds(raw) };
   } catch (error) {
-    return { skinId: null, optionalIds: [] };
+    return { selectedIds: [] };
   }
 }
 
@@ -3049,32 +3045,21 @@ function clearKarecationStateStorage() {
 
 function resetHomeBuilderAndCartState() {
   clearKarecationStateStorage();
-  allInOneState = { skinId: null, optionalIds: [] };
+  allInOneState = { selectedIds: [] };
   syncAllInOneBuilderUI();
   updateCartCount();
 }
 
 function allInOneSelectedCount() {
-  return (allInOneState.skinId ? 1 : 0) + allInOneState.optionalIds.length;
+  return allInOneState.selectedIds.length;
 }
 
 function allInOneSelectionNames() {
-  const ids = [allInOneState.skinId, ...allInOneState.optionalIds].filter(Boolean);
-  return ids.map((id) => ALLINONE_BUILDER_CONFIG.labels[id]).filter(Boolean);
+  return allInOneState.selectedIds.map((id) => ALLINONE_BUILDER_CONFIG.labels[id]).filter(Boolean);
 }
 
 function allInOnePriceBreakdown() {
-  const selectedIds = [allInOneState.skinId, ...allInOneState.optionalIds].filter(Boolean);
-  return allInOnePriceBreakdownForIds(selectedIds);
-}
-
-function remainingProgramsMessage(remaining) {
-  const copy = t();
-  if (remaining <= 0) return "";
-  const oneTemplate = copy.page.allInOneNeedOneMore || "Please choose 1 more program to complete your journey.";
-  const manyTemplate = copy.page.allInOneNeedMore || "Please choose {n} more program(s) to complete your journey.";
-  if (remaining === 1) return oneTemplate;
-  return manyTemplate.replace("{n}", String(remaining));
+  return allInOnePriceBreakdownForIds(allInOneState.selectedIds);
 }
 
 function getProgramById(id) {
@@ -3819,24 +3804,21 @@ function syncAllInOneBuilderUI() {
   if (!counter) return;
 
   const selectedCount = allInOneSelectedCount();
-  const counterTemplate = copy.page.allInOneCounterTemplate || "{count} / 4 selected";
+  const counterTemplate = copy.page.allInOneCounterTemplate || "{count} selected";
   counter.textContent = counterTemplate.replace("{count}", String(selectedCount));
   if (basePriceNode) basePriceNode.textContent = "";
   if (addonPriceNode) addonPriceNode.textContent = "";
   if (totalPriceNode) totalPriceNode.textContent = "";
 
   if (ready) {
-    const isReady = Boolean(allInOneState.skinId) && allInOneState.optionalIds.length === 3;
+    const isReady = selectedCount > 0;
     ready.hidden = !isReady;
     ready.textContent = copy.page.allInOneReady || "Your journey is ready.";
   }
 
   document.querySelectorAll("[data-builder-option]").forEach((option) => {
-    const group = option.getAttribute("data-builder-group");
     const programId = option.getAttribute("data-program-id");
-    const isSelected = group === "skin"
-      ? allInOneState.skinId === programId
-      : allInOneState.optionalIds.includes(programId);
+    const isSelected = allInOneState.selectedIds.includes(programId);
     option.classList.toggle("is-selected", isSelected);
     option.setAttribute("aria-pressed", isSelected ? "true" : "false");
   });
@@ -3857,52 +3839,29 @@ function openAllInOneBuilder() {
 }
 
 function selectAllInOneOption(group, programId) {
-  const copy = t();
-  if (group === "skin") {
-    allInOneState.skinId = programId;
-    saveAllInOneSelection(allInOneState);
-    clearAllInOneJourney();
-    syncAllInOneBuilderUI();
-    return;
-  }
+  const isKnownProgram = ALLINONE_BUILDER_CONFIG.requiredIds.includes(programId)
+    || ALLINONE_BUILDER_CONFIG.optionalIds.includes(programId);
+  if (!isKnownProgram) return;
 
-  const exists = allInOneState.optionalIds.includes(programId);
+  const exists = allInOneState.selectedIds.includes(programId);
   if (exists) {
-    allInOneState.optionalIds = allInOneState.optionalIds.filter((id) => id !== programId);
-    saveAllInOneSelection(allInOneState);
-    clearAllInOneJourney();
-    syncAllInOneBuilderUI();
-    return;
+    allInOneState.selectedIds = allInOneState.selectedIds.filter((id) => id !== programId);
+  } else {
+    allInOneState.selectedIds = [...allInOneState.selectedIds, programId];
   }
 
-  if (allInOneSelectedCount() >= 4) {
-    alert(copy.page.allInOneMaxPrograms || "You have already selected all 4 programs.");
-    return;
-  }
-
-  if (allInOneState.optionalIds.length >= 3) {
-    alert(copy.page.allInOneMaxOptional || "You have already selected all 3 optional programs.");
-    return;
-  }
-
-  allInOneState.optionalIds.push(programId);
   saveAllInOneSelection(allInOneState);
   clearAllInOneJourney();
   syncAllInOneBuilderUI();
 }
 
 function continueAllInOneJourney() {
-  const hasSkin = Boolean(allInOneState.skinId);
-  const optionalCount = allInOneState.optionalIds.length;
-  const selectedCount = allInOneSelectedCount();
-
-  if (!hasSkin || optionalCount !== 3 || selectedCount !== 4) {
-    const remaining = 4 - selectedCount;
-    alert(remainingProgramsMessage(remaining));
+  if (!allInOneState.selectedIds.length) {
+    alert(t().page.allInOneNeedMore || "Please select at least one program to continue.");
     return;
   }
 
-  const selectedIds = [allInOneState.skinId, ...allInOneState.optionalIds];
+  const selectedIds = [...allInOneState.selectedIds];
   const selectedNames = selectedIds
     .map((id) => ALLINONE_BUILDER_CONFIG.labels[id])
     .filter(Boolean);
@@ -3914,8 +3873,9 @@ function continueAllInOneJourney() {
     packageName: "All-in-One Package",
     selectedIds,
     selectedNames,
-    selectedSkinClinic: allInOneState.skinId,
-    selectedOptionalPrograms: [...allInOneState.optionalIds],
+    selectedSkinClinic: selectedIds.find((id) => ALLINONE_BUILDER_CONFIG.requiredIds.includes(id)) || null,
+    selectedClinicCarePrograms: selectedIds.filter((id) => ALLINONE_BUILDER_CONFIG.requiredIds.includes(id)),
+    selectedOptionalPrograms: selectedIds.filter((id) => ALLINONE_BUILDER_CONFIG.optionalIds.includes(id)),
     selectedAddOns: pricing.selectedAddons,
     selectedAddons: pricing.selectedAddons,
     basePrice: 0,
@@ -3997,13 +3957,16 @@ function selectedProgramFieldValues(details, journey) {
       ? journey.selectedNames
       : [
           ALLINONE_BUILDER_CONFIG.labels[journey.selectedSkinClinic],
+          ...(Array.isArray(journey.selectedClinicCarePrograms)
+            ? journey.selectedClinicCarePrograms.map((id) => ALLINONE_BUILDER_CONFIG.labels[id])
+            : []),
           ...(Array.isArray(journey.selectedOptionalPrograms)
             ? journey.selectedOptionalPrograms.map((id) => ALLINONE_BUILDER_CONFIG.labels[id])
             : [])
         ].filter(Boolean);
-    if (journeyNames.length) return journeyNames.slice(0, 4);
+    if (journeyNames.length) return journeyNames;
   }
-  return details.map((item) => programText(item.program).name).filter(Boolean).slice(0, 4);
+  return details.map((item) => programText(item.program).name).filter(Boolean);
 }
 
 function initPreferredDateField() {
@@ -4155,6 +4118,7 @@ function bindBookingForm() {
       "Program 2": programValues[1] || "",
       "Program 3": programValues[2] || "",
       "Program 4": programValues[3] || "",
+      "Selected Programs": programValues.join(" | "),
       "Additional Request": additionalRequest
     };
 
@@ -4362,7 +4326,7 @@ function initAllInOneHeroCarousel() {
 }
 
 function init() {
-  allInOneState = { skinId: null, optionalIds: [] };
+  allInOneState = { selectedIds: [] };
   if (document.body.dataset.page === "home") {
     resetHomeBuilderAndCartState();
   }
