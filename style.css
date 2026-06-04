@@ -582,15 +582,16 @@ p {
 }
 
 .allinone-pricing p {
-  display: flex;
-  justify-content: space-between;
-  gap: 8px;
-  font-size: 0.8rem;
-  color: #3f444d;
+  margin: 0;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--muted);
 }
 
-.allinone-pricing p strong {
+.allinone-pricing h5 {
+  margin: 0 0 4px;
   color: #23262d;
+  font-size: 0.9rem;
   font-weight: 700;
 }
 
@@ -610,6 +611,13 @@ p {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: #5f4c34;
+}
+
+.allinone-category-label {
+  margin: 14px 0 8px;
+  font-size: 0.82rem;
+  color: #2f343d;
+  font-weight: 800;
 }
 
 .allinone-options {

@@ -1,7 +1,7 @@
 const STORAGE_KEY = "karecation_cart_simple_v1";
 const LOCALE_KEY = "karecation_locale_v1";
 const SERVICE_RATE = 0.05;
-const ALLINONE_BASE_PRICE = 1599;
+const ALLINONE_BASE_PRICE = 0;
 const LAUNCH_OFFER_CODE = "LOVEKARECATION";
 const LAUNCH_OFFER_DISCOUNT = 100;
 const BOOKING_ENDPOINT = "https://script.google.com/macros/s/AKfycbw3QYQcz4yEfooj5JHimeEjPhEMiwr9d-thze96WrjQJxzgkjCVRDlG1XG6iM6TJEEU/exec";
@@ -138,27 +138,51 @@ const HIDDEN_PROGRAM_IDS = new Set(["all-in-one-package", "beauty-shopping"]);
 
 const ALLINONE_BUILDER_CONFIG = {
   basePrice: ALLINONE_BASE_PRICE,
-  requiredIds: ["skin-clinic-care-1", "skin-clinic-care-2"],
-  optionalIds: ["scalp-diagnosis-spa", "hair-salon", "celebrity-hair-makeup", "nail-care", "body-massage", "beauty-shopping"],
+  requiredIds: [
+    "essential-skin-reset",
+    "advanced-contour-lift",
+    "clear-calm-skin-care",
+    "glow-hydration-boost",
+    "pigment-tone-refinement"
+  ],
+  optionalIds: [
+    "scalp-diagnosis-spa",
+    "body-massage",
+    "lymphatic-recovery-care",
+    "calming-facial-recovery",
+    "private-rest-tea-time",
+    "hair-salon",
+    "celebrity-hair-makeup",
+    "nail-care",
+    "camera-ready-styling",
+    "k-beauty-makeup-lesson",
+    "beauty-shopping",
+    "skincare-product-matching",
+    "clinic-interpreter-support",
+    "recovery-meal-recommendation",
+    "photo-spot-lifestyle-curation"
+  ],
   labels: {
-    "skin-clinic-care-1": "Skin Clinic Care 1",
-    "skin-clinic-care-2": "Skin Clinic Care 2",
-    "scalp-diagnosis-spa": "Scalp Care",
-    "hair-salon": "Hair Salon",
-    "celebrity-hair-makeup": "Hair & Makeup",
-    "nail-care": "Nail/Pedi Care",
-    "body-massage": "Body Massage",
-    "beauty-shopping": "Beauty Shopping"
-  },
-  addonPrices: {
-    "skin-clinic-care-1": 0,
-    "skin-clinic-care-2": 150,
-    "scalp-diagnosis-spa": 0,
-    "hair-salon": 80,
-    "celebrity-hair-makeup": 100,
-    "nail-care": 0,
-    "body-massage": 20,
-    "beauty-shopping": 0
+    "essential-skin-reset": "Essential Skin Reset",
+    "advanced-contour-lift": "Advanced Contour & Lift",
+    "clear-calm-skin-care": "Clear & Calm Skin Care",
+    "glow-hydration-boost": "Glow & Hydration Boost",
+    "pigment-tone-refinement": "Pigment & Tone Refinement",
+    "scalp-diagnosis-spa": "Scalp Recovery Care",
+    "body-massage": "Body Recovery Massage",
+    "lymphatic-recovery-care": "Lymphatic Recovery Care",
+    "calming-facial-recovery": "Calming Facial Recovery",
+    "private-rest-tea-time": "Private Rest & Tea Time",
+    "hair-salon": "Salon Finish",
+    "celebrity-hair-makeup": "Hair & Makeup Styling",
+    "nail-care": "Nail/Pedi Detail Care",
+    "camera-ready-styling": "Camera-Ready Styling",
+    "k-beauty-makeup-lesson": "K-Beauty Makeup Lesson",
+    "beauty-shopping": "Beauty Shopping Curation",
+    "skincare-product-matching": "Skincare Product Matching",
+    "clinic-interpreter-support": "Clinic Interpreter Support",
+    "recovery-meal-recommendation": "Recovery Meal Recommendation",
+    "photo-spot-lifestyle-curation": "Photo Spot & Lifestyle Curation"
   }
 };
 
@@ -242,15 +266,15 @@ const I18N = {
       reviewCart: "Review Cart"
     },
     common: {
-      startingFrom: "Price",
+      startingFrom: "Consultation required",
       noMatchTitle: "No matching programs",
       noMatchText: "Try another keyword or category.",
       selected: "added to cart.",
       traveler: "traveler",
       travelers: "travelers",
-      subtotal: "Subtotal",
-      service: "Service (5%)",
-      total: "Total",
+      subtotal: "Selected scope",
+      service: "Concierge review",
+      lead: "Private itinerary",
       remove: "Remove",
       finalScope: "Final scope is confirmed after consultation and availability review.",
       noCartItems: "No cart items"
@@ -296,8 +320,8 @@ const I18N = {
       programsLead: "Explore signature itineraries, focused care paths, and private consultation options for international guests.",
       searchPlaceholder: "Search programs",
       sortRecommended: "Sort: Recommended",
-      priceAsc: "Price: Low to High",
-      priceDesc: "Price: High to Low",
+      priceAsc: "Duration: Short to Long",
+      priceDesc: "Duration: Long to Short",
       aboutEyebrow: "About",
       aboutTitle: "Private coordination for international guests visiting Seoul.",
       aboutLead: "Beauty, wellness, and clinic planning with private concierge guidance.",
@@ -984,13 +1008,13 @@ const LOCALE_PATCH = {
         qrMissing: "Add QR image"
       },
       footer: {
-        programs: "Need a starting point? Begin with <strong>Private Consultation ($10)</strong>.",
+        programs: "Need a starting point? Begin with <strong>Private Consultation</strong>.",
         about: "Private planning for international guests visiting Seoul.",
         faq: "Still deciding? Request a private consultation.",
         contact: "For faster support, include your dates, preferred programs, and priorities.",
         booking: "Consultation is request-first. Availability, scope, and final payment guidance are confirmed before any visit is finalized.",
-        cart: "Prefer to begin with clarity? Add <strong>Private Consultation ($10)</strong>.",
-        "program-detail": "Need clarity first? Start with <strong>Private Consultation ($10)</strong>."
+        cart: "Prefer to begin with clarity? Add <strong>Private Consultation</strong>.",
+        "program-detail": "Need clarity first? Start with <strong>Private Consultation</strong>."
       }
     },
     programs: {
@@ -1040,7 +1064,7 @@ const LOCALE_PATCH = {
           "Aftercare guidance"
         ],
         faq: [
-          { q: "Any optional add-ons?", a: "Beard hair removal for men, or underarm / upper-lip hair removal for women." }
+          { q: "Any optional refinements?", a: "Beard hair removal for men, or underarm / upper-lip hair removal for women." }
         ]
       },
       "skin-clinic-care-2": {
@@ -1274,13 +1298,13 @@ const LOCALE_PATCH = {
       proceed: "프라이빗 상담 요청",
       exploreMore: "프로그램 더 보기",
       footer: {
-        programs: "시작이 어렵다면 <strong>프라이빗 상담 ($10)</strong>부터.",
+        programs: "시작이 어렵다면 <strong>프라이빗 상담</strong>부터.",
         about: "서울 방문 전, 프라이빗하게 결정하세요.",
         faq: "아직 고민 중이라면 프라이빗 상담을 요청하세요.",
         contact: "더 빠른 안내를 위해 날짜·서비스·우선순위를 함께 남겨주세요.",
         booking: "상담은 요청 우선 방식입니다. 방문 확정 전 가능 여부, 범위, 최종 결제 안내를 확인합니다.",
-        cart: "가볍게 시작하고 싶다면 <strong>프라이빗 상담 ($10)</strong>을 추가하세요.",
-        "program-detail": "먼저 방향이 필요하다면 <strong>프라이빗 상담 ($10)</strong>으로 시작하세요."
+        cart: "가볍게 시작하고 싶다면 <strong>프라이빗 상담</strong>을 추가하세요.",
+        "program-detail": "먼저 방향이 필요하다면 <strong>프라이빗 상담</strong>으로 시작하세요."
       }
     },
     programs: {
@@ -1446,13 +1470,13 @@ const LOCALE_PATCH = {
       proceed: "申请私享咨询",
       exploreMore: "查看更多路径",
       footer: {
-        programs: "不确定如何开始？先从 <strong>私享咨询 ($10)</strong> 开始。",
+        programs: "不确定如何开始？先从 <strong>私享咨询</strong> 开始。",
         about: "在到访首尔前，更私密地做出清晰决定。",
         faq: "还在考虑中？可先申请私享咨询。",
         contact: "为更快回复，请一并提供日期、偏好服务和优先事项。",
         booking: "咨询为“先申请”流程。到访确认前，我们会先确认可预约性、服务范围与最终付款说明。",
-        cart: "想轻量开始？可先添加 <strong>私享咨询 ($10)</strong>。",
-        "program-detail": "想先明确方向？可从 <strong>私享咨询 ($10)</strong> 开始。"
+        cart: "想轻量开始？可先添加 <strong>私享咨询</strong>。",
+        "program-detail": "想先明确方向？可从 <strong>私享咨询</strong> 开始。"
       }
     },
     programs: {
@@ -1618,13 +1642,13 @@ const LOCALE_PATCH = {
       proceed: "プライベート相談を依頼",
       exploreMore: "ほかのルートを見る",
       footer: {
-        programs: "迷ったら、まず <strong>プライベート相談 ($10)</strong> から。",
+        programs: "迷ったら、まず <strong>プライベート相談</strong> から。",
         about: "ソウル訪問前に、プライベートに判断しましょう。",
         faq: "まだ迷っている場合は、プライベート相談をご依頼ください。",
         contact: "より早いご案内のため、日程・希望サービス・優先事項をご記入ください。",
         booking: "相談はリクエスト先行です。訪問確定前に、空き状況・範囲・最終決済案内を確認します。",
-        cart: "軽く始めたい方は、<strong>プライベート相談 ($10)</strong> を追加してください。",
-        "program-detail": "まず方向性を整理したい方は、<strong>プライベート相談 ($10)</strong> から始めてください。"
+        cart: "軽く始めたい方は、<strong>プライベート相談</strong> を追加してください。",
+        "program-detail": "まず方向性を整理したい方は、<strong>プライベート相談</strong> から始めてください。"
       }
     },
     programs: {
@@ -1752,9 +1776,9 @@ const LANGUAGE_SYNC_PATCH = {
       noMatchText: "Try another keyword or category.",
       traveler: "traveler",
       travelers: "travelers",
-      subtotal: "Subtotal",
-      service: "Service (5%)",
-      total: "Total",
+      subtotal: "Selected scope",
+      service: "Concierge review",
+      lead: "Private itinerary",
       remove: "Remove",
       selected: "added to cart."
     },
@@ -1814,8 +1838,8 @@ const LANGUAGE_SYNC_PATCH = {
       selectedPath: "Selected Path",
       searchPlaceholder: "Search concierge path",
       sortRecommended: "Sort: Recommended",
-      priceAsc: "Price: Low to High",
-      priceDesc: "Price: High to Low",
+      priceAsc: "Duration: Short to Long",
+      priceDesc: "Duration: Long to Short",
       fullName: "Full Name",
       email: "Email",
       nationality: "Nationality",
@@ -1843,32 +1867,32 @@ const LANGUAGE_SYNC_PATCH = {
       contactNextTitle: "Best Next Step",
       contactNextLine: "Request a private consultation with your preferred programs and dates.",
       allInOneCardEyebrow: "SIGNATURE ITINERARY",
-      allInOneCardPrice: "Starting from $1,599",
+      allInOneCardPrice: "",
       allInOneCardDescription: "A private all-in-one Seoul beauty day built around clinic care, salon care, recovery, and optional refinements.",
       allInOneCardNote: "Includes 1 skin clinic care option + 3 optional programs.",
       allInOneCardButton: "Build Your Journey",
       allInOneBuilderTitle: "Build your beauty journey.",
       allInOneBuilderLead: "Choose 1 skin clinic care option and 3 optional programs to complete your All-in-One Package.",
-      allInOneBaseLabel: "Base package:",
-      allInOneAddonsLabel: "Add-ons:",
-      allInOneTotalLabel: "Total:",
+      allInOneBaseLabel: "Journey Summary",
+      allInOneAddonsLabel: "Concierge review",
+      allInOneTotalLabel: "Journey Summary",
       allInOneRequiredLabel: "Required: Choose 1 Skin Clinic Care",
       allInOneOptionalLabel: "Choose 3 Optional Programs",
-      allInOneSkin1Title: "Skin Clinic Care 1 (+$0)",
+      allInOneSkin1Title: "Essential Skin Reset",
       allInOneSkin1Desc: "Tone, texture, pore care, vitamin tone care, and toning.",
-      allInOneSkin2Title: "Skin Clinic Care 2 (+$150)",
+      allInOneSkin2Title: "Advanced Contour & Lift",
       allInOneSkin2Desc: "Lifting, pigment laser, and wrinkle botox.",
-      allInOneOptScalpTitle: "Scalp Care (+$0)",
+      allInOneOptScalpTitle: "Scalp Recovery Care",
       allInOneOptScalpDesc: "Scalp diagnosis, scaling, and relaxing treatment support.",
-      allInOneOptSalonTitle: "Hair Salon (+$80)",
+      allInOneOptSalonTitle: "Salon Finish",
       allInOneOptSalonDesc: "Haircut or hair clinic treatment with consultation and finishing.",
-      allInOneOptHMUTitle: "Hair & Makeup (+$100)",
+      allInOneOptHMUTitle: "Hair & Makeup Styling",
       allInOneOptHMUDesc: "Professional hair styling and makeup for a polished, camera-ready look.",
-      allInOneOptNailTitle: "Nail/Pedi Care (+$0)",
+      allInOneOptNailTitle: "Nail/Pedi Detail Care",
       allInOneOptNailDesc: "Nail or pedi care with shaping, cuticle care, and finish.",
-      allInOneOptBodyTitle: "Body Massage (+$20)",
+      allInOneOptBodyTitle: "Body Recovery Massage",
       allInOneOptBodyDesc: "Full-body massage focused on recovery, comfort, and release.",
-      allInOneOptShopTitle: "Beauty Shopping (+$0)",
+      allInOneOptShopTitle: "Beauty Shopping Curation",
       allInOneOptShopDesc: "Guided K-beauty shopping support, including destinations such as Olive Young.",
       allInOneContinueButton: "Continue to Consultation",
       allInOneCounterTemplate: "{count} / 4 selected",
@@ -1878,9 +1902,9 @@ const LANGUAGE_SYNC_PATCH = {
       allInOneMaxPrograms: "You have already selected all 4 programs.",
       allInOneMaxOptional: "You have already selected all 3 optional programs.",
       allInOneSummary: {
-        base: "Base package:",
-        addons: "Add-ons:",
-        total: "Total:"
+        title: "Journey Summary",
+        note: "Concierge review",
+        note: "Private itinerary review"
       },
       footer: {
         programs: "Need a starting point? Begin with <strong>Private Consultation</strong>.",
@@ -2061,7 +2085,7 @@ const LANGUAGE_SYNC_PATCH = {
       contactNextTitle: "가장 빠른 시작",
       contactNextLine: "원하는 프로그램과 날짜를 남겨 프라이빗 상담을 요청하세요.",
       allInOneCardEyebrow: "시그니처 일정",
-      allInOneCardPrice: "$1,599부터",
+      allInOneCardPrice: "",
       allInOneCardDescription: "클리닉 케어, 살롱 케어, 리커버리, 선택 옵션까지 한 번에 담은 프라이빗 서울 뷰티 데이.",
       allInOneCardNote: "스킨 클리닉 1개 + 선택 프로그램 3개 포함",
       allInOneCardButton: "여정 구성하기",
@@ -2069,24 +2093,24 @@ const LANGUAGE_SYNC_PATCH = {
       allInOneBuilderLead: "스킨 클리닉 1개와 선택 프로그램 3개를 골라 All-in-One 패키지를 완성하세요.",
       allInOneBaseLabel: "기본 패키지:",
       allInOneAddonsLabel: "추가 옵션:",
-      allInOneTotalLabel: "합계:",
+      allInOneTotalLabel: "여정 요약",
       allInOneRequiredLabel: "필수: 스킨 클리닉 1개 선택",
       allInOneOptionalLabel: "선택 프로그램 3개 선택",
-      allInOneSkin1Title: "Skin Clinic Care 1 (+$0)",
+      allInOneSkin1Title: "Essential Skin Reset",
       allInOneSkin1Desc: "톤, 결, 모공, 비타민 톤 케어와 토닝 중심 케어.",
-      allInOneSkin2Title: "Skin Clinic Care 2 (+$150)",
+      allInOneSkin2Title: "Advanced Contour & Lift",
       allInOneSkin2Desc: "리프팅, 색소 레이저, 주름 보톡스 중심 케어.",
-      allInOneOptScalpTitle: "Scalp Care (+$0)",
+      allInOneOptScalpTitle: "Scalp Recovery Care",
       allInOneOptScalpDesc: "두피 진단, 스케일링, 릴랙싱 케어 지원.",
-      allInOneOptSalonTitle: "Hair Salon (+$80)",
+      allInOneOptSalonTitle: "Salon Finish",
       allInOneOptSalonDesc: "상담 후 커트 또는 헤어 클리닉 케어와 마무리.",
-      allInOneOptHMUTitle: "Hair & Makeup (+$100)",
+      allInOneOptHMUTitle: "Hair & Makeup Styling",
       allInOneOptHMUDesc: "카메라-레디 룩을 위한 프로 헤어·메이크업.",
-      allInOneOptNailTitle: "Nail/Pedi Care (+$0)",
+      allInOneOptNailTitle: "Nail/Pedi Detail Care",
       allInOneOptNailDesc: "쉐이핑, 큐티클 케어, 네일 또는 페디 마무리.",
-      allInOneOptBodyTitle: "Body Massage (+$20)",
+      allInOneOptBodyTitle: "Body Recovery Massage",
       allInOneOptBodyDesc: "회복과 이완 중심의 풀바디 마사지.",
-      allInOneOptShopTitle: "Beauty Shopping (+$0)",
+      allInOneOptShopTitle: "Beauty Shopping Curation",
       allInOneOptShopDesc: "올리브영 등 목적지 중심의 K-뷰티 쇼핑 가이드.",
       allInOneContinueButton: "상담 페이지로 이동",
       allInOneCounterTemplate: "{count} / 4 선택됨",
@@ -2280,7 +2304,7 @@ const LANGUAGE_SYNC_PATCH = {
       contactNextTitle: "最佳下一步",
       contactNextLine: "提交你的偏好项目与日期，开始私享咨询。",
       allInOneCardEyebrow: "SIGNATURE ITINERARY",
-      allInOneCardPrice: "$1,599 起",
+      allInOneCardPrice: "",
       allInOneCardDescription: "围绕诊疗护理、沙龙护理、放松恢复与可选优化打造的一日私享首尔美丽行程。",
       allInOneCardNote: "包含 1 个 Skin Clinic Care + 3 个可选项目",
       allInOneCardButton: "开始构建旅程",
@@ -2288,24 +2312,24 @@ const LANGUAGE_SYNC_PATCH = {
       allInOneBuilderLead: "选择 1 个 Skin Clinic Care 选项 + 3 个可选项目，完成 All-in-One Package。",
       allInOneBaseLabel: "基础套餐：",
       allInOneAddonsLabel: "加项：",
-      allInOneTotalLabel: "合计：",
+      allInOneTotalLabel: "行程摘要",
       allInOneRequiredLabel: "必选：选择 1 个 Skin Clinic Care",
       allInOneOptionalLabel: "选择 3 个可选项目",
-      allInOneSkin1Title: "Skin Clinic Care 1 (+$0)",
+      allInOneSkin1Title: "Essential Skin Reset",
       allInOneSkin1Desc: "聚焦肤色、肤质、毛孔、维稳提亮与调理。",
-      allInOneSkin2Title: "Skin Clinic Care 2 (+$150)",
+      allInOneSkin2Title: "Advanced Contour & Lift",
       allInOneSkin2Desc: "聚焦提升、色素激光与皱纹肉毒。",
-      allInOneOptScalpTitle: "Scalp Care (+$0)",
+      allInOneOptScalpTitle: "Scalp Recovery Care",
       allInOneOptScalpDesc: "头皮诊断、深层清洁与放松护理支持。",
-      allInOneOptSalonTitle: "Hair Salon (+$80)",
+      allInOneOptSalonTitle: "Salon Finish",
       allInOneOptSalonDesc: "咨询后进行剪发或发质护理并完成定型。",
-      allInOneOptHMUTitle: "Hair & Makeup (+$100)",
+      allInOneOptHMUTitle: "Hair & Makeup Styling",
       allInOneOptHMUDesc: "专业发型与妆容支持，打造镜头友好效果。",
-      allInOneOptNailTitle: "Nail/Pedi Care (+$0)",
+      allInOneOptNailTitle: "Nail/Pedi Detail Care",
       allInOneOptNailDesc: "包含修形、角质护理与手足部收尾。",
-      allInOneOptBodyTitle: "Body Massage (+$20)",
+      allInOneOptBodyTitle: "Body Recovery Massage",
       allInOneOptBodyDesc: "以恢复与舒缓为核心的全身按摩。",
-      allInOneOptShopTitle: "Beauty Shopping (+$0)",
+      allInOneOptShopTitle: "Beauty Shopping Curation",
       allInOneOptShopDesc: "提供 Olive Young 等目的地导购支持。",
       allInOneContinueButton: "继续前往咨询",
       allInOneCounterTemplate: "已选择 {count} / 4",
@@ -2499,7 +2523,7 @@ const LANGUAGE_SYNC_PATCH = {
       contactNextTitle: "おすすめの次の一歩",
       contactNextLine: "希望プログラムと日程を添えて、プライベート相談をご依頼ください。",
       allInOneCardEyebrow: "SIGNATURE ITINERARY",
-      allInOneCardPrice: "$1,599〜",
+      allInOneCardPrice: "",
       allInOneCardDescription: "クリニックケア、サロンケア、回復、オプション調整を一日にまとめたプライベートソウル美容ルート。",
       allInOneCardNote: "Skin Clinic Care 1件 + オプション3件を含みます",
       allInOneCardButton: "旅程を組み立てる",
@@ -2507,24 +2531,24 @@ const LANGUAGE_SYNC_PATCH = {
       allInOneBuilderLead: "Skin Clinic Care を1つ、オプションを3つ選んで All-in-One Package を完成させてください。",
       allInOneBaseLabel: "基本パッケージ:",
       allInOneAddonsLabel: "追加オプション:",
-      allInOneTotalLabel: "合計:",
+      allInOneTotalLabel: "ジャーニー概要",
       allInOneRequiredLabel: "必須: Skin Clinic Care を1つ選択",
       allInOneOptionalLabel: "オプションを3つ選択",
-      allInOneSkin1Title: "Skin Clinic Care 1 (+$0)",
+      allInOneSkin1Title: "Essential Skin Reset",
       allInOneSkin1Desc: "トーン、キメ、毛穴、ビタミントーンケア、トーニング中心ケア。",
-      allInOneSkin2Title: "Skin Clinic Care 2 (+$150)",
+      allInOneSkin2Title: "Advanced Contour & Lift",
       allInOneSkin2Desc: "リフティング、色素レーザー、しわボトックス中心ケア。",
-      allInOneOptScalpTitle: "Scalp Care (+$0)",
+      allInOneOptScalpTitle: "Scalp Recovery Care",
       allInOneOptScalpDesc: "頭皮診断、スケーリング、リラックスケア支援。",
-      allInOneOptSalonTitle: "Hair Salon (+$80)",
+      allInOneOptSalonTitle: "Salon Finish",
       allInOneOptSalonDesc: "相談後、カットまたはヘアクリニックケアと仕上げ。",
-      allInOneOptHMUTitle: "Hair & Makeup (+$100)",
+      allInOneOptHMUTitle: "Hair & Makeup Styling",
       allInOneOptHMUDesc: "洗練されたカメラ映えのためのプロヘア＆メイク。",
-      allInOneOptNailTitle: "Nail/Pedi Care (+$0)",
+      allInOneOptNailTitle: "Nail/Pedi Detail Care",
       allInOneOptNailDesc: "シェイプ、キューティクルケア、ネイルまたはペディ仕上げ。",
-      allInOneOptBodyTitle: "Body Massage (+$20)",
+      allInOneOptBodyTitle: "Body Recovery Massage",
       allInOneOptBodyDesc: "回復とリリースを重視したフルボディマッサージ。",
-      allInOneOptShopTitle: "Beauty Shopping (+$0)",
+      allInOneOptShopTitle: "Beauty Shopping Curation",
       allInOneOptShopDesc: "Olive Young などを含む K-beauty ショッピングガイド。",
       allInOneContinueButton: "相談ページへ進む",
       allInOneCounterTemplate: "{count} / 4 選択済み",
@@ -2641,6 +2665,245 @@ Object.keys(PREFERRED_DATE_COPY_PATCH).forEach((locale) => {
   if (I18N[locale]?.page) Object.assign(I18N[locale].page, PREFERRED_DATE_COPY_PATCH[locale]);
 });
 
+const ALLINONE_PRIVATE_ITINERARY_COPY = {
+  en: {
+    page: {
+      allInOneSummaryTitle: "Journey Summary",
+      allInOneSummaryLead: "Your private itinerary will be refined after consultation.",
+      allInOneSummaryNote: "Selected clinic care and enhancements will be reviewed by the Karecation concierge team.",
+      allInOneRequiredLabel: "Required: Choose 1 Clinic Care Option",
+      allInOneOptionalLabel: "Choose 3 Optional Enhancements",
+      allInOneRecoveryLabel: "Recovery & Comfort",
+      allInOneBeautyLabel: "Beauty Finishing",
+      allInOneConciergeLabel: "Concierge & Lifestyle",
+      allInOneSkinEssentialTitle: "Essential Skin Reset",
+      allInOneSkinEssentialDesc: "Tone, texture, hydration, pore care, and vitamin care.",
+      allInOneSkinAdvancedTitle: "Advanced Contour & Lift",
+      allInOneSkinAdvancedDesc: "Lifting, pigment care, wrinkle refinement, and facial contour support.",
+      allInOneSkinClearTitle: "Clear & Calm Skin Care",
+      allInOneSkinClearDesc: "Soothing care for sensitive, acne-prone, or irritated skin.",
+      allInOneSkinGlowTitle: "Glow & Hydration Boost",
+      allInOneSkinGlowDesc: "Moisture-focused skin care for a fresh, luminous finish.",
+      allInOneSkinPigmentTitle: "Pigment & Tone Refinement",
+      allInOneSkinPigmentDesc: "Targeted care for uneven tone, dullness, and visible pigmentation.",
+      allInOneOptScalpTitle: "Scalp Recovery Care",
+      allInOneOptScalpDesc: "Scalp diagnosis, scaling, and relaxing treatment support.",
+      allInOneOptBodyTitle: "Body Recovery Massage",
+      allInOneOptBodyDesc: "Full-body massage focused on recovery, comfort, and release.",
+      allInOneOptLymphaticTitle: "Lymphatic Recovery Care",
+      allInOneOptLymphaticDesc: "Gentle recovery-focused care to support facial and body comfort.",
+      allInOneOptCalmingTitle: "Calming Facial Recovery",
+      allInOneOptCalmingDesc: "Post-treatment soothing care for sensitive or tired skin.",
+      allInOneOptTeaTitle: "Private Rest & Tea Time",
+      allInOneOptTeaDesc: "A quiet recovery break with tea, light refreshments, and concierge support.",
+      allInOneOptSalonTitle: "Salon Finish",
+      allInOneOptSalonDesc: "Haircut or hair clinic treatment with consultation and finishing.",
+      allInOneOptHMUTitle: "Hair & Makeup Styling",
+      allInOneOptHMUDesc: "Professional styling for a polished, camera-ready look.",
+      allInOneOptNailTitle: "Nail/Pedi Detail Care",
+      allInOneOptNailDesc: "Nail or pedi care with shaping, cuticle care, and finish.",
+      allInOneOptCameraTitle: "Camera-Ready Styling",
+      allInOneOptCameraDesc: "A refined finish before photos, dinner, or a special occasion.",
+      allInOneOptLessonTitle: "K-Beauty Makeup Lesson",
+      allInOneOptLessonDesc: "A guided beauty session focused on Korean makeup style and product use.",
+      allInOneOptShopTitle: "Beauty Shopping Curation",
+      allInOneOptShopDesc: "Guided K-beauty shopping support, including destinations such as Olive Young.",
+      allInOneOptProductTitle: "Skincare Product Matching",
+      allInOneOptProductDesc: "Personalized product recommendations based on skin concerns and routine.",
+      allInOneOptInterpreterTitle: "Clinic Interpreter Support",
+      allInOneOptInterpreterDesc: "Language support during clinic visit, consultation, and treatment flow.",
+      allInOneOptMealTitle: "Recovery Meal Recommendation",
+      allInOneOptMealDesc: "Curated restaurant or cafe recommendation after treatment.",
+      allInOneOptPhotoTitle: "Photo Spot & Lifestyle Curation",
+      allInOneOptPhotoDesc: "Optional Seoul beauty lifestyle routing for photos, cafes, and soft leisure.",
+      allInOneContinueButton: "Request Private Consultation",
+      allInOneSummary: {
+        title: "Journey Summary",
+        lead: "Your private itinerary will be refined after consultation.",
+        note: "Selected clinic care and enhancements will be reviewed by the Karecation concierge team."
+      }
+    }
+  },
+  ko: {
+    page: {
+      allInOneSummaryTitle: "여정 요약",
+      allInOneSummaryLead: "프라이빗 일정은 상담 후 세밀하게 조정됩니다.",
+      allInOneSummaryNote: "선택한 클리닉 케어와 옵션은 Karecation 컨시어지 팀이 함께 검토합니다.",
+      allInOneRequiredLabel: "필수: 클리닉 케어 1개 선택",
+      allInOneOptionalLabel: "선택 옵션 3개 선택",
+      allInOneRecoveryLabel: "리커버리 & 컴포트",
+      allInOneBeautyLabel: "뷰티 피니싱",
+      allInOneConciergeLabel: "컨시어지 & 라이프스타일",
+      allInOneSkinEssentialTitle: "에센셜 스킨 리셋",
+      allInOneSkinEssentialDesc: "톤, 결, 수분, 모공, 비타민 케어.",
+      allInOneSkinAdvancedTitle: "어드밴스드 윤곽 & 리프트",
+      allInOneSkinAdvancedDesc: "리프팅, 색소 케어, 주름 개선, 얼굴 윤곽 서포트.",
+      allInOneSkinClearTitle: "클리어 & 카밍 스킨 케어",
+      allInOneSkinClearDesc: "민감하거나 트러블이 있는 피부를 위한 진정 케어.",
+      allInOneSkinGlowTitle: "글로우 & 하이드레이션 부스트",
+      allInOneSkinGlowDesc: "맑고 윤기 있는 마무리를 위한 수분 중심 케어.",
+      allInOneSkinPigmentTitle: "피그먼트 & 톤 리파인먼트",
+      allInOneSkinPigmentDesc: "고르지 않은 톤, 칙칙함, 눈에 띄는 색소를 위한 집중 케어.",
+      allInOneOptScalpTitle: "스칼프 리커버리 케어",
+      allInOneOptScalpDesc: "두피 진단, 스케일링, 릴랙싱 트리트먼트 서포트.",
+      allInOneOptBodyTitle: "바디 리커버리 마사지",
+      allInOneOptBodyDesc: "회복, 편안함, 이완에 집중한 전신 마사지.",
+      allInOneOptLymphaticTitle: "림프 리커버리 케어",
+      allInOneOptLymphaticDesc: "얼굴과 몸의 편안함을 돕는 부드러운 회복 케어.",
+      allInOneOptCalmingTitle: "카밍 페이셜 리커버리",
+      allInOneOptCalmingDesc: "시술 후 민감하거나 지친 피부를 위한 진정 케어.",
+      allInOneOptTeaTitle: "프라이빗 휴식 & 티타임",
+      allInOneOptTeaDesc: "차, 가벼운 다과, 컨시어지 서포트가 함께하는 조용한 회복 시간.",
+      allInOneOptSalonTitle: "살롱 피니시",
+      allInOneOptSalonDesc: "상담 후 커트 또는 헤어 클리닉 트리트먼트와 마무리.",
+      allInOneOptHMUTitle: "헤어 & 메이크업 스타일링",
+      allInOneOptHMUDesc: "세련되고 카메라에 잘 어울리는 룩을 위한 프로 스타일링.",
+      allInOneOptNailTitle: "네일/페디 디테일 케어",
+      allInOneOptNailDesc: "쉐이핑, 큐티클 케어, 네일 또는 페디 마무리.",
+      allInOneOptCameraTitle: "카메라 레디 스타일링",
+      allInOneOptCameraDesc: "촬영, 디너, 특별한 일정 전 정돈된 피니시.",
+      allInOneOptLessonTitle: "K-뷰티 메이크업 레슨",
+      allInOneOptLessonDesc: "한국식 메이크업 스타일과 제품 사용을 중심으로 한 가이드 세션.",
+      allInOneOptShopTitle: "뷰티 쇼핑 큐레이션",
+      allInOneOptShopDesc: "올리브영 등 목적지를 포함한 K-뷰티 쇼핑 서포트.",
+      allInOneOptProductTitle: "스킨케어 제품 매칭",
+      allInOneOptProductDesc: "피부 고민과 루틴에 맞춘 개인화 제품 추천.",
+      allInOneOptInterpreterTitle: "클리닉 통역 서포트",
+      allInOneOptInterpreterDesc: "클리닉 방문, 상담, 시술 흐름 중 언어 서포트.",
+      allInOneOptMealTitle: "리커버리 식사 추천",
+      allInOneOptMealDesc: "시술 후 방문하기 좋은 레스토랑 또는 카페 추천.",
+      allInOneOptPhotoTitle: "포토 스팟 & 라이프스타일 큐레이션",
+      allInOneOptPhotoDesc: "사진, 카페, 가벼운 여가를 위한 서울 뷰티 라이프스타일 동선.",
+      allInOneContinueButton: "프라이빗 상담 요청",
+      allInOneSummary: {
+        title: "여정 요약",
+        lead: "프라이빗 일정은 상담 후 세밀하게 조정됩니다.",
+        note: "선택한 클리닉 케어와 옵션은 Karecation 컨시어지 팀이 함께 검토합니다."
+      }
+    }
+  },
+  zh: {
+    page: {
+      allInOneSummaryTitle: "行程摘要",
+      allInOneSummaryLead: "你的私享行程将在咨询后进一步细化。",
+      allInOneSummaryNote: "所选诊疗护理与增强项目将由 Karecation 礼宾团队审核。",
+      allInOneRequiredLabel: "必选：选择 1 个诊疗护理",
+      allInOneOptionalLabel: "选择 3 个可选增强项目",
+      allInOneRecoveryLabel: "恢复与舒适",
+      allInOneBeautyLabel: "美丽收尾",
+      allInOneConciergeLabel: "礼宾与生活方式",
+      allInOneSkinEssentialTitle: "基础焕肤重启",
+      allInOneSkinEssentialDesc: "肤色、肤质、补水、毛孔与维他命护理。",
+      allInOneSkinAdvancedTitle: "进阶轮廓与提升",
+      allInOneSkinAdvancedDesc: "提升、色素护理、皱纹细化与面部轮廓支持。",
+      allInOneSkinClearTitle: "净透舒缓皮肤护理",
+      allInOneSkinClearDesc: "适合敏感、易痘或受刺激肌肤的舒缓护理。",
+      allInOneSkinGlowTitle: "水光保湿提升",
+      allInOneSkinGlowDesc: "以补水为重点，打造清新透亮的收尾效果。",
+      allInOneSkinPigmentTitle: "色素与肤色细化",
+      allInOneSkinPigmentDesc: "针对肤色不均、暗沉与可见色素的护理。",
+      allInOneOptScalpTitle: "头皮恢复护理",
+      allInOneOptScalpDesc: "头皮诊断、清洁与放松护理支持。",
+      allInOneOptBodyTitle: "身体恢复按摩",
+      allInOneOptBodyDesc: "专注恢复、舒适与放松的全身按摩。",
+      allInOneOptLymphaticTitle: "淋巴恢复护理",
+      allInOneOptLymphaticDesc: "温和恢复护理，支持面部与身体舒适感。",
+      allInOneOptCalmingTitle: "舒缓面部恢复",
+      allInOneOptCalmingDesc: "适合护理后敏感或疲惫肌肤的舒缓护理。",
+      allInOneOptTeaTitle: "私享休息与茶点",
+      allInOneOptTeaDesc: "含茶饮、轻食与礼宾支持的安静恢复时段。",
+      allInOneOptSalonTitle: "沙龙造型收尾",
+      allInOneOptSalonDesc: "咨询后进行剪发或发质护理并完成造型。",
+      allInOneOptHMUTitle: "发型与妆容造型",
+      allInOneOptHMUDesc: "专业造型，打造精致上镜效果。",
+      allInOneOptNailTitle: "美甲/足部细节护理",
+      allInOneOptNailDesc: "指甲或足部护理，含修形、角质护理与收尾。",
+      allInOneOptCameraTitle: "上镜造型整理",
+      allInOneOptCameraDesc: "适合拍照、晚餐或特别场合前的精致收尾。",
+      allInOneOptLessonTitle: "K-Beauty 妆容课程",
+      allInOneOptLessonDesc: "围绕韩式妆容风格与产品使用的指导体验。",
+      allInOneOptShopTitle: "美妆购物策划",
+      allInOneOptShopDesc: "K-beauty 购物支持，包括 Olive Young 等目的地。",
+      allInOneOptProductTitle: "护肤产品匹配",
+      allInOneOptProductDesc: "根据皮肤关注点与日常流程提供个性化产品建议。",
+      allInOneOptInterpreterTitle: "诊所口译支持",
+      allInOneOptInterpreterDesc: "诊所到访、咨询与护理流程中的语言支持。",
+      allInOneOptMealTitle: "恢复餐饮推荐",
+      allInOneOptMealDesc: "护理后餐厅或咖啡馆推荐。",
+      allInOneOptPhotoTitle: "拍照点与生活方式策划",
+      allInOneOptPhotoDesc: "可选首尔美丽生活方式路线，包含拍照、咖啡馆与轻休闲。",
+      allInOneContinueButton: "申请私享咨询",
+      allInOneSummary: {
+        title: "行程摘要",
+        lead: "你的私享行程将在咨询后进一步细化。",
+        note: "所选诊疗护理与增强项目将由 Karecation 礼宾团队审核。"
+      }
+    }
+  },
+  ja: {
+    page: {
+      allInOneSummaryTitle: "ジャーニー概要",
+      allInOneSummaryLead: "プライベート旅程は相談後に細かく調整されます。",
+      allInOneSummaryNote: "選択したクリニックケアとオプションは Karecation コンシェルジュチームが確認します。",
+      allInOneRequiredLabel: "必須: クリニックケアを1つ選択",
+      allInOneOptionalLabel: "オプションを3つ選択",
+      allInOneRecoveryLabel: "リカバリー & コンフォート",
+      allInOneBeautyLabel: "ビューティーフィニッシュ",
+      allInOneConciergeLabel: "コンシェルジュ & ライフスタイル",
+      allInOneSkinEssentialTitle: "エッセンシャルスキンリセット",
+      allInOneSkinEssentialDesc: "トーン、キメ、保湿、毛穴、ビタミンケア。",
+      allInOneSkinAdvancedTitle: "アドバンスド輪郭 & リフト",
+      allInOneSkinAdvancedDesc: "リフティング、色素ケア、しわの refinement、フェイスラインサポート。",
+      allInOneSkinClearTitle: "クリア & カームスキンケア",
+      allInOneSkinClearDesc: "敏感肌、ニキビが気になる肌、ゆらぎ肌のための鎮静ケア。",
+      allInOneSkinGlowTitle: "グロウ & ハイドレーションブースト",
+      allInOneSkinGlowDesc: "みずみずしく明るい仕上がりのための保湿重視ケア。",
+      allInOneSkinPigmentTitle: "ピグメント & トーンリファインメント",
+      allInOneSkinPigmentDesc: "色ムラ、くすみ、目立つ色素に向けた集中ケア。",
+      allInOneOptScalpTitle: "スカルプリカバリーケア",
+      allInOneOptScalpDesc: "頭皮診断、スケーリング、リラックストリートメントサポート。",
+      allInOneOptBodyTitle: "ボディリカバリーマッサージ",
+      allInOneOptBodyDesc: "回復、心地よさ、リリースを重視した全身マッサージ。",
+      allInOneOptLymphaticTitle: "リンパリカバリーケア",
+      allInOneOptLymphaticDesc: "顔と身体の心地よさを支える穏やかな回復ケア。",
+      allInOneOptCalmingTitle: "カーミングフェイシャルリカバリー",
+      allInOneOptCalmingDesc: "施術後の敏感肌や疲れた肌のための鎮静ケア。",
+      allInOneOptTeaTitle: "プライベート休憩 & ティータイム",
+      allInOneOptTeaDesc: "お茶、軽いリフレッシュメント、コンシェルジュサポート付きの静かな回復時間。",
+      allInOneOptSalonTitle: "サロンフィニッシュ",
+      allInOneOptSalonDesc: "相談後、カットまたはヘアクリニックトリートメントと仕上げ。",
+      allInOneOptHMUTitle: "ヘア & メイクスタイリング",
+      allInOneOptHMUDesc: "洗練されたカメラ映えのためのプロスタイリング。",
+      allInOneOptNailTitle: "ネイル/ペディディテールケア",
+      allInOneOptNailDesc: "シェイプ、キューティクルケア、ネイルまたはペディ仕上げ。",
+      allInOneOptCameraTitle: "カメラレディスタイリング",
+      allInOneOptCameraDesc: "写真、ディナー、特別な予定の前に整える上品な仕上げ。",
+      allInOneOptLessonTitle: "K-Beauty メイクレッスン",
+      allInOneOptLessonDesc: "韓国メイクスタイルと製品使いに焦点を当てたガイドセッション。",
+      allInOneOptShopTitle: "ビューティーショッピングキュレーション",
+      allInOneOptShopDesc: "Olive Young などを含む K-beauty ショッピングサポート。",
+      allInOneOptProductTitle: "スキンケア製品マッチング",
+      allInOneOptProductDesc: "肌悩みとルーティンに合わせたパーソナル製品提案。",
+      allInOneOptInterpreterTitle: "クリニック通訳サポート",
+      allInOneOptInterpreterDesc: "クリニック訪問、相談、施術フローでの言語サポート。",
+      allInOneOptMealTitle: "リカバリー食事レコメンド",
+      allInOneOptMealDesc: "施術後に向いたレストランやカフェの提案。",
+      allInOneOptPhotoTitle: "フォトスポット & ライフスタイルキュレーション",
+      allInOneOptPhotoDesc: "写真、カフェ、ゆったりした余暇のためのソウル美容ライフスタイルルート。",
+      allInOneContinueButton: "プライベート相談を依頼",
+      allInOneSummary: {
+        title: "ジャーニー概要",
+        lead: "プライベート旅程は相談後に細かく調整されます。",
+        note: "選択したクリニックケアとオプションは Karecation コンシェルジュチームが確認します。"
+      }
+    }
+  }
+};
+
+Object.keys(ALLINONE_PRIVATE_ITINERARY_COPY).forEach((locale) => {
+  if (I18N[locale]) deepMerge(I18N[locale], ALLINONE_PRIVATE_ITINERARY_COPY[locale]);
+});
+
 function getLocale() {
   const params = new URLSearchParams(window.location.search);
   const requested = params.get("lang") || localStorage.getItem(LOCALE_KEY) || "en";
@@ -2716,16 +2979,13 @@ function normalizeAllInOneIds(journey) {
 }
 
 function allInOnePriceBreakdownForIds(selectedIds) {
-  const addonTotal = selectedIds.reduce((sum, id) => sum + (ALLINONE_BUILDER_CONFIG.addonPrices[id] || 0), 0);
-  const basePrice = ALLINONE_BUILDER_CONFIG.basePrice;
   return {
-    basePrice,
-    addonTotal,
-    totalPrice: basePrice + addonTotal,
+    basePrice: 0,
+    addonTotal: 0,
+    totalPrice: 0,
     selectedAddons: selectedIds.map((id) => ({
       id,
-      name: ALLINONE_BUILDER_CONFIG.labels[id],
-      addonPrice: ALLINONE_BUILDER_CONFIG.addonPrices[id] || 0
+      name: ALLINONE_BUILDER_CONFIG.labels[id]
     }))
   };
 }
@@ -2747,11 +3007,11 @@ function normalizeAllInOneJourney(journey) {
     selectedNames,
     selectedAddOns: pricing.selectedAddons,
     selectedAddons: pricing.selectedAddons,
-    basePrice: pricing.basePrice,
-    addOnsTotal: pricing.addonTotal,
-    addonTotal: pricing.addonTotal,
-    finalTotal: pricing.totalPrice,
-    totalPrice: pricing.totalPrice
+    basePrice: 0,
+    addOnsTotal: 0,
+    addonTotal: 0,
+    finalTotal: 0,
+    totalPrice: 0
   };
 }
 
@@ -2848,7 +3108,7 @@ function getCartDetails() {
     const program = getProgramById(item.programId);
     const travelers = Math.max(1, Number(item.travelers) || 1);
     const isAllInOne = journey?.packageType === "all-in-one" && item.programId === "all-in-one-package";
-    const unit = isAllInOne ? Number(journey.finalTotal || journey.totalPrice || program.startPrice || 0) : program.startPrice;
+    const unit = 0;
     return {
       ...item,
       program,
@@ -3130,27 +3390,54 @@ function renderStaticPageCopy() {
     setText("allInOneCardButton", copy.page.allInOneCardButton);
     setText("allInOneBuilderTitle", copy.page.allInOneBuilderTitle);
     setText("allInOneBuilderLead", copy.page.allInOneBuilderLead);
-    setText("allInOneBaseLabel", copy.page.allInOneBaseLabel);
-    setText("allInOneAddonsLabel", copy.page.allInOneAddonsLabel);
-    setText("allInOneTotalLabel", copy.page.allInOneTotalLabel);
+    setText("allInOneSummaryTitle", copy.page.allInOneSummaryTitle);
+    setText("allInOneSummaryLead", copy.page.allInOneSummaryLead);
+    setText("allInOneSummaryNote", copy.page.allInOneSummaryNote);
     setText("allInOneRequiredLabel", copy.page.allInOneRequiredLabel);
     setText("allInOneOptionalLabel", copy.page.allInOneOptionalLabel);
-    setText("allInOneSkin1Title", copy.page.allInOneSkin1Title);
-    setText("allInOneSkin1Desc", copy.page.allInOneSkin1Desc);
-    setText("allInOneSkin2Title", copy.page.allInOneSkin2Title);
-    setText("allInOneSkin2Desc", copy.page.allInOneSkin2Desc);
+    setText("allInOneRecoveryLabel", copy.page.allInOneRecoveryLabel);
+    setText("allInOneBeautyLabel", copy.page.allInOneBeautyLabel);
+    setText("allInOneConciergeLabel", copy.page.allInOneConciergeLabel);
+    setText("allInOneSkinEssentialTitle", copy.page.allInOneSkinEssentialTitle);
+    setText("allInOneSkinEssentialDesc", copy.page.allInOneSkinEssentialDesc);
+    setText("allInOneSkinAdvancedTitle", copy.page.allInOneSkinAdvancedTitle);
+    setText("allInOneSkinAdvancedDesc", copy.page.allInOneSkinAdvancedDesc);
+    setText("allInOneSkinClearTitle", copy.page.allInOneSkinClearTitle);
+    setText("allInOneSkinClearDesc", copy.page.allInOneSkinClearDesc);
+    setText("allInOneSkinGlowTitle", copy.page.allInOneSkinGlowTitle);
+    setText("allInOneSkinGlowDesc", copy.page.allInOneSkinGlowDesc);
+    setText("allInOneSkinPigmentTitle", copy.page.allInOneSkinPigmentTitle);
+    setText("allInOneSkinPigmentDesc", copy.page.allInOneSkinPigmentDesc);
     setText("allInOneOptScalpTitle", copy.page.allInOneOptScalpTitle);
     setText("allInOneOptScalpDesc", copy.page.allInOneOptScalpDesc);
+    setText("allInOneOptBodyTitle", copy.page.allInOneOptBodyTitle);
+    setText("allInOneOptBodyDesc", copy.page.allInOneOptBodyDesc);
+    setText("allInOneOptLymphaticTitle", copy.page.allInOneOptLymphaticTitle);
+    setText("allInOneOptLymphaticDesc", copy.page.allInOneOptLymphaticDesc);
+    setText("allInOneOptCalmingTitle", copy.page.allInOneOptCalmingTitle);
+    setText("allInOneOptCalmingDesc", copy.page.allInOneOptCalmingDesc);
+    setText("allInOneOptTeaTitle", copy.page.allInOneOptTeaTitle);
+    setText("allInOneOptTeaDesc", copy.page.allInOneOptTeaDesc);
     setText("allInOneOptSalonTitle", copy.page.allInOneOptSalonTitle);
     setText("allInOneOptSalonDesc", copy.page.allInOneOptSalonDesc);
     setText("allInOneOptHMUTitle", copy.page.allInOneOptHMUTitle);
     setText("allInOneOptHMUDesc", copy.page.allInOneOptHMUDesc);
     setText("allInOneOptNailTitle", copy.page.allInOneOptNailTitle);
     setText("allInOneOptNailDesc", copy.page.allInOneOptNailDesc);
-    setText("allInOneOptBodyTitle", copy.page.allInOneOptBodyTitle);
-    setText("allInOneOptBodyDesc", copy.page.allInOneOptBodyDesc);
+    setText("allInOneOptCameraTitle", copy.page.allInOneOptCameraTitle);
+    setText("allInOneOptCameraDesc", copy.page.allInOneOptCameraDesc);
+    setText("allInOneOptLessonTitle", copy.page.allInOneOptLessonTitle);
+    setText("allInOneOptLessonDesc", copy.page.allInOneOptLessonDesc);
     setText("allInOneOptShopTitle", copy.page.allInOneOptShopTitle);
     setText("allInOneOptShopDesc", copy.page.allInOneOptShopDesc);
+    setText("allInOneOptProductTitle", copy.page.allInOneOptProductTitle);
+    setText("allInOneOptProductDesc", copy.page.allInOneOptProductDesc);
+    setText("allInOneOptInterpreterTitle", copy.page.allInOneOptInterpreterTitle);
+    setText("allInOneOptInterpreterDesc", copy.page.allInOneOptInterpreterDesc);
+    setText("allInOneOptMealTitle", copy.page.allInOneOptMealTitle);
+    setText("allInOneOptMealDesc", copy.page.allInOneOptMealDesc);
+    setText("allInOneOptPhotoTitle", copy.page.allInOneOptPhotoTitle);
+    setText("allInOneOptPhotoDesc", copy.page.allInOneOptPhotoDesc);
     setText("allInOneContinueButton", copy.page.allInOneContinueButton);
   }
 
@@ -3266,9 +3553,7 @@ function programCard(program, useCardDescription = true, options = {}) {
   const tagLine = isProgramsPageCard && text.tagline
     ? `<p class="muted" style="font-size:.78rem; margin-top:2px;">${text.tagline}</p>`
     : "";
-  const metaBlock = isProgramsPageCard
-    ? `<div class="program-price"><span>${durationText}</span></div>`
-    : `<div class="program-price"><strong>${copy.common.startingFrom} ${formatPrice(program.startPrice)}</strong><span>${durationText}</span></div>`;
+  const metaBlock = `<div class="program-price"><span>${durationText}</span></div>`;
   const actionsBlock = isProgramsPageCard
     ? ""
     : `<div class="program-actions"><a class="btn btn-secondary" href="program-detail.html?id=${program.id}">${copy.cta.viewProgram}</a><button class="btn btn-primary" type="button" data-add-to-cart="${program.id}">${primaryCta}</button></div>`;
@@ -3328,8 +3613,12 @@ function renderProgramsPage() {
       return catOk && (!keyword || searchable.includes(keyword));
     });
 
-    if (sortValue === "price-asc") list.sort((a, b) => a.startPrice - b.startPrice);
-    if (sortValue === "price-desc") list.sort((a, b) => b.startPrice - a.startPrice);
+    if (sortValue === "duration-asc" || sortValue === "price-asc") {
+      list.sort((a, b) => String(programText(a).duration).localeCompare(String(programText(b).duration)));
+    }
+    if (sortValue === "duration-desc" || sortValue === "price-desc") {
+      list.sort((a, b) => String(programText(b).duration).localeCompare(String(programText(a).duration)));
+    }
 
     grid.innerHTML = list.length
       ? list.map((program) => programCard(program, true, { informationalOnly: true })).join("")
@@ -3361,7 +3650,7 @@ function renderDetailPage() {
   document.title = `${text.name} | Karecation`;
   document.getElementById("pdpName").textContent = text.name;
   document.getElementById("pdpTagline").textContent = text.tagline;
-  document.getElementById("pdpPrice").textContent = `${copy.common.startingFrom} ${formatPrice(program.startPrice)}`;
+  document.getElementById("pdpPrice").textContent = copy.common.startingFrom || "Private consultation required";
   document.getElementById("pdpDuration").textContent = text.duration;
   document.getElementById("pdpCategory").textContent = copy.categories[program.category];
   document.getElementById("pdpLocation").textContent = text.location;
@@ -3373,7 +3662,7 @@ function renderDetailPage() {
   document.getElementById("pdpAddons").innerHTML = `<div class="list-item">${copy.home.trust[2][1]}</div>`;
   document.getElementById("pdpFaq").innerHTML = text.faq.map((item) => `<details class="faq-item"><summary>${item.q}</summary><p>${item.a}</p></details>`).join("");
   document.querySelectorAll("[data-detail-price]").forEach((node) => {
-    node.textContent = `${copy.common.startingFrom} ${formatPrice(program.startPrice)}`;
+    node.textContent = copy.common.startingFrom || "Private consultation required";
   });
   document.querySelectorAll("[data-detail-add]").forEach((button) => {
     button.setAttribute("data-add-to-cart", program.id);
@@ -3388,7 +3677,6 @@ function renderCartPage() {
   if (!root) return;
   const copy = t();
   const details = getCartDetails();
-  const { subtotal, service, total } = getCartTotals();
 
   if (!details.length) {
     root.innerHTML = `
@@ -3407,9 +3695,8 @@ function renderCartPage() {
           <div class="cart-head">
             <div>
               <h3>${text.name}</h3>
-              <p class="muted" style="font-size:.8rem;">${copy.common.startingFrom} ${formatPrice(item.program.startPrice)} · ${text.duration}</p>
+              <p class="muted" style="font-size:.8rem;">${text.duration}</p>
             </div>
-            <strong>${formatPrice(item.lineTotal)}</strong>
           </div>
           <div class="cart-controls">
             <label>${travelerLabel}<input type="number" min="1" max="8" data-cart-travelers data-program-id="${item.program.id}" value="${item.travelers}"></label>
@@ -3423,14 +3710,6 @@ function renderCartPage() {
       `;
     }).join("");
   }
-
-  setText("cartSubtotal", formatPrice(subtotal));
-  setText("cartService", formatPrice(service));
-  setText("cartTotal", formatPrice(total));
-  const cartRows = document.querySelectorAll(".summary-card .total-row");
-  if (cartRows[0]) cartRows[0].querySelector("span:first-child").textContent = copy.common.subtotal;
-  if (cartRows[1]) cartRows[1].querySelector("span:first-child").textContent = copy.common.service;
-  if (cartRows[2]) cartRows[2].querySelector("strong:first-child").textContent = copy.common.total;
   document.querySelector(".summary-card a.btn-primary")?.replaceChildren(document.createTextNode(copy.page.proceed));
   document.querySelector(".summary-card a.btn-secondary")?.replaceChildren(document.createTextNode(copy.page.exploreMore));
 }
@@ -3465,16 +3744,11 @@ function renderBookingSummary() {
   if (!root) return;
   const copy = t();
   const details = getCartDetails();
-  const totals = getBookingTotals();
   const journey = readAllInOneJourney();
   const hasAllInOneInCart = details.some((item) => item.program?.id === "all-in-one-package");
-  const journeyLabels = copy.page.allInOneSummary || {
-    base: "Base package:",
-    addons: "Add-ons:",
-    total: "Total:"
-  };
+  const journeyLabels = copy.page.allInOneSummary || {};
   const journeySummary = hasAllInOneInCart && journey?.packageType === "all-in-one" && journey?.selectedNames?.length
-    ? `<div class="list-item"><strong>${journey.packageName || "All-in-One Package"}</strong><p class="muted" style="font-size:.8rem; margin-top:6px;">${journey.selectedNames.join(" / ")}</p><p class="muted" style="font-size:.78rem; margin-top:6px;">${journeyLabels.base} ${formatPrice(journey.basePrice || ALLINONE_BUILDER_CONFIG.basePrice)} / ${journeyLabels.addons} ${formatPrice(journey.addOnsTotal ?? journey.addonTotal ?? 0)} / ${journeyLabels.total} ${formatPrice(journey.finalTotal ?? journey.totalPrice ?? ALLINONE_BUILDER_CONFIG.basePrice)}</p></div>`
+    ? `<div class="list-item"><strong>${journeyLabels.title || "Journey Summary"}</strong><p class="muted" style="font-size:.8rem; margin-top:6px;">${journey.selectedNames.join(" / ")}</p><p class="muted" style="font-size:.78rem; margin-top:6px;">${journeyLabels.lead || "Your private itinerary will be refined after consultation."}</p><p class="muted" style="font-size:.78rem; margin-top:4px;">${journeyLabels.note || "Selected clinic care and enhancements will be reviewed by the Karecation concierge team."}</p></div>`
     : "";
   const preferredDate = getPreferredDateValue();
   const preferredDateSummary = preferredDate
@@ -3492,19 +3766,10 @@ function renderBookingSummary() {
         <div class="list-item">
           <strong>${text.name}</strong>
           <p class="muted" style="font-size:.8rem; margin-top:4px;">${item.travelers} ${travelerLabel}${item.preferredDate ? ` - ${item.preferredDate}` : ""}</p>
-          <p style="margin-top:6px; font-weight:600;">${formatPrice(item.lineTotal)}</p>
         </div>
       `;
     }).join("")}`;
   }
-
-  setText("bookingSubtotal", formatPrice(totals.subtotal));
-  setText("bookingService", formatPrice(totals.service));
-  setText("bookingTotal", formatPrice(totals.total));
-  setText("bookingSubtotalLabel", copy.common.subtotal);
-  setText("bookingServiceLabel", copy.common.service);
-  setText("bookingTotalLabel", copy.common.total);
-  syncBookingDiscountUI(totals);
 }
 
 function renderContactChannels() {
@@ -3556,10 +3821,9 @@ function syncAllInOneBuilderUI() {
   const selectedCount = allInOneSelectedCount();
   const counterTemplate = copy.page.allInOneCounterTemplate || "{count} / 4 selected";
   counter.textContent = counterTemplate.replace("{count}", String(selectedCount));
-  const price = allInOnePriceBreakdown();
-  if (basePriceNode) basePriceNode.textContent = formatPrice(price.basePrice);
-  if (addonPriceNode) addonPriceNode.textContent = formatPrice(price.addonTotal);
-  if (totalPriceNode) totalPriceNode.textContent = formatPrice(price.totalPrice);
+  if (basePriceNode) basePriceNode.textContent = "";
+  if (addonPriceNode) addonPriceNode.textContent = "";
+  if (totalPriceNode) totalPriceNode.textContent = "";
 
   if (ready) {
     const isReady = Boolean(allInOneState.skinId) && allInOneState.optionalIds.length === 3;
@@ -3654,11 +3918,11 @@ function continueAllInOneJourney() {
     selectedOptionalPrograms: [...allInOneState.optionalIds],
     selectedAddOns: pricing.selectedAddons,
     selectedAddons: pricing.selectedAddons,
-    basePrice: pricing.basePrice,
-    addOnsTotal: pricing.addonTotal,
-    addonTotal: pricing.addonTotal,
-    finalTotal: pricing.totalPrice,
-    totalPrice: pricing.totalPrice,
+    basePrice: 0,
+    addOnsTotal: 0,
+    addonTotal: 0,
+    finalTotal: 0,
+    totalPrice: 0,
     createdAt: new Date().toISOString()
   };
   saveAllInOneJourney(journey);
@@ -3723,7 +3987,7 @@ function selectedAddonSummary(journey) {
     : Array.isArray(journey?.selectedAddOns)
       ? journey.selectedAddOns
       : [];
-  return addons.map((item) => `${item.name} (+${formatPrice(item.addonPrice || 0)})`).join(", ");
+  return addons.map((item) => item.name).join(", ");
 }
 
 function selectedProgramFieldValues(details, journey) {
@@ -3848,9 +4112,8 @@ function bindBookingForm() {
     const preferredDate = (preferredDateInput?.value || "").trim();
     const additionalRequest = (form.querySelector("#requestNote")?.value || form.querySelector("[name='message']")?.value || "").trim();
     const details = getCartDetails();
-    const selectedPathTotals = getBookingTotals();
 
-    if (!details.length || selectedPathTotals.subtotal <= 0 || selectedPathTotals.total <= 0) {
+    if (!details.length) {
       alert(emptySelectedPathMessage());
       return;
     }
@@ -3892,12 +4155,6 @@ function bindBookingForm() {
       "Program 2": programValues[1] || "",
       "Program 3": programValues[2] || "",
       "Program 4": programValues[3] || "",
-      Subtotal: formatPrice(selectedPathTotals.subtotal),
-      "Service (5%)": formatPrice(selectedPathTotals.service),
-      discountCode: selectedPathTotals.discountCode,
-      discountAmount: formatPrice(selectedPathTotals.discountAmount),
-      finalTotal: formatPrice(selectedPathTotals.total),
-      Value: formatPrice(selectedPathTotals.total),
       "Additional Request": additionalRequest
     };
 
