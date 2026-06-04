@@ -180,6 +180,14 @@ const ALLINONE_PROGRAM_GROUPS = [
     imageAlt: "Comforting post-treatment recovery suite with tea and soft blankets",
     programs: [
       {
+        id: "recovery-comfort",
+        name: "Recovery & Comfort",
+        description: "An overall recovery and comfort focus combining calming, scalp, body, and quiet rest care.",
+        image: "images/recovery-comfort.jpg",
+        imageAlt: "Comforting post-treatment recovery suite with tea and soft blankets",
+        builderGroup: "info"
+      },
+      {
         id: "scalp-diagnosis-spa",
         name: "Scalp Recovery Care",
         description: "Scalp diagnosis, scaling, and relaxing treatment support.",
@@ -283,13 +291,26 @@ const ALLINONE_PROGRAM_GROUPS = [
         description: "Optional Seoul beauty lifestyle routing for photos, cafes, and soft leisure.",
         image: "images/photo-spot-lifestyle-curation.jpg",
         imageAlt: "Photo spot and Seoul lifestyle curation setup"
+      },
+      {
+        id: "private-consultation",
+        name: "Private Consultation",
+        description: "A private consultation to map your goals, timing, and support needs before any visit.",
+        image: "images/request-private-consultation.jpg",
+        imageAlt: "Private consultation lounge for tailored K-beauty planning",
+        builderGroup: "info"
       }
     ]
   }
 ];
 
 const ALLINONE_PROGRAMS = ALLINONE_PROGRAM_GROUPS.flatMap((group) => (
-  group.programs.map((program) => ({ ...program, category: group.id, categoryLabel: group.title, builderGroup: group.builderGroup }))
+  group.programs.map((program) => ({
+    ...program,
+    category: group.id,
+    categoryLabel: group.title,
+    builderGroup: program.builderGroup || group.builderGroup
+  }))
 ));
 
 const ALLINONE_PROGRAM_BY_ID = Object.fromEntries(ALLINONE_PROGRAMS.map((program) => [program.id, program]));
@@ -3377,8 +3398,81 @@ const PROGRAMS_PAGE_DURATION_MAP = {
   }
 };
 
-// Programs page uses local placeholders so visual assets can be swapped with licensed brand-safe files.
+// Programs page media map kept aligned with ALLINONE_PROGRAM_GROUPS so any rendering
+// path (Programs page or future informational-only cards) resolves to the same image.
 const PROGRAMS_PAGE_MEDIA = {
+  "advanced-contour-lift": {
+    image: "images/advanced-contour-lift.jpg",
+    imageAlt: "Premium Seoul K-beauty contour and lift treatment suite"
+  },
+  "clear-calm-skin-care": {
+    image: "images/clear-calm-skin-care.jpg",
+    imageAlt: "Calming K-beauty treatment room for sensitive skin care"
+  },
+  "glow-hydration-boost": {
+    image: "images/glow-hydration-boost.jpg",
+    imageAlt: "Luminous hydration boost setup in a luxury Seoul beauty suite"
+  },
+  "pigment-tone-refinement": {
+    image: "images/pigment-tone-refinement.jpg",
+    imageAlt: "Brightening tone refinement treatment room with prism light"
+  },
+  "recovery-comfort": {
+    image: "images/recovery-comfort.jpg",
+    imageAlt: "Comforting post-treatment recovery suite with tea and soft blankets"
+  },
+  "scalp-diagnosis-spa": {
+    image: "images/scalp-recovery-care.jpg",
+    imageAlt: "Premium scalp recovery care wash basin with steam"
+  },
+  "body-massage": {
+    image: "images/body-recovery-massage.jpg",
+    imageAlt: "Luxury body recovery massage room with hot stones"
+  },
+  "calming-facial-recovery": {
+    image: "images/calming-facial-recovery.jpg",
+    imageAlt: "Cooling facial recovery setup with ice and compresses"
+  },
+  "private-rest-tea-time": {
+    image: "images/private-heat-ice-time.jpg",
+    imageAlt: "Private heat and ice recovery ritual in a Seoul beauty suite"
+  },
+  "hair-salon": {
+    image: "images/salon-finish.jpg",
+    imageAlt: "Salon finishing vanity with hair styling tools"
+  },
+  "celebrity-hair-makeup": {
+    image: "images/hair-makeup-styling.jpg",
+    imageAlt: "Hair and makeup styling station in a luxury Seoul beauty suite"
+  },
+  "nail-care": {
+    image: "images/nail-pedi-detail-care.jpg",
+    imageAlt: "Luxury nail and pedi detail care station"
+  },
+  "k-beauty-makeup-lesson": {
+    image: "images/k-beauty-makeup-lesson.jpg",
+    imageAlt: "K-beauty makeup lesson setup with face chart and palettes"
+  },
+  "beauty-shopping": {
+    image: "images/beauty-shopping-curation.jpg",
+    imageAlt: "Premium beauty shopping curation setup in Seoul"
+  },
+  "skincare-product-matching": {
+    image: "images/signature-product-matching.jpg",
+    imageAlt: "Signature product matching consultation table"
+  },
+  "clinic-interpreter-support": {
+    image: "images/clinic-interpreter-support.jpg",
+    imageAlt: "Clinic interpreter support desk for international guests"
+  },
+  "recovery-meal-recommendation": {
+    image: "images/recovery-meal-recommendation.jpg",
+    imageAlt: "Recovery meal recommendation tray after K-beauty treatment"
+  },
+  "photo-spot-lifestyle-curation": {
+    image: "images/photo-spot-lifestyle-curation.jpg",
+    imageAlt: "Photo spot and Seoul lifestyle curation setup"
+  },
   "private-consultation": {
     image: "images/request-private-consultation.jpg",
     imageAlt: "Private consultation lounge for tailored K-beauty planning"
@@ -3394,26 +3488,6 @@ const PROGRAMS_PAGE_MEDIA = {
   "skin-clinic-care-2": {
     image: "images/advanced-contour-lift.jpg",
     imageAlt: "Premium Seoul K-beauty contour and lift treatment suite"
-  },
-  "scalp-diagnosis-spa": {
-    image: "images/scalp-recovery-care.jpg",
-    imageAlt: "Premium scalp recovery care wash basin with steam"
-  },
-  "hair-salon": {
-    image: "images/salon-finish.jpg",
-    imageAlt: "Salon finishing vanity with hair styling tools"
-  },
-  "celebrity-hair-makeup": {
-    image: "images/hair-makeup-styling.jpg",
-    imageAlt: "Hair and makeup styling station in a luxury Seoul beauty suite"
-  },
-  "nail-care": {
-    image: "images/nail-pedi-detail-care.jpg",
-    imageAlt: "Luxury nail and pedi detail care station"
-  },
-  "body-massage": {
-    image: "images/body-recovery-massage.jpg",
-    imageAlt: "Luxury body recovery massage room with hot stones"
   }
 };
 
