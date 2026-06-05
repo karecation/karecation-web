@@ -135,7 +135,7 @@ const PROGRAMS = [
 
 const CATEGORY_ORDER = ["all", "package", "starter", "skin", "wellness", "styling"];
 const HIDDEN_PROGRAM_IDS = new Set(["all-in-one-package"]);
-const ASSET_VERSION = "20260605-program-images-v10";
+const ASSET_VERSION = "20260605-program-images-v11";
 
 const PROGRAM_THUMBNAIL_MEDIA = Object.freeze({
   "advanced-contour-lift": {
