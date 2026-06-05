@@ -65,7 +65,7 @@ const PROGRAMS = [
     startPrice: ALLINONE_BASE_PRICE,
     duration: "Full day+",
     location: "Seoul",
-    image: "recovery-comfort.jpg"
+    image: "./images/recovery-comfort.jpg"
   },
   {
     id: "quick-concierge-consultation",
@@ -73,7 +73,7 @@ const PROGRAMS = [
     startPrice: 10,
     duration: "30 mins",
     location: "Online / Seoul",
-    image: "request-private-consultation.jpg"
+    image: "./images/request-private-consultation.jpg"
   },
   {
     id: "skin-clinic-care-1",
@@ -81,7 +81,7 @@ const PROGRAMS = [
     startPrice: 150,
     duration: "2 hrs",
     location: "Gangnam, Seoul",
-    image: "clear-calm-skin-care.jpg"
+    image: "./images/clear-calm-skin-care.jpg"
   },
   {
     id: "skin-clinic-care-2",
@@ -89,7 +89,7 @@ const PROGRAMS = [
     startPrice: 500,
     duration: "2-3 hrs",
     location: "Gangnam, Seoul",
-    image: "advanced-contour-lift.jpg"
+    image: "./images/advanced-contour-lift.jpg"
   },
   {
     id: "scalp-diagnosis-spa",
@@ -97,7 +97,7 @@ const PROGRAMS = [
     startPrice: 100,
     duration: "2-3 hrs",
     location: "Cheongdam, Seoul",
-    image: "scalp-recovery-care.jpg"
+    image: "./images/scalp-recovery-care.jpg"
   },
   {
     id: "hair-salon",
@@ -105,7 +105,7 @@ const PROGRAMS = [
     startPrice: 100,
     duration: "2 hrs",
     location: "Seoul",
-    image: "salon-finish.jpg"
+    image: "./images/salon-finish.jpg"
   },
   {
     id: "celebrity-hair-makeup",
@@ -113,7 +113,7 @@ const PROGRAMS = [
     startPrice: 200,
     duration: "2 hrs",
     location: "Apgujeong, Seoul",
-    image: "hair-makeup-styling.jpg"
+    image: "./images/hair-makeup-styling.jpg"
   },
   {
     id: "nail-care",
@@ -121,7 +121,7 @@ const PROGRAMS = [
     startPrice: 80,
     duration: "1-1.5 hrs",
     location: "Seoul",
-    image: "nail-pedi-detail-care.jpg"
+    image: "./images/nail-pedi-detail-care.jpg"
   },
   {
     id: "body-massage",
@@ -129,119 +129,96 @@ const PROGRAMS = [
     startPrice: 120,
     duration: "90 mins",
     location: "Seoul",
-    image: "body-recovery-massage.jpg"
+    image: "./images/body-recovery-massage.jpg"
   }
 ];
 
 const CATEGORY_ORDER = ["all", "package", "starter", "skin", "wellness", "styling"];
 const HIDDEN_PROGRAM_IDS = new Set(["all-in-one-package"]);
-const ASSET_VERSION = "20260605-program-thumbnail-final-fix";
+const ASSET_VERSION = "20260605-program-images-v10";
 
-const PROGRAM_THUMBNAIL_MEDIA = {
+const PROGRAM_THUMBNAIL_MEDIA = Object.freeze({
   "advanced-contour-lift": {
-    image: "advanced-contour-lift.jpg",
-    imageAlt: "Premium Seoul K-beauty contour and lift treatment suite"
+    image: "./images/advanced-contour-lift.jpg",
+    imageAlt: "Advanced Contour and Lift Karecation program"
   },
   "clear-calm-skin-care": {
-    image: "clear-calm-skin-care.jpg",
-    imageAlt: "Calming K-beauty treatment room for sensitive skin care"
+    image: "./images/clear-calm-skin-care.jpg",
+    imageAlt: "Clear and Calm Skin Care Karecation program"
   },
   "glow-hydration-boost": {
-    image: "glow-hydration-boost.jpg",
-    imageAlt: "Luminous hydration boost setup in a luxury Seoul beauty suite"
+    image: "./images/glow-hydration-boost.jpg",
+    imageAlt: "Glow and Hydration Boost Karecation program"
   },
   "pigment-tone-refinement": {
-    image: "pigment-tone-refinement.jpg",
-    imageAlt: "Brightening tone refinement treatment room with prism light"
+    image: "./images/pigment-tone-refinement.jpg",
+    imageAlt: "Pigment and Tone Refinement Karecation program"
   },
   "recovery-comfort": {
-    image: "recovery-comfort.jpg",
-    imageAlt: "Comforting post-treatment recovery suite with tea and soft blankets"
+    image: "./images/recovery-comfort.jpg",
+    imageAlt: "Recovery and Comfort Karecation program"
   },
   "scalp-diagnosis-spa": {
-    image: "scalp-recovery-care.jpg",
-    imageAlt: "Premium scalp recovery care wash basin with steam"
+    image: "./images/scalp-recovery-care.jpg",
+    imageAlt: "Scalp Recovery Care Karecation program"
   },
   "body-massage": {
-    image: "body-recovery-massage.jpg",
-    imageAlt: "Luxury body recovery massage room with hot stones"
+    image: "./images/body-recovery-massage.jpg",
+    imageAlt: "Body Recovery Massage Karecation program"
   },
   "calming-facial-recovery": {
-    image: "calming-facial-recovery.jpg",
-    imageAlt: "Cooling facial recovery setup with ice and compresses"
+    image: "./images/calming-facial-recovery.jpg",
+    imageAlt: "Calming Facial Recovery Karecation program"
   },
   "private-rest-tea-time": {
-    image: "private-heat-ice-time.jpg",
-    imageAlt: "Private heat and ice recovery ritual in a Seoul beauty suite"
+    image: "./images/private-heat-ice-time.jpg",
+    imageAlt: "Private Heat and Ice Time Karecation program"
   },
   "hair-salon": {
-    image: "salon-finish.jpg",
-    imageAlt: "Salon finishing vanity with hair styling tools"
+    image: "./images/salon-finish.jpg",
+    imageAlt: "Salon Finish Karecation program"
   },
   "celebrity-hair-makeup": {
-    image: "hair-makeup-styling.jpg",
-    imageAlt: "Hair and makeup styling station in a luxury Seoul beauty suite"
+    image: "./images/hair-makeup-styling.jpg",
+    imageAlt: "Hair and Makeup Styling Karecation program"
   },
   "nail-care": {
-    image: "nail-pedi-detail-care.jpg",
-    imageAlt: "Luxury nail and pedi detail care station"
+    image: "./images/nail-pedi-detail-care.jpg",
+    imageAlt: "Nail and Pedi Detail Care Karecation program"
   },
   "k-beauty-makeup-lesson": {
-    image: "k-beauty-makeup-lesson.jpg",
-    imageAlt: "K-beauty makeup lesson setup with face chart and palettes"
+    image: "./images/k-beauty-makeup-lesson.jpg",
+    imageAlt: "K-Beauty Makeup Lesson Karecation program"
   },
   "beauty-shopping": {
-    image: "beauty-shopping-curation.jpg",
-    imageAlt: "Premium beauty shopping curation setup in Seoul"
+    image: "./images/beauty-shopping-curation.jpg",
+    imageAlt: "Beauty Shopping Curation Karecation program"
   },
   "skincare-product-matching": {
-    image: "signature-product-matching.jpg",
-    imageAlt: "Signature product matching consultation table"
+    image: "./images/signature-product-matching.jpg",
+    imageAlt: "Signature Product Matching Karecation program"
   },
   "clinic-interpreter-support": {
-    image: "clinic-interpreter-support.jpg",
-    imageAlt: "Clinic interpreter support desk for international guests"
+    image: "./images/clinic-interpreter-support.jpg",
+    imageAlt: "Clinic Interpreter Support Karecation program"
   },
   "recovery-meal-recommendation": {
-    image: "recovery-meal-recommendation.jpg",
-    imageAlt: "Recovery meal recommendation tray after K-beauty treatment"
+    image: "./images/recovery-meal-recommendation.jpg",
+    imageAlt: "Recovery Meal Recommendation Karecation program"
   },
   "photo-spot-lifestyle-curation": {
-    image: "photo-spot-lifestyle-curation.jpg",
-    imageAlt: "Photo spot and Seoul lifestyle curation setup"
+    image: "./images/photo-spot-lifestyle-curation.jpg",
+    imageAlt: "Photo Spot and Lifestyle Curation Karecation program"
   },
   "private-consultation": {
-    image: "request-private-consultation.jpg",
-    imageAlt: "Private consultation lounge for tailored K-beauty planning"
+    image: "./images/request-private-consultation.jpg",
+    imageAlt: "Private Consultation Karecation program"
   },
   "quick-concierge-consultation": {
-    image: "request-private-consultation.jpg",
-    imageAlt: "Private consultation lounge for tailored K-beauty planning"
+    image: "./images/request-private-consultation.jpg",
+    imageAlt: "Private Consultation Karecation program"
   }
-};
-
-const FORCED_PROGRAM_THUMBNAILS_BY_TITLE = {
-  "Advanced Contour & Lift": "advanced-contour-lift.jpg",
-  "Clear & Calm Skin Care": "clear-calm-skin-care.jpg",
-  "Glow & Hydration Boost": "glow-hydration-boost.jpg",
-  "Pigment & Tone Refinement": "pigment-tone-refinement.jpg",
-  "Recovery & Comfort": "recovery-comfort.jpg",
-  "Scalp Recovery Care": "scalp-recovery-care.jpg",
-  "Body Recovery Massage": "body-recovery-massage.jpg",
-  "Calming Facial Recovery": "calming-facial-recovery.jpg",
-  "Private Heat & Ice Time": "private-heat-ice-time.jpg",
-  "Salon Finish": "salon-finish.jpg",
-  "Hair & Makeup Styling": "hair-makeup-styling.jpg",
-  "Nail/Pedi Detail Care": "nail-pedi-detail-care.jpg",
-  "K-Beauty Makeup Lesson": "k-beauty-makeup-lesson.jpg",
-  "Beauty Shopping Curation": "beauty-shopping-curation.jpg",
-  "Signature Product Matching": "signature-product-matching.jpg",
-  "Clinic Interpreter Support": "clinic-interpreter-support.jpg",
-  "Recovery Meal Recommendation": "recovery-meal-recommendation.jpg",
-  "Photo Spot & Lifestyle Curation": "photo-spot-lifestyle-curation.jpg",
-  "Private Consultation": "request-private-consultation.jpg",
-  "Request Private Consultation": "request-private-consultation.jpg"
-};
+});
 
 const ALLINONE_PROGRAM_GROUPS = [
   {
@@ -253,28 +230,28 @@ const ALLINONE_PROGRAM_GROUPS = [
         id: "advanced-contour-lift",
         name: "Advanced Contour & Lift",
         description: "Lifting, pigment care, wrinkle refinement, and facial contour support.",
-        image: "advanced-contour-lift.jpg",
+        image: "./images/advanced-contour-lift.jpg",
         imageAlt: "Premium Seoul K-beauty contour and lift treatment suite"
       },
       {
         id: "clear-calm-skin-care",
         name: "Clear & Calm Skin Care",
         description: "Soothing care for sensitive, acne-prone, or irritated skin.",
-        image: "clear-calm-skin-care.jpg",
+        image: "./images/clear-calm-skin-care.jpg",
         imageAlt: "Calming K-beauty treatment room for sensitive skin care"
       },
       {
         id: "glow-hydration-boost",
         name: "Glow & Hydration Boost",
         description: "Moisture-focused skin care for a fresh, luminous finish.",
-        image: "glow-hydration-boost.jpg",
+        image: "./images/glow-hydration-boost.jpg",
         imageAlt: "Luminous hydration boost setup in a luxury Seoul beauty suite"
       },
       {
         id: "pigment-tone-refinement",
         name: "Pigment & Tone Refinement",
         description: "Targeted care for uneven tone, dullness, and visible pigmentation.",
-        image: "pigment-tone-refinement.jpg",
+        image: "./images/pigment-tone-refinement.jpg",
         imageAlt: "Brightening tone refinement treatment room with prism light"
       }
     ]
@@ -283,35 +260,35 @@ const ALLINONE_PROGRAM_GROUPS = [
     id: "recovery-comfort",
     title: "Recovery & Comfort",
     builderGroup: "optional",
-    image: "recovery-comfort.jpg",
+    image: "./images/recovery-comfort.jpg",
     imageAlt: "Comforting post-treatment recovery suite with tea and soft blankets",
     programs: [
       {
         id: "scalp-diagnosis-spa",
         name: "Scalp Recovery Care",
         description: "Scalp diagnosis, scaling, and relaxing treatment support.",
-        image: "scalp-recovery-care.jpg",
+        image: "./images/scalp-recovery-care.jpg",
         imageAlt: "Premium scalp recovery care wash basin with steam"
       },
       {
         id: "body-massage",
         name: "Body Recovery Massage",
         description: "Full-body massage focused on recovery, comfort, and release.",
-        image: "body-recovery-massage.jpg",
+        image: "./images/body-recovery-massage.jpg",
         imageAlt: "Luxury body recovery massage room with hot stones"
       },
       {
         id: "calming-facial-recovery",
         name: "Calming Facial Recovery",
         description: "Post-treatment soothing care for sensitive or tired skin.",
-        image: "calming-facial-recovery.jpg",
+        image: "./images/calming-facial-recovery.jpg",
         imageAlt: "Cooling facial recovery setup with ice and compresses"
       },
       {
         id: "private-rest-tea-time",
         name: "Private Heat & Ice Time",
         description: "A private heat and ice recovery ritual with concierge support.",
-        image: "private-heat-ice-time.jpg",
+        image: "./images/private-heat-ice-time.jpg",
         imageAlt: "Private heat and ice recovery ritual in a Seoul beauty suite"
       }
     ]
@@ -325,28 +302,28 @@ const ALLINONE_PROGRAM_GROUPS = [
         id: "hair-salon",
         name: "Salon Finish",
         description: "Haircut or hair clinic treatment with consultation and finishing.",
-        image: "salon-finish.jpg",
+        image: "./images/salon-finish.jpg",
         imageAlt: "Salon finishing vanity with hair styling tools"
       },
       {
         id: "celebrity-hair-makeup",
         name: "Hair & Makeup Styling",
         description: "Professional hair styling for a polished, camera-ready look.",
-        image: "hair-makeup-styling.jpg",
+        image: "./images/hair-makeup-styling.jpg",
         imageAlt: "Hair and makeup styling station in a luxury Seoul beauty suite"
       },
       {
         id: "nail-care",
         name: "Nail/Pedi Detail Care",
         description: "Nail or pedi care with shaping, cuticle care, and finish.",
-        image: "nail-pedi-detail-care.jpg",
+        image: "./images/nail-pedi-detail-care.jpg",
         imageAlt: "Luxury nail and pedi detail care station"
       },
       {
         id: "k-beauty-makeup-lesson",
         name: "K-Beauty Makeup Lesson",
         description: "A guided beauty session focused on Korean makeup style and product use.",
-        image: "k-beauty-makeup-lesson.jpg",
+        image: "./images/k-beauty-makeup-lesson.jpg",
         imageAlt: "K-beauty makeup lesson setup with face chart and palettes"
       }
     ]
@@ -360,35 +337,35 @@ const ALLINONE_PROGRAM_GROUPS = [
         id: "beauty-shopping",
         name: "Beauty Shopping Curation",
         description: "Guided K-beauty shopping support, including destinations such as Olive Young.",
-        image: "beauty-shopping-curation.jpg",
+        image: "./images/beauty-shopping-curation.jpg",
         imageAlt: "Premium beauty shopping curation setup in Seoul"
       },
       {
         id: "skincare-product-matching",
         name: "Signature Product Matching",
         description: "Personalized product recommendations based on skin concerns and routine.",
-        image: "signature-product-matching.jpg",
+        image: "./images/signature-product-matching.jpg",
         imageAlt: "Signature product matching consultation table"
       },
       {
         id: "clinic-interpreter-support",
         name: "Clinic Interpreter Support",
         description: "Language support during clinic visit, consultation, and treatment flow.",
-        image: "clinic-interpreter-support.jpg",
+        image: "./images/clinic-interpreter-support.jpg",
         imageAlt: "Clinic interpreter support desk for international guests"
       },
       {
         id: "recovery-meal-recommendation",
         name: "Recovery Meal Recommendation",
         description: "Curated restaurant or cafe recommendation after treatment.",
-        image: "recovery-meal-recommendation.jpg",
+        image: "./images/recovery-meal-recommendation.jpg",
         imageAlt: "Recovery meal recommendation tray after K-beauty treatment"
       },
       {
         id: "photo-spot-lifestyle-curation",
         name: "Photo Spot & Lifestyle Curation",
         description: "Optional Seoul beauty lifestyle routing for photos, cafes, and soft leisure.",
-        image: "photo-spot-lifestyle-curation.jpg",
+        image: "./images/photo-spot-lifestyle-curation.jpg",
         imageAlt: "Photo spot and Seoul lifestyle curation setup"
       }
     ]
@@ -3207,76 +3184,22 @@ function programCategoryLabel(program) {
 }
 
 function versionedAsset(src) {
-  if (!src) return src;
-  return src.includes("?") ? src : `${src}?v=${ASSET_VERSION}`;
+  if (!src) return "";
+  const separator = src.includes("?") ? "&" : "?";
+  return `${src}${separator}v=${ASSET_VERSION}`;
 }
 
 function getProgramThumbnailMedia(program) {
-  if (!program) {
-    return { image: "", imageAlt: "Karecation program" };
-  }
-
-  const media = PROGRAM_THUMBNAIL_MEDIA[program.id] || {};
-  const image = media.image || program.image || "";
+  const mapped = PROGRAM_THUMBNAIL_MEDIA[program.id];
 
   return {
-    image: image.replace(/^\/?/, ""),
-    imageAlt: media.imageAlt || program.imageAlt || program.name || "Karecation program"
+    image: mapped?.image || program.image || "",
+    imageAlt:
+      mapped?.imageAlt ||
+      program.imageAlt ||
+      program.name ||
+      "Karecation program"
   };
-}
-
-function forceProgramsPageThumbnails() {
-  if (!document.body.classList.contains("programs-page")) {
-    return;
-  }
-
-  const cards = document.querySelectorAll(".program-card");
-
-  cards.forEach((card) => {
-    const titleEl =
-      card.querySelector(".program-title a") ||
-      card.querySelector(".program-title") ||
-      card.querySelector("h3");
-
-    if (!titleEl) return;
-
-    const title = titleEl.textContent.trim();
-    const imageFile = FORCED_PROGRAM_THUMBNAILS_BY_TITLE[title];
-
-    if (!imageFile) return;
-
-    const imageSrc = versionedAsset(imageFile);
-    const imageAlt = `${title} Karecation program thumbnail`;
-
-    let imageWrap = card.querySelector(".program-card-image");
-
-    if (!imageWrap) {
-      imageWrap = document.createElement("a");
-      imageWrap.className = "program-card-image";
-
-      const titleLink = card.querySelector(".program-title a");
-      if (titleLink && titleLink.href) {
-        imageWrap.href = titleLink.href;
-      }
-
-      card.prepend(imageWrap);
-    }
-
-    imageWrap.classList.remove("is-placeholder");
-
-    let img = imageWrap.querySelector("img");
-
-    if (!img) {
-      img = document.createElement("img");
-      img.loading = "lazy";
-      imageWrap.innerHTML = "";
-      imageWrap.appendChild(img);
-    }
-
-    img.src = imageSrc;
-    img.alt = imageAlt;
-    img.dataset.forcedProgramThumbnail = "true";
-  });
 }
 
 function withProgramThumbnail(program) {
@@ -3286,6 +3209,16 @@ function withProgramThumbnail(program) {
     image: media.image,
     imageAlt: media.imageAlt
   };
+}
+
+function handleProgramThumbnailError(img) {
+  console.error("[Karecation] Program thumbnail failed", {
+    programId: img.dataset.programThumbnail,
+    requestedSrc: img.getAttribute("src"),
+    resolvedSrc: img.currentSrc || img.src
+  });
+
+  img.closest(".program-card-image")?.classList.add("is-placeholder");
 }
 
 function formatPrice(value) {
@@ -3841,8 +3774,8 @@ function programCard(program, useCardDescription = true, options = {}) {
   const imageAlt = media.imageAlt || text.name;
   const imageBlock = imageSrc
     ? (isProgramsPageCard
-      ? `<div class="program-card-image"><img src="${imageSrc}" alt="${imageAlt}" loading="lazy" onerror="this.closest('.program-card-image').classList.add('is-placeholder'); this.remove();"></div>`
-      : `<a class="program-card-image" href="program-detail.html?id=${program.id}"><img src="${imageSrc}" alt="${imageAlt}" loading="lazy" onerror="this.closest('.program-card-image').classList.add('is-placeholder'); this.remove();"></a>`)
+      ? `<div class="program-card-image"><img src="${imageSrc}" alt="${imageAlt}" loading="lazy" data-program-thumbnail="${program.id}" onerror="handleProgramThumbnailError(this)"></div>`
+      : `<a class="program-card-image" href="program-detail.html?id=${encodeURIComponent(program.id)}"><img src="${imageSrc}" alt="${imageAlt}" loading="lazy" data-program-thumbnail="${program.id}" onerror="handleProgramThumbnailError(this)"></a>`)
     : `<div class="program-card-image is-placeholder" role="img" aria-label="${imageAlt || text.name}"></div>`;
   const tagLine = isProgramsPageCard && text.tagline
     ? `<p class="muted" style="font-size:.78rem; margin-top:2px;">${text.tagline}</p>`
@@ -3850,9 +3783,9 @@ function programCard(program, useCardDescription = true, options = {}) {
   const metaBlock = `<div class="program-price"><span>${durationText}</span></div>`;
   const actionsBlock = isProgramsPageCard
     ? ""
-    : `<div class="program-actions"><a class="btn btn-secondary" href="program-detail.html?id=${program.id}">${copy.cta.viewProgram}</a><button class="btn btn-primary" type="button" data-add-to-cart="${program.id}">${primaryCta}</button></div>`;
+    : `<div class="program-actions"><a class="btn btn-secondary" href="program-detail.html?id=${encodeURIComponent(program.id)}">${copy.cta.viewProgram}</a><button class="btn btn-primary" type="button" data-add-to-cart="${program.id}">${primaryCta}</button></div>`;
   return `
-    <article class="program-card">
+    <article class="program-card" data-program-id="${program.id}">
       ${imageBlock}
       <div class="program-card-body">
         <div class="program-meta">
@@ -3870,21 +3803,34 @@ function programCard(program, useCardDescription = true, options = {}) {
 }
 
 function allInOneProgramCard(program) {
-  const detailHref = `program-detail.html?id=${program.id}`;
+  const detailHref = `program-detail.html?id=${encodeURIComponent(program.id)}`;
   const media = getProgramThumbnailMedia(program);
   const imageSrc = versionedAsset(media.image);
-  const imageBlock = media.image
-    ? `<a class="program-card-image" href="${detailHref}"><img src="${imageSrc}" alt="${media.imageAlt}" loading="lazy" onerror="this.closest('.program-card-image').classList.add('is-placeholder'); this.remove();"></a>`
-    : `<div class="program-card-image is-placeholder" role="img" aria-label="${media.imageAlt || program.name}"></div>`;
+
   return `
-    <article class="program-card">
-      ${imageBlock}
+    <article class="program-card" data-program-id="${program.id}">
+      <a class="program-card-image" href="${detailHref}">
+        <img
+          src="${imageSrc}"
+          alt="${media.imageAlt}"
+          loading="lazy"
+          data-program-thumbnail="${program.id}"
+          onerror="handleProgramThumbnailError(this)"
+        >
+      </a>
+
       <div class="program-card-body">
         <div class="program-meta">
-          <span class="badge">${program.categoryLabel}</span>
+          <span class="badge">${program.categoryLabel || ""}</span>
         </div>
-        <h3 class="program-title"><a class="program-title-link" href="${detailHref}">${program.name}</a></h3>
-        <p class="program-desc">${program.description}</p>
+
+        <h3 class="program-title">
+          <a class="program-title-link" href="${detailHref}">
+            ${program.name}
+          </a>
+        </h3>
+
+        <p class="program-desc">${program.description || ""}</p>
       </div>
     </article>
   `;
@@ -3940,7 +3886,6 @@ function renderProgramsPage() {
     grid.innerHTML = list.length
       ? list.map((program) => allInOneProgramCard(program)).join("")
       : `<div class="empty-state" style="grid-column: 1/-1;"><h3 class="display">${copy.common.noMatchTitle}</h3><p class="muted" style="margin-top:6px;">${copy.common.noMatchText}</p></div>`;
-    forceProgramsPageThumbnails();
   }
 
   filterRoot.onclick = (event) => {
@@ -3974,8 +3919,13 @@ function renderDetailPage() {
   document.getElementById("pdpCategory").textContent = programCategoryLabel(program);
   document.getElementById("pdpLocation").textContent = text.location;
   document.getElementById("pdpDescription").textContent = text.description;
-  document.getElementById("pdpImage").src = versionedAsset(media.image);
-  document.getElementById("pdpImage").alt = media.imageAlt || text.name;
+  const detailImage = document.getElementById("pdpImage");
+  detailImage.src = versionedAsset(media.image);
+  detailImage.alt = media.imageAlt || text.name;
+  detailImage.dataset.programThumbnail = program.id;
+  detailImage.onerror = function () {
+    handleProgramThumbnailError(this);
+  };
   document.getElementById("pdpIncludes").innerHTML = text.includes.map((item) => `<div class="list-item">${item}</div>`).join("");
   document.getElementById("pdpSteps").innerHTML = text.steps.map((item, idx) => `<div class="list-item"><strong class="step-index">${idx + 1}</strong>${item}</div>`).join("");
   document.getElementById("pdpAddons").innerHTML = `<div class="list-item">${copy.home.trust[2][1]}</div>`;
@@ -4675,8 +4625,3 @@ function init() {
 }
 
 document.addEventListener("DOMContentLoaded", init);
-document.addEventListener("DOMContentLoaded", () => {
-  setTimeout(forceProgramsPageThumbnails, 50);
-  setTimeout(forceProgramsPageThumbnails, 300);
-  setTimeout(forceProgramsPageThumbnails, 1000);
-});
