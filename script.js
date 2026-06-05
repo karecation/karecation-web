@@ -65,7 +65,7 @@ const PROGRAMS = [
     startPrice: ALLINONE_BASE_PRICE,
     duration: "Full day+",
     location: "Seoul",
-    image: "images/recovery-comfort.jpg"
+    image: "recovery-comfort.jpg"
   },
   {
     id: "quick-concierge-consultation",
@@ -73,7 +73,7 @@ const PROGRAMS = [
     startPrice: 10,
     duration: "30 mins",
     location: "Online / Seoul",
-    image: "images/request-private-consultation.jpg"
+    image: "request-private-consultation.jpg"
   },
   {
     id: "skin-clinic-care-1",
@@ -81,7 +81,7 @@ const PROGRAMS = [
     startPrice: 150,
     duration: "2 hrs",
     location: "Gangnam, Seoul",
-    image: "images/clear-calm-skin-care.jpg"
+    image: "clear-calm-skin-care.jpg"
   },
   {
     id: "skin-clinic-care-2",
@@ -89,7 +89,7 @@ const PROGRAMS = [
     startPrice: 500,
     duration: "2-3 hrs",
     location: "Gangnam, Seoul",
-    image: "images/advanced-contour-lift.jpg"
+    image: "advanced-contour-lift.jpg"
   },
   {
     id: "scalp-diagnosis-spa",
@@ -97,7 +97,7 @@ const PROGRAMS = [
     startPrice: 100,
     duration: "2-3 hrs",
     location: "Cheongdam, Seoul",
-    image: "images/scalp-recovery-care.jpg"
+    image: "scalp-recovery-care.jpg"
   },
   {
     id: "hair-salon",
@@ -105,7 +105,7 @@ const PROGRAMS = [
     startPrice: 100,
     duration: "2 hrs",
     location: "Seoul",
-    image: "images/salon-finish.jpg"
+    image: "salon-finish.jpg"
   },
   {
     id: "celebrity-hair-makeup",
@@ -113,7 +113,7 @@ const PROGRAMS = [
     startPrice: 200,
     duration: "2 hrs",
     location: "Apgujeong, Seoul",
-    image: "images/hair-makeup-styling.jpg"
+    image: "hair-makeup-styling.jpg"
   },
   {
     id: "nail-care",
@@ -121,7 +121,7 @@ const PROGRAMS = [
     startPrice: 80,
     duration: "1-1.5 hrs",
     location: "Seoul",
-    image: "images/nail-pedi-detail-care.jpg"
+    image: "nail-pedi-detail-care.jpg"
   },
   {
     id: "body-massage",
@@ -129,103 +129,118 @@ const PROGRAMS = [
     startPrice: 120,
     duration: "90 mins",
     location: "Seoul",
-    image: "images/body-recovery-massage.jpg"
+    image: "body-recovery-massage.jpg"
   }
 ];
 
 const CATEGORY_ORDER = ["all", "package", "starter", "skin", "wellness", "styling"];
 const HIDDEN_PROGRAM_IDS = new Set(["all-in-one-package"]);
-const ASSET_VERSION = "20260605-program-images-final";
+const ASSET_VERSION = "20260605-program-thumbnail-final-fix";
 
 const PROGRAM_THUMBNAIL_MEDIA = {
   "advanced-contour-lift": {
-    image: "images/advanced-contour-lift.jpg",
+    image: "advanced-contour-lift.jpg",
     imageAlt: "Premium Seoul K-beauty contour and lift treatment suite"
   },
   "clear-calm-skin-care": {
-    image: "images/clear-calm-skin-care.jpg",
+    image: "clear-calm-skin-care.jpg",
     imageAlt: "Calming K-beauty treatment room for sensitive skin care"
   },
   "glow-hydration-boost": {
-    image: "images/glow-hydration-boost.jpg",
+    image: "glow-hydration-boost.jpg",
     imageAlt: "Luminous hydration boost setup in a luxury Seoul beauty suite"
   },
   "pigment-tone-refinement": {
-    image: "images/pigment-tone-refinement.jpg",
+    image: "pigment-tone-refinement.jpg",
     imageAlt: "Brightening tone refinement treatment room with prism light"
   },
   "recovery-comfort": {
-    image: "images/recovery-comfort.jpg",
+    image: "recovery-comfort.jpg",
     imageAlt: "Comforting post-treatment recovery suite with tea and soft blankets"
   },
   "scalp-diagnosis-spa": {
-    image: "images/scalp-recovery-care.jpg",
+    image: "scalp-recovery-care.jpg",
     imageAlt: "Premium scalp recovery care wash basin with steam"
   },
   "body-massage": {
-    image: "images/body-recovery-massage.jpg",
+    image: "body-recovery-massage.jpg",
     imageAlt: "Luxury body recovery massage room with hot stones"
   },
   "calming-facial-recovery": {
-    image: "images/calming-facial-recovery.jpg",
+    image: "calming-facial-recovery.jpg",
     imageAlt: "Cooling facial recovery setup with ice and compresses"
   },
   "private-rest-tea-time": {
-    image: "images/private-heat-ice-time.jpg",
+    image: "private-heat-ice-time.jpg",
     imageAlt: "Private heat and ice recovery ritual in a Seoul beauty suite"
   },
   "hair-salon": {
-    image: "images/salon-finish.jpg",
+    image: "salon-finish.jpg",
     imageAlt: "Salon finishing vanity with hair styling tools"
   },
   "celebrity-hair-makeup": {
-    image: "images/hair-makeup-styling.jpg",
+    image: "hair-makeup-styling.jpg",
     imageAlt: "Hair and makeup styling station in a luxury Seoul beauty suite"
   },
   "nail-care": {
-    image: "images/nail-pedi-detail-care.jpg",
+    image: "nail-pedi-detail-care.jpg",
     imageAlt: "Luxury nail and pedi detail care station"
   },
   "k-beauty-makeup-lesson": {
-    image: "images/k-beauty-makeup-lesson.jpg",
+    image: "k-beauty-makeup-lesson.jpg",
     imageAlt: "K-beauty makeup lesson setup with face chart and palettes"
   },
   "beauty-shopping": {
-    image: "images/beauty-shopping-curation.jpg",
+    image: "beauty-shopping-curation.jpg",
     imageAlt: "Premium beauty shopping curation setup in Seoul"
   },
   "skincare-product-matching": {
-    image: "images/signature-product-matching.jpg",
+    image: "signature-product-matching.jpg",
     imageAlt: "Signature product matching consultation table"
   },
   "clinic-interpreter-support": {
-    image: "images/clinic-interpreter-support.jpg",
+    image: "clinic-interpreter-support.jpg",
     imageAlt: "Clinic interpreter support desk for international guests"
   },
   "recovery-meal-recommendation": {
-    image: "images/recovery-meal-recommendation.jpg",
+    image: "recovery-meal-recommendation.jpg",
     imageAlt: "Recovery meal recommendation tray after K-beauty treatment"
   },
   "photo-spot-lifestyle-curation": {
-    image: "images/photo-spot-lifestyle-curation.jpg",
+    image: "photo-spot-lifestyle-curation.jpg",
     imageAlt: "Photo spot and Seoul lifestyle curation setup"
   },
   "private-consultation": {
-    image: "images/request-private-consultation.jpg",
+    image: "request-private-consultation.jpg",
     imageAlt: "Private consultation lounge for tailored K-beauty planning"
   },
   "quick-concierge-consultation": {
-    image: "images/request-private-consultation.jpg",
+    image: "request-private-consultation.jpg",
     imageAlt: "Private consultation lounge for tailored K-beauty planning"
-  },
-  "skin-clinic-care-1": {
-    image: "images/clear-calm-skin-care.jpg",
-    imageAlt: "Calming K-beauty treatment room for sensitive skin care"
-  },
-  "skin-clinic-care-2": {
-    image: "images/advanced-contour-lift.jpg",
-    imageAlt: "Premium Seoul K-beauty contour and lift treatment suite"
   }
+};
+
+const FORCED_PROGRAM_THUMBNAILS_BY_TITLE = {
+  "Advanced Contour & Lift": "advanced-contour-lift.jpg",
+  "Clear & Calm Skin Care": "clear-calm-skin-care.jpg",
+  "Glow & Hydration Boost": "glow-hydration-boost.jpg",
+  "Pigment & Tone Refinement": "pigment-tone-refinement.jpg",
+  "Recovery & Comfort": "recovery-comfort.jpg",
+  "Scalp Recovery Care": "scalp-recovery-care.jpg",
+  "Body Recovery Massage": "body-recovery-massage.jpg",
+  "Calming Facial Recovery": "calming-facial-recovery.jpg",
+  "Private Heat & Ice Time": "private-heat-ice-time.jpg",
+  "Salon Finish": "salon-finish.jpg",
+  "Hair & Makeup Styling": "hair-makeup-styling.jpg",
+  "Nail/Pedi Detail Care": "nail-pedi-detail-care.jpg",
+  "K-Beauty Makeup Lesson": "k-beauty-makeup-lesson.jpg",
+  "Beauty Shopping Curation": "beauty-shopping-curation.jpg",
+  "Signature Product Matching": "signature-product-matching.jpg",
+  "Clinic Interpreter Support": "clinic-interpreter-support.jpg",
+  "Recovery Meal Recommendation": "recovery-meal-recommendation.jpg",
+  "Photo Spot & Lifestyle Curation": "photo-spot-lifestyle-curation.jpg",
+  "Private Consultation": "request-private-consultation.jpg",
+  "Request Private Consultation": "request-private-consultation.jpg"
 };
 
 const ALLINONE_PROGRAM_GROUPS = [
@@ -238,28 +253,28 @@ const ALLINONE_PROGRAM_GROUPS = [
         id: "advanced-contour-lift",
         name: "Advanced Contour & Lift",
         description: "Lifting, pigment care, wrinkle refinement, and facial contour support.",
-        image: "images/advanced-contour-lift.jpg",
+        image: "advanced-contour-lift.jpg",
         imageAlt: "Premium Seoul K-beauty contour and lift treatment suite"
       },
       {
         id: "clear-calm-skin-care",
         name: "Clear & Calm Skin Care",
         description: "Soothing care for sensitive, acne-prone, or irritated skin.",
-        image: "images/clear-calm-skin-care.jpg",
+        image: "clear-calm-skin-care.jpg",
         imageAlt: "Calming K-beauty treatment room for sensitive skin care"
       },
       {
         id: "glow-hydration-boost",
         name: "Glow & Hydration Boost",
         description: "Moisture-focused skin care for a fresh, luminous finish.",
-        image: "images/glow-hydration-boost.jpg",
+        image: "glow-hydration-boost.jpg",
         imageAlt: "Luminous hydration boost setup in a luxury Seoul beauty suite"
       },
       {
         id: "pigment-tone-refinement",
         name: "Pigment & Tone Refinement",
         description: "Targeted care for uneven tone, dullness, and visible pigmentation.",
-        image: "images/pigment-tone-refinement.jpg",
+        image: "pigment-tone-refinement.jpg",
         imageAlt: "Brightening tone refinement treatment room with prism light"
       }
     ]
@@ -268,35 +283,35 @@ const ALLINONE_PROGRAM_GROUPS = [
     id: "recovery-comfort",
     title: "Recovery & Comfort",
     builderGroup: "optional",
-    image: "images/recovery-comfort.jpg",
+    image: "recovery-comfort.jpg",
     imageAlt: "Comforting post-treatment recovery suite with tea and soft blankets",
     programs: [
       {
         id: "scalp-diagnosis-spa",
         name: "Scalp Recovery Care",
         description: "Scalp diagnosis, scaling, and relaxing treatment support.",
-        image: "images/scalp-recovery-care.jpg",
+        image: "scalp-recovery-care.jpg",
         imageAlt: "Premium scalp recovery care wash basin with steam"
       },
       {
         id: "body-massage",
         name: "Body Recovery Massage",
         description: "Full-body massage focused on recovery, comfort, and release.",
-        image: "images/body-recovery-massage.jpg",
+        image: "body-recovery-massage.jpg",
         imageAlt: "Luxury body recovery massage room with hot stones"
       },
       {
         id: "calming-facial-recovery",
         name: "Calming Facial Recovery",
         description: "Post-treatment soothing care for sensitive or tired skin.",
-        image: "images/calming-facial-recovery.jpg",
+        image: "calming-facial-recovery.jpg",
         imageAlt: "Cooling facial recovery setup with ice and compresses"
       },
       {
         id: "private-rest-tea-time",
         name: "Private Heat & Ice Time",
         description: "A private heat and ice recovery ritual with concierge support.",
-        image: "images/private-heat-ice-time.jpg",
+        image: "private-heat-ice-time.jpg",
         imageAlt: "Private heat and ice recovery ritual in a Seoul beauty suite"
       }
     ]
@@ -310,28 +325,28 @@ const ALLINONE_PROGRAM_GROUPS = [
         id: "hair-salon",
         name: "Salon Finish",
         description: "Haircut or hair clinic treatment with consultation and finishing.",
-        image: "images/salon-finish.jpg",
+        image: "salon-finish.jpg",
         imageAlt: "Salon finishing vanity with hair styling tools"
       },
       {
         id: "celebrity-hair-makeup",
         name: "Hair & Makeup Styling",
         description: "Professional hair styling for a polished, camera-ready look.",
-        image: "images/hair-makeup-styling.jpg",
+        image: "hair-makeup-styling.jpg",
         imageAlt: "Hair and makeup styling station in a luxury Seoul beauty suite"
       },
       {
         id: "nail-care",
         name: "Nail/Pedi Detail Care",
         description: "Nail or pedi care with shaping, cuticle care, and finish.",
-        image: "images/nail-pedi-detail-care.jpg",
+        image: "nail-pedi-detail-care.jpg",
         imageAlt: "Luxury nail and pedi detail care station"
       },
       {
         id: "k-beauty-makeup-lesson",
         name: "K-Beauty Makeup Lesson",
         description: "A guided beauty session focused on Korean makeup style and product use.",
-        image: "images/k-beauty-makeup-lesson.jpg",
+        image: "k-beauty-makeup-lesson.jpg",
         imageAlt: "K-beauty makeup lesson setup with face chart and palettes"
       }
     ]
@@ -345,35 +360,35 @@ const ALLINONE_PROGRAM_GROUPS = [
         id: "beauty-shopping",
         name: "Beauty Shopping Curation",
         description: "Guided K-beauty shopping support, including destinations such as Olive Young.",
-        image: "images/beauty-shopping-curation.jpg",
+        image: "beauty-shopping-curation.jpg",
         imageAlt: "Premium beauty shopping curation setup in Seoul"
       },
       {
         id: "skincare-product-matching",
         name: "Signature Product Matching",
         description: "Personalized product recommendations based on skin concerns and routine.",
-        image: "images/signature-product-matching.jpg",
+        image: "signature-product-matching.jpg",
         imageAlt: "Signature product matching consultation table"
       },
       {
         id: "clinic-interpreter-support",
         name: "Clinic Interpreter Support",
         description: "Language support during clinic visit, consultation, and treatment flow.",
-        image: "images/clinic-interpreter-support.jpg",
+        image: "clinic-interpreter-support.jpg",
         imageAlt: "Clinic interpreter support desk for international guests"
       },
       {
         id: "recovery-meal-recommendation",
         name: "Recovery Meal Recommendation",
         description: "Curated restaurant or cafe recommendation after treatment.",
-        image: "images/recovery-meal-recommendation.jpg",
+        image: "recovery-meal-recommendation.jpg",
         imageAlt: "Recovery meal recommendation tray after K-beauty treatment"
       },
       {
         id: "photo-spot-lifestyle-curation",
         name: "Photo Spot & Lifestyle Curation",
         description: "Optional Seoul beauty lifestyle routing for photos, cafes, and soft leisure.",
-        image: "images/photo-spot-lifestyle-curation.jpg",
+        image: "photo-spot-lifestyle-curation.jpg",
         imageAlt: "Photo spot and Seoul lifestyle curation setup"
       }
     ]
@@ -3210,6 +3225,60 @@ function getProgramThumbnailMedia(program) {
   };
 }
 
+function forceProgramsPageThumbnails() {
+  if (!document.body.classList.contains("programs-page")) {
+    return;
+  }
+
+  const cards = document.querySelectorAll(".program-card");
+
+  cards.forEach((card) => {
+    const titleEl =
+      card.querySelector(".program-title a") ||
+      card.querySelector(".program-title") ||
+      card.querySelector("h3");
+
+    if (!titleEl) return;
+
+    const title = titleEl.textContent.trim();
+    const imageFile = FORCED_PROGRAM_THUMBNAILS_BY_TITLE[title];
+
+    if (!imageFile) return;
+
+    const imageSrc = versionedAsset(imageFile);
+    const imageAlt = `${title} Karecation program thumbnail`;
+
+    let imageWrap = card.querySelector(".program-card-image");
+
+    if (!imageWrap) {
+      imageWrap = document.createElement("a");
+      imageWrap.className = "program-card-image";
+
+      const titleLink = card.querySelector(".program-title a");
+      if (titleLink && titleLink.href) {
+        imageWrap.href = titleLink.href;
+      }
+
+      card.prepend(imageWrap);
+    }
+
+    imageWrap.classList.remove("is-placeholder");
+
+    let img = imageWrap.querySelector("img");
+
+    if (!img) {
+      img = document.createElement("img");
+      img.loading = "lazy";
+      imageWrap.innerHTML = "";
+      imageWrap.appendChild(img);
+    }
+
+    img.src = imageSrc;
+    img.alt = imageAlt;
+    img.dataset.forcedProgramThumbnail = "true";
+  });
+}
+
 function withProgramThumbnail(program) {
   const media = getProgramThumbnailMedia(program);
   return {
@@ -3871,6 +3940,7 @@ function renderProgramsPage() {
     grid.innerHTML = list.length
       ? list.map((program) => allInOneProgramCard(program)).join("")
       : `<div class="empty-state" style="grid-column: 1/-1;"><h3 class="display">${copy.common.noMatchTitle}</h3><p class="muted" style="margin-top:6px;">${copy.common.noMatchText}</p></div>`;
+    forceProgramsPageThumbnails();
   }
 
   filterRoot.onclick = (event) => {
@@ -4605,3 +4675,8 @@ function init() {
 }
 
 document.addEventListener("DOMContentLoaded", init);
+document.addEventListener("DOMContentLoaded", () => {
+  setTimeout(forceProgramsPageThumbnails, 50);
+  setTimeout(forceProgramsPageThumbnails, 300);
+  setTimeout(forceProgramsPageThumbnails, 1000);
+});
