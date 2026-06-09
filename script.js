@@ -4758,6 +4758,9 @@ function bindBookingForm() {
 
     const programValues = selectedProgramFieldValues(details, readAllInOneJourney());
     const pricing = getBookingTotals();
+    const estimatedTotalValue = Number.isFinite(Number(pricing.estimatedTotal))
+      ? Math.round(Number(pricing.estimatedTotal))
+      : 0;
 
     const payload = {
       Timestamp: new Date().toISOString(),
@@ -4779,7 +4782,8 @@ function bindBookingForm() {
       "Estimated Total Before Discount": pricing.estimatedTotalBeforeDiscount,
       "Discount Code": pricing.discountCode,
       "Discount Amount": pricing.discountAmount,
-      "Estimated Total": pricing.estimatedTotal
+      "Estimated Total": pricing.estimatedTotal,
+      "Value": estimatedTotalValue
     };
 
     try {
