@@ -1,16 +1,48 @@
 const STORAGE_KEY = "karecation_cart_simple_v1";
 const LOCALE_KEY = "karecation_locale_v1";
 const SERVICE_RATE = 0.05;
-const ALLINONE_BASE_PRICE = 0;
+const PRIVATE_JOURNEY_COORDINATION_FEE = 399;
 const LAUNCH_OFFER_CODE = "LOVEKARECATION";
 const LAUNCH_OFFER_DISCOUNT = 100;
+const CURRENCY = "USD";
+const DISCOUNT_STATE_KEY = "karecation_discount_state_v1";
 const BOOKING_ENDPOINT = "https://script.google.com/macros/s/AKfycbw3QYQcz4yEfooj5JHimeEjPhEMiwr9d-thze96WrjQJxzgkjCVRDlG1XG6iM6TJEEU/exec";
 const ALLINONE_SELECTION_KEY = "karecation_allinone_selection_v1";
 const ALLINONE_JOURNEY_KEY = "karecation_allinone_journey_v1";
+const INFORMATIONAL_PROGRAM_PRICE = 0;
+const PROGRAM_PRICING = Object.freeze({
+  "advanced-contour-lift": 749,
+  "clear-calm-skin-care": 499,
+  "glow-hydration-boost": 449,
+  "pigment-tone-refinement": 599,
+
+  "scalp-diagnosis-spa": 279,
+  "body-massage": 269,
+  "calming-facial-recovery": 229,
+  "private-rest-tea-time": 169,
+
+  "hair-salon": 129,
+  "celebrity-hair-makeup": 349,
+  "nail-care": 189,
+  "k-beauty-makeup-lesson": 279,
+
+  "beauty-shopping": 169,
+  "skincare-product-matching": 99,
+  "clinic-interpreter-support": 199,
+  "recovery-meal-recommendation": 0,
+  "photo-spot-lifestyle-curation": 119
+});
+const CLINIC_CARE_IDS = new Set([
+  "advanced-contour-lift",
+  "clear-calm-skin-care",
+  "glow-hydration-boost",
+  "pigment-tone-refinement"
+]);
 const RESETTABLE_STATE_KEYS = [
   STORAGE_KEY,
   ALLINONE_SELECTION_KEY,
   ALLINONE_JOURNEY_KEY,
+  DISCOUNT_STATE_KEY,
   "cart",
   "karecationCart",
   "selectedPrograms",
@@ -29,32 +61,67 @@ const SUPPORTED_LOCALES = [
 
 const LAUNCH_OFFER_COPY = {
   en: {
-    label: "Launch Offer Code",
-    placeholder: "Enter discount code",
-    discount: "Discount",
+    label: "Discount Code",
+    placeholder: "Enter code",
+    apply: "Apply",
+    appliedButton: "Applied",
     invalid: "Invalid discount code.",
-    applied: "Launch offer applied."
+    applied: "Discount code applied.",
+    totalLabel: "Estimated Total",
+    consultationRequired: "Private consultation required"
   },
   ko: {
-    label: "런칭 할인 코드",
-    placeholder: "할인 코드를 입력하세요",
-    discount: "할인",
+    label: "할인 코드",
+    placeholder: "코드를 입력하세요",
+    apply: "적용",
+    appliedButton: "적용됨",
     invalid: "유효하지 않은 할인 코드입니다.",
-    applied: "런칭 혜택이 적용되었습니다."
+    applied: "할인 코드가 적용되었습니다.",
+    totalLabel: "예상 총액",
+    consultationRequired: "프라이빗 상담 후 안내"
   },
   zh: {
-    label: "开业优惠码",
+    label: "优惠码",
     placeholder: "输入优惠码",
-    discount: "优惠",
+    apply: "应用",
+    appliedButton: "已应用",
     invalid: "优惠码无效。",
-    applied: "开业优惠已应用。"
+    applied: "优惠码已应用。",
+    totalLabel: "预计总额",
+    consultationRequired: "需先进行私人咨询"
   },
   ja: {
-    label: "ローンチ特典コード",
-    placeholder: "割引コードを入力",
-    discount: "割引",
+    label: "割引コード",
+    placeholder: "コードを入力",
+    apply: "適用",
+    appliedButton: "適用済み",
     invalid: "無効な割引コードです。",
-    applied: "ローンチ特典が適用されました。"
+    applied: "割引コードが適用されました。",
+    totalLabel: "お見積り合計",
+    consultationRequired: "プライベート相談後にご案内"
+  }
+};
+
+const PROGRAM_SORT_COPY = {
+  en: {
+    recommended: "Sort: Recommended",
+    durationAsc: "Duration: Short to Long",
+    durationDesc: "Duration: Long to Short"
+  },
+  ko: {
+    recommended: "정렬: 추천순",
+    durationAsc: "소요 시간: 짧은 순",
+    durationDesc: "소요 시간: 긴 순"
+  },
+  zh: {
+    recommended: "排序：推荐",
+    durationAsc: "时长：从短到长",
+    durationDesc: "时长：从长到短"
+  },
+  ja: {
+    recommended: "並び替え：おすすめ",
+    durationAsc: "所要時間：短い順",
+    durationDesc: "所要時間：長い順"
   }
 };
 
@@ -62,7 +129,7 @@ const PROGRAMS = [
   {
     id: "all-in-one-package",
     category: "package",
-    startPrice: ALLINONE_BASE_PRICE,
+    startPrice: INFORMATIONAL_PROGRAM_PRICE,
     duration: "Full day+",
     location: "Seoul",
     image: "./images/recovery-comfort.jpg"
@@ -424,7 +491,7 @@ const PROGRAMS_PAGE_PROGRAMS = [
 const PROGRAMS_PAGE_PROGRAM_BY_ID = Object.fromEntries(PROGRAMS_PAGE_PROGRAMS.map((program) => [program.id, program]));
 
 const ALLINONE_BUILDER_CONFIG = {
-  basePrice: ALLINONE_BASE_PRICE,
+  basePrice: INFORMATIONAL_PROGRAM_PRICE,
   requiredIds: ALLINONE_PROGRAMS.filter((program) => program.builderGroup === "skin").map((program) => program.id),
   optionalIds: ALLINONE_PROGRAMS.filter((program) => program.builderGroup === "optional").map((program) => program.id),
   labels: Object.fromEntries(ALLINONE_PROGRAMS.map((program) => [program.id, program.name]))
@@ -3147,6 +3214,10 @@ function launchOfferCopy() {
   return LAUNCH_OFFER_COPY[currentLocale] || LAUNCH_OFFER_COPY.en;
 }
 
+function programSortCopy() {
+  return PROGRAM_SORT_COPY[currentLocale] || PROGRAM_SORT_COPY.en;
+}
+
 function programText(program) {
   const pageProgram = ALLINONE_PROGRAM_BY_ID[program.id] || (program.categoryLabel && program.name ? program : null);
   if (pageProgram && program.categoryLabel) {
@@ -3221,12 +3292,155 @@ function handleProgramThumbnailError(img) {
   img.closest(".program-card-image")?.classList.add("is-placeholder");
 }
 
+function toFiniteAmount(value) {
+  const amount = Number(value);
+  return Number.isFinite(amount) ? amount : 0;
+}
+
+function normalizeTravelers(value) {
+  return Math.max(1, Math.round(Number(value) || 1));
+}
+
+function hasProgramPricing(programId) {
+  return Object.prototype.hasOwnProperty.call(PROGRAM_PRICING, programId);
+}
+
+function normalizeDiscountCode(value) {
+  return String(value || "").trim().toUpperCase();
+}
+
+function validateDiscountCode(value) {
+  return normalizeDiscountCode(value) === LAUNCH_OFFER_CODE;
+}
+
+function getLaunchOfferState(value) {
+  const code = normalizeDiscountCode(value);
+  const isValid = validateDiscountCode(code);
+  return {
+    hasCode: Boolean(code),
+    isValid,
+    discountCode: isValid ? LAUNCH_OFFER_CODE : "",
+    discountAmount: isValid ? LAUNCH_OFFER_DISCOUNT : 0
+  };
+}
+
+function readDiscountState() {
+  if (typeof localStorage === "undefined") return { appliedCode: "" };
+  try {
+    const raw = JSON.parse(localStorage.getItem(DISCOUNT_STATE_KEY) || "{}");
+    const appliedCode = normalizeDiscountCode(raw?.appliedCode);
+    return {
+      appliedCode: validateDiscountCode(appliedCode) ? LAUNCH_OFFER_CODE : ""
+    };
+  } catch (error) {
+    return { appliedCode: "" };
+  }
+}
+
+function saveDiscountState(appliedCode) {
+  if (typeof localStorage === "undefined") return;
+  if (!validateDiscountCode(appliedCode)) {
+    localStorage.removeItem(DISCOUNT_STATE_KEY);
+    return;
+  }
+  localStorage.setItem(DISCOUNT_STATE_KEY, JSON.stringify({ appliedCode: LAUNCH_OFFER_CODE }));
+}
+
+function clearDiscountState() {
+  if (typeof localStorage === "undefined") return;
+  localStorage.removeItem(DISCOUNT_STATE_KEY);
+}
+
+function getAppliedDiscountCode() {
+  return readDiscountState().appliedCode;
+}
+
 function formatPrice(value) {
+  const amount = Math.max(0, Math.round(toFiniteAmount(value)));
   return new Intl.NumberFormat("en-US", {
     style: "currency",
-    currency: "USD",
+    currency: CURRENCY,
+    minimumFractionDigits: 0,
     maximumFractionDigits: 0
-  }).format(value);
+  }).format(amount);
+}
+
+function getSelectedProgramIdSet(selectedItems) {
+  return new Set(
+    (Array.isArray(selectedItems) ? selectedItems : [])
+      .map((item) => typeof item === "string" ? item : item?.programId)
+      .filter(Boolean)
+  );
+}
+
+function getEffectiveProgramPrice(programId, selectedProgramIds = []) {
+  if (!hasProgramPricing(programId)) return 0;
+  const selectedSet = selectedProgramIds instanceof Set
+    ? selectedProgramIds
+    : new Set(Array.isArray(selectedProgramIds) ? selectedProgramIds : []);
+
+  if (
+    programId === "clinic-interpreter-support" &&
+    [...CLINIC_CARE_IDS].some((id) => selectedSet.has(id))
+  ) {
+    return 0;
+  }
+
+  if (programId === "skincare-product-matching" && selectedSet.has("beauty-shopping")) {
+    return 0;
+  }
+
+  return PROGRAM_PRICING[programId];
+}
+
+function normalizeSelectedPricingItems(selectedItems) {
+  return (Array.isArray(selectedItems) ? selectedItems : [])
+    .map((item) => {
+      if (typeof item === "string") {
+        return { programId: item, travelers: 1 };
+      }
+      return {
+        programId: item?.programId,
+        travelers: normalizeTravelers(item?.travelers)
+      };
+    })
+    .filter((item) => item.programId && hasProgramPricing(item.programId));
+}
+
+function calculateProgramTotal(selectedItems) {
+  const pricingItems = normalizeSelectedPricingItems(selectedItems);
+  const selectedProgramIds = getSelectedProgramIdSet(pricingItems);
+  return pricingItems.reduce((sum, item) => (
+    sum + (getEffectiveProgramPrice(item.programId, selectedProgramIds) * item.travelers)
+  ), 0);
+}
+
+function calculatePricing({ selectedItems = [], appliedDiscountCode = "" } = {}) {
+  const pricingItems = normalizeSelectedPricingItems(selectedItems);
+  const hasPrograms = pricingItems.length > 0;
+  const programTotal = hasPrograms ? calculateProgramTotal(pricingItems) : 0;
+  const coordinationFee = hasPrograms ? PRIVATE_JOURNEY_COORDINATION_FEE : 0;
+  const subtotal = programTotal + coordinationFee;
+  const serviceFee = hasPrograms ? Math.round(subtotal * SERVICE_RATE) : 0;
+  const estimatedTotalBeforeDiscount = hasPrograms ? subtotal + serviceFee : 0;
+  const discountCode = validateDiscountCode(appliedDiscountCode) ? LAUNCH_OFFER_CODE : "";
+  const discountAmount = discountCode && estimatedTotalBeforeDiscount > 0 ? LAUNCH_OFFER_DISCOUNT : 0;
+  const estimatedTotal = hasPrograms
+    ? Math.max(0, estimatedTotalBeforeDiscount - discountAmount)
+    : 0;
+
+  return {
+    programTotal,
+    coordinationFee,
+    subtotal,
+    serviceFeeRate: SERVICE_RATE,
+    serviceFee,
+    estimatedTotalBeforeDiscount,
+    discountCode,
+    discountAmount,
+    estimatedTotal,
+    currency: CURRENCY
+  };
 }
 
 function readAllInOneSelection() {
@@ -3256,15 +3470,27 @@ function normalizeAllInOneIds(journey) {
     ));
 }
 
-function allInOnePriceBreakdownForIds(selectedIds) {
+function allInOnePriceBreakdownForIds(selectedIds, appliedDiscountCode = getAppliedDiscountCode()) {
+  const normalizedIds = normalizeAllInOneIds({ selectedIds });
+  const selectedProgramIds = new Set(normalizedIds);
+  const pricing = calculatePricing({
+    selectedItems: normalizedIds.map((programId) => ({ programId, travelers: 1 })),
+    appliedDiscountCode
+  });
+  const selectedAddons = normalizedIds.map((id) => ({
+    id,
+    name: ALLINONE_BUILDER_CONFIG.labels[id],
+    price: getEffectiveProgramPrice(id, selectedProgramIds)
+  }));
+
   return {
-    basePrice: 0,
-    addonTotal: 0,
-    totalPrice: 0,
-    selectedAddons: selectedIds.map((id) => ({
-      id,
-      name: ALLINONE_BUILDER_CONFIG.labels[id]
-    }))
+    ...pricing,
+    basePrice: pricing.programTotal,
+    addOnsTotal: pricing.programTotal,
+    addonTotal: pricing.programTotal,
+    finalTotal: pricing.estimatedTotal,
+    totalPrice: pricing.estimatedTotal,
+    selectedAddons
   };
 }
 
@@ -3272,7 +3498,8 @@ function normalizeAllInOneJourney(journey) {
   if (journey?.packageType !== "all-in-one") return null;
   const selectedIds = normalizeAllInOneIds(journey);
   if (!selectedIds.length) return null;
-  const pricing = allInOnePriceBreakdownForIds(selectedIds);
+  const storedDiscountCode = validateDiscountCode(journey.discountCode) ? journey.discountCode : getAppliedDiscountCode();
+  const pricing = allInOnePriceBreakdownForIds(selectedIds, storedDiscountCode);
   const selectedNames = selectedIds
     .map((id) => ALLINONE_BUILDER_CONFIG.labels[id])
     .filter(Boolean);
@@ -3285,11 +3512,20 @@ function normalizeAllInOneJourney(journey) {
     selectedNames,
     selectedAddOns: pricing.selectedAddons,
     selectedAddons: pricing.selectedAddons,
-    basePrice: 0,
-    addOnsTotal: 0,
-    addonTotal: 0,
-    finalTotal: 0,
-    totalPrice: 0
+    programTotal: pricing.programTotal,
+    coordinationFee: pricing.coordinationFee,
+    serviceFeeRate: pricing.serviceFeeRate,
+    serviceFee: pricing.serviceFee,
+    estimatedTotalBeforeDiscount: pricing.estimatedTotalBeforeDiscount,
+    discountCode: pricing.discountCode,
+    discountAmount: pricing.discountAmount,
+    estimatedTotal: pricing.estimatedTotal,
+    currency: pricing.currency,
+    basePrice: pricing.basePrice,
+    addOnsTotal: pricing.addOnsTotal,
+    addonTotal: pricing.addonTotal,
+    finalTotal: pricing.finalTotal,
+    totalPrice: pricing.totalPrice
   };
 }
 
@@ -3355,7 +3591,7 @@ function readCart() {
     return raw
       .map((item) => ({
         programId: item.programId,
-        travelers: Math.max(1, Math.round(Number(item.travelers) || 1)),
+        travelers: normalizeTravelers(item.travelers),
         preferredDate: item.preferredDate || ""
       }))
       .filter((item) => getProgramById(item.programId));
@@ -3371,62 +3607,82 @@ function saveCart(cart) {
 
 function getCartDetails() {
   const journey = readAllInOneJourney();
-  return readCart().map((item) => {
+  const rawDetails = readCart().map((item) => {
     const program = getProgramById(item.programId);
-    const travelers = Math.max(1, Number(item.travelers) || 1);
+    const travelers = normalizeTravelers(item.travelers);
     const isAllInOne = journey?.packageType === "all-in-one" && item.programId === "all-in-one-package";
-    const unit = 0;
+    const pricingItems = isAllInOne
+      ? journey.selectedIds.map((programId) => ({ programId, travelers }))
+      : hasProgramPricing(item.programId)
+        ? [{ programId: item.programId, travelers }]
+        : [];
     return {
       ...item,
       program,
       travelers,
+      isAllInOne,
+      pricingItems
+    };
+  });
+
+  const selectedProgramIds = getSelectedProgramIdSet(rawDetails.flatMap((item) => item.pricingItems));
+  return rawDetails.map((item) => {
+    const unit = item.pricingItems.reduce((sum, pricingItem) => (
+      sum + getEffectiveProgramPrice(pricingItem.programId, selectedProgramIds)
+    ), 0);
+    return {
+      ...item,
       unit,
-      lineTotal: unit * travelers
+      lineTotal: unit * item.travelers
     };
   });
 }
 
-function normalizeDiscountCode(value) {
-  return String(value || "").trim().toUpperCase();
+function cartDetailsToPricingItems(details) {
+  return (Array.isArray(details) ? details : []).flatMap((item) => (
+    Array.isArray(item.pricingItems) ? item.pricingItems : []
+  ));
 }
 
-function getLaunchOfferState(value) {
-  const code = normalizeDiscountCode(value);
-  const isValid = code === LAUNCH_OFFER_CODE;
-  return {
-    hasCode: Boolean(code),
-    isValid,
-    discountCode: isValid ? LAUNCH_OFFER_CODE : "",
-    discountAmount: isValid ? LAUNCH_OFFER_DISCOUNT : 0
-  };
+function getHomePricingItems() {
+  return (allInOneState?.selectedIds || []).map((programId) => ({ programId, travelers: 1 }));
 }
 
-function getBookingDiscountCodeValue() {
-  return document.getElementById("bookingDiscountCode")?.value || "";
+function getCurrentPricingItems() {
+  if (document.body.dataset.page === "home" && document.getElementById("allInOneBuilder")) {
+    return getHomePricingItems();
+  }
+  return cartDetailsToPricingItems(getCartDetails());
 }
 
-function calculateSelectedPathTotals(details, discountCode = "") {
-  const subtotal = details.reduce((sum, item) => sum + item.lineTotal, 0);
-  const service = Math.round(subtotal * SERVICE_RATE);
+function getCurrentPricing() {
+  return calculatePricing({
+    selectedItems: getCurrentPricingItems(),
+    appliedDiscountCode: getAppliedDiscountCode()
+  });
+}
+
+function calculateSelectedPathTotals(details, discountCode = getAppliedDiscountCode()) {
+  const pricing = calculatePricing({
+    selectedItems: cartDetailsToPricingItems(details),
+    appliedDiscountCode: discountCode
+  });
   const discount = getLaunchOfferState(discountCode);
-  const beforeDiscount = subtotal + service;
   return {
-    subtotal,
-    service,
-    discountCode: discount.discountCode,
-    discountAmount: discount.discountAmount,
+    ...pricing,
+    service: pricing.serviceFee,
+    total: pricing.estimatedTotal,
     hasDiscountCode: discount.hasCode,
-    isDiscountValid: discount.isValid,
-    total: Math.max(0, beforeDiscount - discount.discountAmount)
+    isDiscountValid: discount.isValid
   };
 }
 
 function getCartTotals() {
-  return calculateSelectedPathTotals(getCartDetails());
+  return calculateSelectedPathTotals(getCartDetails(), getAppliedDiscountCode());
 }
 
 function getBookingTotals() {
-  return calculateSelectedPathTotals(getCartDetails(), getBookingDiscountCodeValue());
+  return calculateSelectedPathTotals(getCartDetails(), getAppliedDiscountCode());
 }
 
 function updateCartCount() {
@@ -3439,6 +3695,11 @@ function updateCartCount() {
 function setText(id, value) {
   const node = document.getElementById(id);
   if (node && value != null) node.textContent = value;
+}
+
+function setHtml(id, value) {
+  const node = document.getElementById(id);
+  if (node && value != null) node.innerHTML = value;
 }
 
 function setLineTitle(id, lines) {
@@ -3575,6 +3836,7 @@ function applyLocale() {
   renderFaqPage();
   updateCartCount();
   syncAllInOneBuilderUI();
+  syncPricingUI();
 }
 
 function setActiveNav() {
@@ -3716,9 +3978,10 @@ function renderStaticPageCopy() {
   setPlaceholder("programSearch", copy.page.searchPlaceholder);
   const sort = document.getElementById("programSort");
   if (sort) {
-    sort.options[0].textContent = copy.page.sortRecommended;
-    sort.options[1].textContent = copy.page.priceAsc;
-    sort.options[2].textContent = copy.page.priceDesc;
+    const sortCopy = programSortCopy();
+    sort.options[0].textContent = sortCopy.recommended;
+    sort.options[1].textContent = sortCopy.durationAsc;
+    sort.options[2].textContent = sortCopy.durationDesc;
   }
 
   setText("homeFinalCta", copy.cta.requestConsultation);
@@ -3906,6 +4169,7 @@ function renderDetailPage() {
   const name = document.getElementById("pdpName");
   if (!name) return;
   const copy = t();
+  const pricingCopy = launchOfferCopy();
   const params = new URLSearchParams(window.location.search);
   const program = getProgramById(params.get("id")) || PROGRAMS[0];
   const text = programText(program);
@@ -3914,7 +4178,7 @@ function renderDetailPage() {
   document.title = `${text.name} | Karecation`;
   document.getElementById("pdpName").textContent = text.name;
   document.getElementById("pdpTagline").textContent = text.tagline;
-  document.getElementById("pdpPrice").textContent = copy.common.startingFrom || "Private consultation required";
+  document.getElementById("pdpPrice").textContent = pricingCopy.consultationRequired;
   document.getElementById("pdpDuration").textContent = text.duration;
   document.getElementById("pdpCategory").textContent = programCategoryLabel(program);
   document.getElementById("pdpLocation").textContent = text.location;
@@ -3931,7 +4195,7 @@ function renderDetailPage() {
   document.getElementById("pdpAddons").innerHTML = `<div class="list-item">${copy.home.trust[2][1]}</div>`;
   document.getElementById("pdpFaq").innerHTML = text.faq.map((item) => `<details class="faq-item"><summary>${item.q}</summary><p>${item.a}</p></details>`).join("");
   document.querySelectorAll("[data-detail-price]").forEach((node) => {
-    node.textContent = copy.common.startingFrom || "Private consultation required";
+    node.textContent = pricingCopy.consultationRequired;
   });
   document.querySelectorAll("[data-detail-add]").forEach((button) => {
     button.setAttribute("data-add-to-cart", program.id);
@@ -3981,31 +4245,71 @@ function renderCartPage() {
   }
   document.querySelector(".summary-card a.btn-primary")?.replaceChildren(document.createTextNode(copy.page.proceed));
   document.querySelector(".summary-card a.btn-secondary")?.replaceChildren(document.createTextNode(copy.page.exploreMore));
+  syncPricingUI();
 }
 
-function syncBookingDiscountUI(totals) {
+function syncPricingUI({ preserveInput = null } = {}) {
   const copy = launchOfferCopy();
-  setText("bookingDiscountCodeLabel", copy.label);
-  setPlaceholder("bookingDiscountCode", copy.placeholder);
-  setText("bookingDiscountLabel", copy.discount);
-  setText("bookingDiscountAmount", totals.discountAmount ? `-${formatPrice(totals.discountAmount)}` : "");
+  const pricing = getCurrentPricing();
+  const appliedCode = pricing.discountCode || getAppliedDiscountCode();
 
-  const row = document.getElementById("bookingDiscountRow");
-  if (row) row.hidden = !totals.discountAmount;
+  document.querySelectorAll("[data-total-label]").forEach((node) => {
+    node.textContent = copy.totalLabel;
+  });
+  document.querySelectorAll("[data-estimated-total]").forEach((node) => {
+    node.textContent = formatPrice(pricing.estimatedTotal);
+  });
 
-  const message = document.getElementById("bookingDiscountMessage");
-  if (!message) return;
+  document.querySelectorAll("[data-discount-form]").forEach((form) => {
+    const input = form.querySelector("[data-discount-input]");
+    const button = form.querySelector("[data-discount-apply]");
+    const label = form.querySelector("[data-discount-label]");
+    const message = form.querySelector("[data-discount-message]");
+    const status = form.dataset.discountStatus;
 
-  if (!totals.hasDiscountCode) {
+    if (label) label.textContent = copy.label;
+    if (input) {
+      input.placeholder = copy.placeholder;
+      if (appliedCode) {
+        input.value = appliedCode;
+      }
+      if (status === "error" && !appliedCode) {
+        input.setAttribute("aria-invalid", "true");
+      } else {
+        input.removeAttribute("aria-invalid");
+      }
+    }
+
+    if (button) {
+      button.textContent = appliedCode ? copy.appliedButton : copy.apply;
+      button.classList.toggle("is-applied", Boolean(appliedCode));
+      button.setAttribute("aria-pressed", appliedCode ? "true" : "false");
+    }
+
+    if (!message) return;
+
+    if (appliedCode) {
+      form.dataset.discountStatus = "success";
+      message.textContent = copy.applied;
+      message.className = "discount-code-message success";
+      return;
+    }
+
+    if (status === "error") {
+      message.textContent = copy.invalid;
+      message.className = "discount-code-message error";
+      return;
+    }
+
+    if (status === "success") {
+      delete form.dataset.discountStatus;
+    }
+    if (input !== preserveInput) {
+      input?.removeAttribute("aria-invalid");
+    }
     message.textContent = "";
     message.className = "discount-code-message";
-  } else if (totals.isDiscountValid) {
-    message.textContent = copy.applied;
-    message.className = "discount-code-message success";
-  } else {
-    message.textContent = copy.invalid;
-    message.className = "discount-code-message error";
-  }
+  });
 }
 
 function renderBookingSummary() {
@@ -4039,6 +4343,7 @@ function renderBookingSummary() {
       `;
     }).join("")}`;
   }
+  syncPricingUI();
 }
 
 function renderContactChannels() {
@@ -4082,17 +4387,11 @@ function syncAllInOneBuilderUI() {
   const copy = t();
   const counter = document.getElementById("allInOneCounter");
   const ready = document.getElementById("allInOneReady");
-  const basePriceNode = document.getElementById("allInOneBasePrice");
-  const addonPriceNode = document.getElementById("allInOneAddonPrice");
-  const totalPriceNode = document.getElementById("allInOneTotalPrice");
   if (!counter) return;
 
   const selectedCount = allInOneSelectedCount();
   const counterTemplate = copy.page.allInOneCounterTemplate || "{count} selected";
   counter.textContent = counterTemplate.replace("{count}", String(selectedCount));
-  if (basePriceNode) basePriceNode.textContent = "";
-  if (addonPriceNode) addonPriceNode.textContent = "";
-  if (totalPriceNode) totalPriceNode.textContent = "";
 
   if (ready) {
     const isReady = selectedCount > 0;
@@ -4106,6 +4405,7 @@ function syncAllInOneBuilderUI() {
     option.classList.toggle("is-selected", isSelected);
     option.setAttribute("aria-pressed", isSelected ? "true" : "false");
   });
+  syncPricingUI();
 }
 
 function openAllInOneBuilder() {
@@ -4162,11 +4462,20 @@ function continueAllInOneJourney() {
     selectedOptionalPrograms: selectedIds.filter((id) => ALLINONE_BUILDER_CONFIG.optionalIds.includes(id)),
     selectedAddOns: pricing.selectedAddons,
     selectedAddons: pricing.selectedAddons,
-    basePrice: 0,
-    addOnsTotal: 0,
-    addonTotal: 0,
-    finalTotal: 0,
-    totalPrice: 0,
+    programTotal: pricing.programTotal,
+    coordinationFee: pricing.coordinationFee,
+    serviceFeeRate: pricing.serviceFeeRate,
+    serviceFee: pricing.serviceFee,
+    estimatedTotalBeforeDiscount: pricing.estimatedTotalBeforeDiscount,
+    discountCode: pricing.discountCode,
+    discountAmount: pricing.discountAmount,
+    estimatedTotal: pricing.estimatedTotal,
+    currency: pricing.currency,
+    basePrice: pricing.basePrice,
+    addOnsTotal: pricing.addOnsTotal,
+    addonTotal: pricing.addonTotal,
+    finalTotal: pricing.finalTotal,
+    totalPrice: pricing.totalPrice,
     createdAt: new Date().toISOString()
   };
   saveAllInOneJourney(journey);
@@ -4335,12 +4644,69 @@ async function sendReservationToSheet(payload) {
   }
 }
 
-function bindBookingDiscountCode() {
-  const input = document.getElementById("bookingDiscountCode");
-  if (!input) return;
-  input.addEventListener("input", renderBookingSummary);
-  input.addEventListener("change", renderBookingSummary);
-  input.addEventListener("keyup", renderBookingSummary);
+function bindPricingControls() {
+  document.querySelectorAll("[data-discount-form]").forEach((form) => {
+    if (form.dataset.pricingBound === "true") return;
+    form.dataset.pricingBound = "true";
+
+    const input = form.querySelector("[data-discount-input]");
+    const button = form.querySelector("[data-discount-apply]");
+
+    const applyDiscountFromForm = () => {
+      const code = normalizeDiscountCode(input?.value);
+
+      if (!code) {
+        clearDiscountState();
+        delete form.dataset.discountStatus;
+        input?.removeAttribute("aria-invalid");
+        syncPricingUI({ preserveInput: input });
+        return;
+      }
+
+      if (validateDiscountCode(code)) {
+        saveDiscountState(code);
+        form.dataset.discountStatus = "success";
+        if (input) input.value = LAUNCH_OFFER_CODE;
+        syncPricingUI();
+        return;
+      }
+
+      clearDiscountState();
+      form.dataset.discountStatus = "error";
+      input?.setAttribute("aria-invalid", "true");
+      syncPricingUI({ preserveInput: input });
+    };
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      applyDiscountFromForm();
+    });
+
+    input?.addEventListener("input", () => {
+      if (getAppliedDiscountCode()) {
+        clearDiscountState();
+      }
+      delete form.dataset.discountStatus;
+      input.removeAttribute("aria-invalid");
+      syncPricingUI({ preserveInput: input });
+    });
+
+    const submitFromEnter = (event) => {
+      const isEnterKey = event.key === "Enter" ||
+        event.key === "ENTER" ||
+        event.key === "NumpadEnter" ||
+        event.code === "Enter" ||
+        event.code === "NumpadEnter" ||
+        event.keyCode === 13;
+      if (!isEnterKey) return;
+      event.preventDefault();
+      applyDiscountFromForm();
+    };
+
+    input?.addEventListener("keydown", submitFromEnter);
+    input?.addEventListener("keyup", submitFromEnter);
+    input?.addEventListener("keypress", submitFromEnter);
+  });
 }
 
 function bindBookingForm() {
@@ -4391,6 +4757,7 @@ function bindBookingForm() {
     }
 
     const programValues = selectedProgramFieldValues(details, readAllInOneJourney());
+    const pricing = getBookingTotals();
 
     const payload = {
       Timestamp: new Date().toISOString(),
@@ -4403,7 +4770,16 @@ function bindBookingForm() {
       "Program 3": programValues[2] || "",
       "Program 4": programValues[3] || "",
       "Selected Programs": programValues.join(" | "),
-      "Additional Request": additionalRequest
+      "Additional Request": additionalRequest,
+      "Currency": pricing.currency,
+      "Program Total": pricing.programTotal,
+      "Private Journey Coordination Fee": pricing.coordinationFee,
+      "Service Fee Rate": pricing.serviceFeeRate,
+      "Service Fee": pricing.serviceFee,
+      "Estimated Total Before Discount": pricing.estimatedTotalBeforeDiscount,
+      "Discount Code": pricing.discountCode,
+      "Discount Amount": pricing.discountAmount,
+      "Estimated Total": pricing.estimatedTotal
     };
 
     try {
@@ -4462,7 +4838,7 @@ function bindGlobalEvents() {
     const travelers = event.target.closest("[data-cart-travelers]");
     if (travelers) {
       updateCartItem(travelers.getAttribute("data-program-id"), {
-        travelers: Math.max(1, Math.round(Number(travelers.value) || 1))
+        travelers: normalizeTravelers(travelers.value)
       });
       return;
     }
@@ -4472,6 +4848,14 @@ function bindGlobalEvents() {
         preferredDate: date.value || ""
       });
     }
+  });
+
+  document.body.addEventListener("input", (event) => {
+    const travelers = event.target.closest("[data-cart-travelers]");
+    if (!travelers) return;
+    updateCartItem(travelers.getAttribute("data-program-id"), {
+      travelers: normalizeTravelers(travelers.value)
+    });
   });
 }
 
@@ -4617,7 +5001,7 @@ function init() {
   insertLanguageSelector();
   setActiveNav();
   initPreferredDateField();
-  bindBookingDiscountCode();
+  bindPricingControls();
   bindBookingForm();
   bindGlobalEvents();
   applyLocale();

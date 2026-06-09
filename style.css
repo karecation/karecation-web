@@ -604,6 +604,15 @@ p {
   font-weight: 700;
 }
 
+.pricing-summary {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fff;
+  padding: 11px;
+  display: grid;
+  gap: 10px;
+}
+
 .allinone-ready {
   font-size: 0.8rem;
   color: var(--success);
@@ -1070,35 +1079,67 @@ textarea {
   padding: 14px;
 }
 
-.total-row {
-  display: flex;
-  justify-content: space-between;
-  gap: 8px;
-  margin: 8px 0;
-  font-size: 0.85rem;
+.summary-card .pricing-summary {
+  margin: 12px 0;
+  background: var(--surface-soft);
 }
 
-.total-row strong {
-  font-size: 0.96rem;
-}
-
-.discount-row {
-  color: #6d5538;
-}
-
-.discount-code-field {
-  margin: 10px 0 8px;
+.discount-code-form {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
 }
 
 .discount-code-label {
-  gap: 5px;
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+  color: #4d525b;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.discount-code-controls {
+  display: flex;
+  align-items: stretch;
+  gap: 8px;
+  min-width: 0;
+}
+
+.discount-code-controls input {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 42px;
+  min-height: 42px;
+  border-radius: 9px;
+  background: #fff;
+}
+
+.discount-code-controls input[aria-invalid="true"] {
+  border-color: var(--danger);
+}
+
+.discount-apply-button {
+  flex: 0 0 auto;
+  min-width: 78px;
+  height: 42px;
+  min-height: 42px;
+  padding: 0 14px;
+  white-space: nowrap;
+}
+
+.discount-apply-button.is-applied {
+  border-color: rgba(47, 106, 82, 0.42);
+  color: var(--success);
 }
 
 .discount-code-message {
   min-height: 1.05em;
-  margin: 4px 0 0;
   color: var(--muted);
-  font-size: 0.76rem;
+  font-size: 0.74rem;
   line-height: 1.4;
 }
 
@@ -1110,6 +1151,33 @@ textarea {
   color: var(--danger);
 }
 
+.estimated-total-block {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  min-width: 0;
+  border-top: 1px solid var(--line);
+  padding-top: 10px;
+}
+
+.estimated-total-label {
+  color: var(--muted);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.estimated-total-value {
+  flex: 0 0 auto;
+  color: #181b20;
+  font-size: 1.35rem;
+  font-weight: 800;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
 .payment-note {
   font-size: 0.78rem;
   margin: 8px 0 0;
@@ -1117,9 +1185,17 @@ textarea {
 
 .booking-grid {
   display: grid;
-  grid-template-columns: 1.2fr 1fr;
+  grid-template-columns: minmax(280px, 0.92fr) minmax(0, 1.2fr);
   gap: 14px;
   width: 100%;
+}
+
+.booking-grid > .summary-card {
+  order: 1;
+}
+
+.booking-grid > .form-card {
+  order: 2;
 }
 
 .booking-layout {
@@ -1665,6 +1741,57 @@ a[href="cart.html"],
 
   .channel-qr-shell {
     min-height: 172px;
+  }
+}
+
+@media (max-width: 420px) {
+  .pricing-summary {
+    padding: 10px;
+  }
+
+  .discount-code-controls {
+    gap: 6px;
+  }
+
+  .discount-code-controls input {
+    padding-inline: 9px;
+  }
+
+  .discount-apply-button {
+    min-width: 72px;
+    padding-inline: 10px;
+  }
+
+  .estimated-total-block {
+    gap: 8px;
+  }
+
+  .estimated-total-value {
+    font-size: 1.22rem;
+  }
+}
+
+@media (max-width: 340px) {
+  .discount-code-label {
+    letter-spacing: 0.08em;
+  }
+
+  .discount-code-controls input {
+    padding-inline: 8px;
+  }
+
+  .discount-apply-button {
+    min-width: 70px;
+    padding-inline: 8px;
+    font-size: 0.74rem;
+  }
+
+  .estimated-total-label {
+    letter-spacing: 0.08em;
+  }
+
+  .estimated-total-value {
+    font-size: 1.14rem;
   }
 }
 

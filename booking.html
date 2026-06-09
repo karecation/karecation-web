@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Private Consultation | Karecation</title>
   <meta name="description" content="Request a private Karecation consultation for Seoul K-beauty, wellness, and clinic-focused coordination.">
-  <link rel="stylesheet" href="./style.css?v=20260605-program-images-v11">
-  <script src="./script.js?v=20260605-program-images-v11" defer></script>
+  <link rel="stylesheet" href="./style.css?v=20260609-booking-pricing-v2">
+  <script src="./script.js?v=20260609-booking-pricing-v2" defer></script>
 </head>
 <body data-page="booking">
   <header class="site-header">
@@ -35,6 +35,36 @@
 
     <section class="section-sm">
       <div class="container booking-grid">
+        <aside class="summary-card">
+          <h3 class="display" style="margin-bottom:8px;">Selected Path</h3>
+          <div id="bookingSummary" class="list-stack"></div>
+          <div class="pricing-summary" aria-label="Pricing summary">
+            <form class="discount-code-form" data-discount-form novalidate>
+              <label class="discount-code-label">
+                <span data-discount-label>DISCOUNT CODE</span>
+                <span class="discount-code-controls">
+                  <input
+                    type="text"
+                    autocomplete="off"
+                    spellcheck="false"
+                    data-discount-input
+                    aria-describedby="bookingDiscountMessage"
+                    placeholder="Enter code"
+                  >
+                  <button class="btn btn-secondary discount-apply-button" type="submit" data-discount-apply>Apply</button>
+                </span>
+              </label>
+              <span class="discount-code-message" id="bookingDiscountMessage" data-discount-message aria-live="polite"></span>
+            </form>
+
+            <div class="estimated-total-block">
+              <span class="estimated-total-label" data-total-label>ESTIMATED TOTAL</span>
+              <strong class="estimated-total-value" data-estimated-total>$0</strong>
+            </div>
+          </div>
+          <p class="muted" style="font-size:.86rem; margin-top:10px;">Your private itinerary will be refined after consultation. Selected clinic care and enhancements will be reviewed by the Karecation concierge team.</p>
+        </aside>
+
         <article class="form-card">
           <h3 class="display" style="margin-bottom:10px;">Your Details</h3>
           <form id="bookingForm" style="display:grid; gap:8px;">
@@ -69,12 +99,6 @@
             <p id="bookingStatus" class="status-message"></p>
           </form>
         </article>
-
-        <aside class="summary-card">
-          <h3 class="display" style="margin-bottom:8px;">Selected Path</h3>
-          <div id="bookingSummary" class="list-stack"></div>
-          <p class="muted" style="font-size:.86rem; margin-top:10px;">Your private itinerary will be refined after consultation. Selected clinic care and enhancements will be reviewed by the Karecation concierge team.</p>
-        </aside>
       </div>
     </section>
   </main>
