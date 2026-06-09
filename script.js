@@ -5,6 +5,7 @@ const PRIVATE_JOURNEY_COORDINATION_FEE = 399;
 const LAUNCH_OFFER_CODE = "LOVEKARECATION";
 const LAUNCH_OFFER_DISCOUNT = 100;
 const CURRENCY = "USD";
+const MAX_PROGRAM_FIELDS = 17;
 const DISCOUNT_STATE_KEY = "karecation_discount_state_v1";
 const BOOKING_ENDPOINT = "https://script.google.com/macros/s/AKfycbw3QYQcz4yEfooj5JHimeEjPhEMiwr9d-thze96WrjQJxzgkjCVRDlG1XG6iM6TJEEU/exec";
 const ALLINONE_SELECTION_KEY = "karecation_allinone_selection_v1";
@@ -4757,10 +4758,28 @@ function bindBookingForm() {
     }
 
     const programValues = selectedProgramFieldValues(details, readAllInOneJourney());
+
+    // Internal pricing engine is unchanged: getBookingTotals() still runs the
+    // full calculation (program total, 399 coordination fee, 5% service fee,
+    // discount). We only forward the two derived numbers the Sheet needs.
     const pricing = getBookingTotals();
+
     const estimatedTotalValue = Number.isFinite(Number(pricing.estimatedTotal))
       ? Math.round(Number(pricing.estimatedTotal))
       : 0;
+
+    const discountAmountValue = Number.isFinite(Number(pricing.discountAmount))
+      ? Math.round(Number(pricing.discountAmount))
+      : 0;
+
+    // Program 1..17 generated programmatically so the payload always has the
+    // same fixed set of program columns regardless of how many were selected.
+    const programFields = Object.fromEntries(
+      Array.from({ length: MAX_PROGRAM_FIELDS }, (_, index) => [
+        `Program ${index + 1}`,
+        programValues[index] || ""
+      ])
+    );
 
     const payload = {
       Timestamp: new Date().toISOString(),
@@ -4768,21 +4787,12 @@ function bindBookingForm() {
       Email: email,
       Nationality: nationality,
       "Preferred Date": preferredDate,
-      "Program 1": programValues[0] || "",
-      "Program 2": programValues[1] || "",
-      "Program 3": programValues[2] || "",
-      "Program 4": programValues[3] || "",
-      "Selected Programs": programValues.join(" | "),
+
+      ...programFields,
+
       "Additional Request": additionalRequest,
-      "Currency": pricing.currency,
-      "Program Total": pricing.programTotal,
-      "Private Journey Coordination Fee": pricing.coordinationFee,
-      "Service Fee Rate": pricing.serviceFeeRate,
-      "Service Fee": pricing.serviceFee,
-      "Estimated Total Before Discount": pricing.estimatedTotalBeforeDiscount,
-      "Discount Code": pricing.discountCode,
-      "Discount Amount": pricing.discountAmount,
-      "Estimated Total": pricing.estimatedTotal,
+      "Discount Code": pricing.discountCode || "",
+      "Discount Amount": discountAmountValue,
       "Value": estimatedTotalValue
     };
 
